@@ -8,13 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let homeScreen = HomeScreenView()
+    
+    override func loadView() {
+        view = homeScreen
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        // test 1
     }
-
-
 }
 
