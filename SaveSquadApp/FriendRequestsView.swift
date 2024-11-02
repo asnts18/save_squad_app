@@ -1,14 +1,14 @@
 //
-//  HomeScreenView.swift
+//  FriendRequestsView.swift
 //  SaveSquadApp
 //
-//  Created by Colin Kenny on 10/31/24.
+//  Created by Colin Kenny on 11/2/24.
 //
 
 import UIKit
 
-class HomeScreenView: UIView {
-    
+class FriendRequestsView: UIView {
+
     var bottomNavBar:UIView!
     var homeContainer:UIView!
     var homeButton:UIButton!
@@ -198,4 +198,5 @@ class HomeScreenView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }

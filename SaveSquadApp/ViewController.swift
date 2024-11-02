@@ -10,9 +10,19 @@ import UIKit
 class ViewController: UIViewController {
     
     let homeScreen = HomeScreenView()
+    let addExpenseScreen = AddExpenseView()
+    let addIncomeScreen = AddIncomeView()
+    let expenseLogScreen = ExpenseLogView()
+    let expenseDetailsScreen = ExpenseDetailsView()
+    let savingsGoalsScreen = SavingsGoalsView()
+    let createSavingsGoalScreen = CreateSavingsGoalView()
+    let goalDetailsScreen = GoalDetailsView()
+    let socialFeedScreen = SocialFeedView()
+    let friendsListScreen = FriendsListView()
+    let friendRequestsScreen = FriendRequestsView()
     
     override func loadView() {
-        view = homeScreen
+        view = friendRequestsScreen
     }
 
     override func viewDidLoad() {

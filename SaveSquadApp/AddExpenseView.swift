@@ -1,14 +1,14 @@
 //
-//  HomeScreenView.swift
+//  AddExpenseView.swift
 //  SaveSquadApp
 //
-//  Created by Colin Kenny on 10/31/24.
+//  Created by Colin Kenny on 11/2/24.
 //
 
 import UIKit
 
-class HomeScreenView: UIView {
-    
+class AddExpenseView: UIView {
+
     var bottomNavBar:UIView!
     var homeContainer:UIView!
     var homeButton:UIButton!
