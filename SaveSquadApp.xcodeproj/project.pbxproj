@@ -16,6 +16,20 @@
 		BA5A748C2CC9AF8800797481 /* SaveSquadAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5A748B2CC9AF8800797481 /* SaveSquadAppTests.swift */; };
 		BA5A74962CC9AF8800797481 /* SaveSquadAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5A74952CC9AF8800797481 /* SaveSquadAppUITests.swift */; };
 		BA5A74982CC9AF8800797481 /* SaveSquadAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5A74972CC9AF8800797481 /* SaveSquadAppUITestsLaunchTests.swift */; };
+		BA6B02F42CD943A00076F361 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02E82CD943A00076F361 /* HomeScreenView.swift */; };
+		BA6B02F52CD943A00076F361 /* SavingsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02E92CD943A00076F361 /* SavingsGoalsView.swift */; };
+		BA6B02F62CD943A00076F361 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02EA2CD943A00076F361 /* SocialFeedView.swift */; };
+		BA6B02F72CD943A00076F361 /* AddIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02EB2CD943A00076F361 /* AddIncomeView.swift */; };
+		BA6B02F82CD943A00076F361 /* FriendRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02EC2CD943A00076F361 /* FriendRequestsView.swift */; };
+		BA6B02F92CD943A00076F361 /* CreateSavingsGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02ED2CD943A00076F361 /* CreateSavingsGoalView.swift */; };
+		BA6B02FA2CD943A00076F361 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02EE2CD943A00076F361 /* HomeScreenViewController.swift */; };
+		BA6B02FB2CD943A00076F361 /* ExpenseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02EF2CD943A00076F361 /* ExpenseDetailsView.swift */; };
+		BA6B02FC2CD943A00076F361 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02F02CD943A00076F361 /* AddExpenseView.swift */; };
+		BA6B02FD2CD943A00076F361 /* ExpenseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02F12CD943A00076F361 /* ExpenseLogView.swift */; };
+		BA6B02FE2CD943A00076F361 /* GoalDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02F22CD943A00076F361 /* GoalDetailsView.swift */; };
+		BA6B02FF2CD943A00076F361 /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B02F32CD943A00076F361 /* FriendsListView.swift */; };
+		BA6B03022CD945080076F361 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B03012CD945080076F361 /* LoginView.swift */; };
+		BA6B030D2CD9B6720076F361 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B030C2CD9B6720076F361 /* RegisterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +63,20 @@
 		BA5A74912CC9AF8800797481 /* SaveSquadAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaveSquadAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5A74952CC9AF8800797481 /* SaveSquadAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSquadAppUITests.swift; sourceTree = "<group>"; };
 		BA5A74972CC9AF8800797481 /* SaveSquadAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSquadAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BA6B02E82CD943A00076F361 /* HomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		BA6B02E92CD943A00076F361 /* SavingsGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingsGoalsView.swift; sourceTree = "<group>"; };
+		BA6B02EA2CD943A00076F361 /* SocialFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedView.swift; sourceTree = "<group>"; };
+		BA6B02EB2CD943A00076F361 /* AddIncomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIncomeView.swift; sourceTree = "<group>"; };
+		BA6B02EC2CD943A00076F361 /* FriendRequestsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsView.swift; sourceTree = "<group>"; };
+		BA6B02ED2CD943A00076F361 /* CreateSavingsGoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalView.swift; sourceTree = "<group>"; };
+		BA6B02EE2CD943A00076F361 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		BA6B02EF2CD943A00076F361 /* ExpenseDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsView.swift; sourceTree = "<group>"; };
+		BA6B02F02CD943A00076F361 /* AddExpenseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
+		BA6B02F12CD943A00076F361 /* ExpenseLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseLogView.swift; sourceTree = "<group>"; };
+		BA6B02F22CD943A00076F361 /* GoalDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalDetailsView.swift; sourceTree = "<group>"; };
+		BA6B02F32CD943A00076F361 /* FriendsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
+		BA6B03012CD945080076F361 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BA6B030C2CD9B6720076F361 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +127,20 @@
 		BA5A74732CC9AF8700797481 /* SaveSquadApp */ = {
 			isa = PBXGroup;
 			children = (
+				BA6B02F02CD943A00076F361 /* AddExpenseView.swift */,
+				BA6B02EB2CD943A00076F361 /* AddIncomeView.swift */,
+				BA6B02ED2CD943A00076F361 /* CreateSavingsGoalView.swift */,
+				BA6B02EF2CD943A00076F361 /* ExpenseDetailsView.swift */,
+				BA6B02F12CD943A00076F361 /* ExpenseLogView.swift */,
+				BA6B02EC2CD943A00076F361 /* FriendRequestsView.swift */,
+				BA6B02F32CD943A00076F361 /* FriendsListView.swift */,
+				BA6B02F22CD943A00076F361 /* GoalDetailsView.swift */,
+				BA6B02E92CD943A00076F361 /* SavingsGoalsView.swift */,
+				BA6B02EA2CD943A00076F361 /* SocialFeedView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
-				BA5A74782CC9AF8700797481 /* ViewController.swift */,
+				BA6B03032CD9450F0076F361 /* Login Screen */,
+				BA6B03042CD945360076F361 /* Home Screen */,
 				BA5A747A2CC9AF8700797481 /* Main.storyboard */,
 				BA5A747D2CC9AF8800797481 /* Assets.xcassets */,
 				BA5A747F2CC9AF8800797481 /* LaunchScreen.storyboard */,
@@ -125,6 +164,25 @@
 				BA5A74972CC9AF8800797481 /* SaveSquadAppUITestsLaunchTests.swift */,
 			);
 			path = SaveSquadAppUITests;
+			sourceTree = "<group>";
+		};
+		BA6B03032CD9450F0076F361 /* Login Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BA5A74782CC9AF8700797481 /* ViewController.swift */,
+				BA6B03012CD945080076F361 /* LoginView.swift */,
+				BA6B030C2CD9B6720076F361 /* RegisterView.swift */,
+			);
+			path = "Login Screen";
+			sourceTree = "<group>";
+		};
+		BA6B03042CD945360076F361 /* Home Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BA6B02E82CD943A00076F361 /* HomeScreenView.swift */,
+				BA6B02EE2CD943A00076F361 /* HomeScreenViewController.swift */,
+			);
+			path = "Home Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +316,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA6B02F52CD943A00076F361 /* SavingsGoalsView.swift in Sources */,
 				BA5A74792CC9AF8700797481 /* ViewController.swift in Sources */,
+				BA6B02F82CD943A00076F361 /* FriendRequestsView.swift in Sources */,
+				BA6B02FC2CD943A00076F361 /* AddExpenseView.swift in Sources */,
+				BA6B02FE2CD943A00076F361 /* GoalDetailsView.swift in Sources */,
+				BA6B02F92CD943A00076F361 /* CreateSavingsGoalView.swift in Sources */,
+				BA6B02FB2CD943A00076F361 /* ExpenseDetailsView.swift in Sources */,
 				BA5A74752CC9AF8700797481 /* AppDelegate.swift in Sources */,
+				BA6B030D2CD9B6720076F361 /* RegisterView.swift in Sources */,
+				BA6B02F72CD943A00076F361 /* AddIncomeView.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
+				BA6B02F42CD943A00076F361 /* HomeScreenView.swift in Sources */,
+				BA6B02FD2CD943A00076F361 /* ExpenseLogView.swift in Sources */,
+				BA6B02F62CD943A00076F361 /* SocialFeedView.swift in Sources */,
+				BA6B02FA2CD943A00076F361 /* HomeScreenViewController.swift in Sources */,
+				BA6B03022CD945080076F361 /* LoginView.swift in Sources */,
+				BA6B02FF2CD943A00076F361 /* FriendsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

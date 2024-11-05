@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let loginScreen = LoginView()
+    let registerScreen = RegisterView()
     let homeScreen = HomeScreenView()
     let addExpenseScreen = AddExpenseView()
     let addIncomeScreen = AddIncomeView()
@@ -22,7 +24,7 @@ class ViewController: UIViewController {
     let friendRequestsScreen = FriendRequestsView()
     
     override func loadView() {
-        view = friendRequestsScreen
+        view = registerScreen
     }
 
     override func viewDidLoad() {
