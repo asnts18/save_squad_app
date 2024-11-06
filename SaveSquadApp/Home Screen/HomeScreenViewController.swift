@@ -18,13 +18,18 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(containerTapped))
-        //homeScreen.homeContainer.addGestureRecognizer(tapGesture)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        homeScreen.floatingButtonAdd.showsMenuAsPrimaryAction = true
+        homeScreen.floatingButtonAdd.menu = UIMenu(title: "",
+                                                   children: [
+                                                    UIAction(title: "Add Income",handler: {(_) in
+                                                        let addIncomeViewController = AddIncomeViewController()
+                                                        self.navigationController?.pushViewController(addIncomeViewController, animated: true)
+                                                    }),
+                                                    UIAction(title: "Add Expense",handler: {(_) in
+                                                        let addExpenseViewController = AddExpenseViewController()
+                                                        self.navigationController?.pushViewController(addExpenseViewController, animated: true)
+                                                    })
+                                                   ])
     }
-
-    @objc func containerTapped() {
-        //print("Container tapped!")
-    }
-
 }

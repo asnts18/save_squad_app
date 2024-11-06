@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         //Comment these next two lines out if you want to test login/register screens
         let tabBarController = TabBarController()
         navigationController?.pushViewController(tabBarController, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
 

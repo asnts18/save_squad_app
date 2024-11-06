@@ -11,10 +11,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBar.tintColor = .black                      // Selected color
+        tabBar.unselectedItemTintColor = .gray
         let homeTab = UINavigationController(rootViewController: HomeScreenViewController())
         let tabHomeBarItem = UITabBarItem(
             title: "Home",
-            image: UIImage(systemName: "house")?.withRenderingMode(.alwaysOriginal),
+            image: UIImage(systemName: "house")?.withRenderingMode(.alwaysTemplate),
             selectedImage: UIImage(systemName: "house.fill")
         )
         homeTab.tabBarItem = tabHomeBarItem
@@ -22,7 +24,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let tabExpenses = UINavigationController(rootViewController: ExpenseLogViewController())
         let tabExpensesBarItem = UITabBarItem(
             title: "Expenses",
-            image: UIImage(systemName: "chart.bar")?.withRenderingMode(.alwaysOriginal),
+            image: UIImage(systemName: "chart.bar")?.withRenderingMode(.alwaysTemplate),
             selectedImage: UIImage(systemName: "chart.bar.fill")
         )
         tabExpenses.tabBarItem = tabExpensesBarItem
@@ -30,7 +32,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let tabGoals = UINavigationController(rootViewController: SavingsGoalsViewController())
         let tabGoalsBarItem = UITabBarItem(
             title: "Goals",
-            image: UIImage(systemName: "dollarsign.circle")?.withRenderingMode(.alwaysOriginal),
+            image: UIImage(systemName: "dollarsign.circle")?.withRenderingMode(.alwaysTemplate),
             selectedImage: UIImage(systemName: "dollarsign.circle.fill")
         )
         tabGoals.tabBarItem = tabGoalsBarItem
@@ -38,7 +40,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let tabSocial = UINavigationController(rootViewController: SocialFeedViewController())
         let tabSocialBarItem = UITabBarItem(
             title: "Social",
-            image: UIImage(systemName: "person.2")?.withRenderingMode(.alwaysOriginal),
+            image: UIImage(systemName: "person.2")?.withRenderingMode(.alwaysTemplate),
             selectedImage: UIImage(systemName: "person.2.fill")
         )
         tabSocial.tabBarItem = tabSocialBarItem
@@ -48,6 +50,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.hidesBackButton = true
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }

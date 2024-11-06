@@ -18,7 +18,7 @@ class SavingsGoalsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Goals"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
 }

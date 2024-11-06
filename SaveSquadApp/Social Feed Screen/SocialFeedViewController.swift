@@ -18,7 +18,7 @@ class SocialFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Social"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
 }
