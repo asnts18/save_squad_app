@@ -17,13 +17,14 @@ class HomeScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(containerTapped))
-        homeScreen.homeContainer.addGestureRecognizer(tapGesture)
+        title = "Home"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(containerTapped))
+        //homeScreen.homeContainer.addGestureRecognizer(tapGesture)
     }
 
     @objc func containerTapped() {
-        print("Container tapped!")
-        // just a test
+        //print("Container tapped!")
     }
 
 }

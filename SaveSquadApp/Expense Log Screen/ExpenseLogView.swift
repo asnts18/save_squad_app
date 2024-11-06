@@ -1,5 +1,5 @@
 //
-//  CreateSavingsGoalView.swift
+//  ExpenseLogView.swift
 //  SaveSquadApp
 //
 //  Created by Colin Kenny on 11/2/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateSavingsGoalView: UIView {
+class ExpenseLogView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

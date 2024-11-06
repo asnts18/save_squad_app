@@ -29,6 +29,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Go right to Tab Bar controller to skip login/test post-login experience
+        //Comment these next two lines out if you want to test login/register screens
+        let tabBarController = TabBarController()
+        navigationController?.pushViewController(tabBarController, animated: true)
     }
 }
 
