@@ -36,6 +36,9 @@
 		BA6B03172CD9BEFC0076F361 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B03102CD9BEFC0076F361 /* ViewController.swift */; };
 		BA6B03182CD9BEFC0076F361 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B03122CD9BEFC0076F361 /* HomeScreenView.swift */; };
 		BA6B03192CD9BEFC0076F361 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B03132CD9BEFC0076F361 /* HomeScreenViewController.swift */; };
+		BA6B031B2CDC786F0076F361 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031A2CDC786F0076F361 /* Expense.swift */; };
+		BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031D2CDC79520076F361 /* Utilities.swift */; };
+		BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,9 @@
 		BA6B03102CD9BEFC0076F361 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BA6B03122CD9BEFC0076F361 /* HomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		BA6B03132CD9BEFC0076F361 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		BA6B031A2CDC786F0076F361 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		BA6B031D2CDC79520076F361 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExpenseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,7 @@
 			children = (
 				4822FDC12CD9433300FDE851 /* ExpenseLogView.swift */,
 				4838E9262CDBDF750068129F /* ExpenseLogViewController.swift */,
+				BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */,
 			);
 			path = "Expense Log Screen";
 			sourceTree = "<group>";
@@ -203,6 +210,8 @@
 				BA5A747D2CC9AF8800797481 /* Assets.xcassets */,
 				BA5A747F2CC9AF8800797481 /* LaunchScreen.storyboard */,
 				BA5A74822CC9AF8800797481 /* Info.plist */,
+				BA6B031C2CDC78A90076F361 /* Data Models */,
+				BA6B031D2CDC79520076F361 /* Utilities.swift */,
 			);
 			path = SaveSquadApp;
 			sourceTree = "<group>";
@@ -241,6 +250,14 @@
 				BA6B03132CD9BEFC0076F361 /* HomeScreenViewController.swift */,
 			);
 			path = "Home Screen";
+			sourceTree = "<group>";
+		};
+		BA6B031C2CDC78A90076F361 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA6B031A2CDC786F0076F361 /* Expense.swift */,
+			);
+			path = "Data Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA6B031B2CDC786F0076F361 /* Expense.swift in Sources */,
 				481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */,
 				4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */,
 				BA6B03192CD9BEFC0076F361 /* HomeScreenViewController.swift in Sources */,
@@ -387,6 +405,7 @@
 				BA6B03182CD9BEFC0076F361 /* HomeScreenView.swift in Sources */,
 				BA6B03162CD9BEFC0076F361 /* RegisterView.swift in Sources */,
 				4822FDBC2CD9430900FDE851 /* SocialFeedView.swift in Sources */,
+				BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */,
 				4838E92A2CDBDFF70068129F /* TabBarController.swift in Sources */,
 				4822FDC82CD9433300FDE851 /* AddExpenseView.swift in Sources */,
 				4822FDD22CD9433300FDE851 /* SavingsGoalsView.swift in Sources */,
@@ -396,6 +415,7 @@
 				BA5A74752CC9AF8700797481 /* AppDelegate.swift in Sources */,
 				4838E9272CDBDF750068129F /* ExpenseLogViewController.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
+				BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */,
 				4838E9322CDC0FC50068129F /* AddExpenseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

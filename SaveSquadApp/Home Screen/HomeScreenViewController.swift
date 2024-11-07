@@ -33,6 +33,7 @@ class HomeScreenViewController: UIViewController {
                                                     }),
                                                     UIAction(title: "Add Expense",handler: {(_) in
                                                         let addExpenseViewController = AddExpenseViewController()
+                                                        addExpenseViewController.delegate = ExpenseLogViewController()
                                                         self.navigationController?.pushViewController(addExpenseViewController, animated: true)
                                                     })
                                                    ])
