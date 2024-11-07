@@ -19,6 +19,13 @@ class AddExpenseViewController: UIViewController {
         super.viewDidLoad()
         title = "Add Expense"
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.titleTextAttributes = attributes
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        self.navigationController?.navigationBar.tintColor = .white
     }
 
 }

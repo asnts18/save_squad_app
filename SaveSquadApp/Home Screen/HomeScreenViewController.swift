@@ -19,6 +19,11 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         title = "Home"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
         homeScreen.floatingButtonAdd.showsMenuAsPrimaryAction = true
         homeScreen.floatingButtonAdd.menu = UIMenu(title: "",
                                                    children: [

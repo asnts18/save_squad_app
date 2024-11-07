@@ -19,6 +19,11 @@ class SavingsGoalsViewController: UIViewController {
         super.viewDidLoad()
         title = "Goals"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
     }
     
 }
