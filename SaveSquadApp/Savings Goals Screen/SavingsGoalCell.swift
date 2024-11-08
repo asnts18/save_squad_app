@@ -2,7 +2,7 @@
 //  SavingsGoalCell.swift
 //  SaveSquadApp
 //
-//  Created by Bubesh Dev on 11/7/24.
+//  Created by Haritha Selvakumaran on 11/7/24.
 //
 import UIKit
 
@@ -56,25 +56,20 @@ class SavingsGoalCell: UITableViewCell {
         contentView.addSubview(goalTargetAmountLabel)
         contentView.addSubview(goalTargetDateLabel)
         
-        // Layout constraints
         NSLayoutConstraint.activate([
-            // Goal Image
             goalImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             goalImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             goalImageView.widthAnchor.constraint(equalToConstant: 50),
             goalImageView.heightAnchor.constraint(equalToConstant: 50),
             
-            // Goal Name
             goalNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             goalNameLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 15),
             goalNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             
-            // Goal Target Amount
             goalTargetAmountLabel.topAnchor.constraint(equalTo: goalNameLabel.bottomAnchor, constant: 5),
             goalTargetAmountLabel.leadingAnchor.constraint(equalTo: goalNameLabel.leadingAnchor),
             goalTargetAmountLabel.trailingAnchor.constraint(equalTo: goalNameLabel.trailingAnchor),
             
-            // Goal Target Date
             goalTargetDateLabel.topAnchor.constraint(equalTo: goalTargetAmountLabel.bottomAnchor, constant: 5),
             goalTargetDateLabel.leadingAnchor.constraint(equalTo: goalNameLabel.leadingAnchor),
             goalTargetDateLabel.trailingAnchor.constraint(equalTo: goalNameLabel.trailingAnchor),
@@ -82,7 +77,6 @@ class SavingsGoalCell: UITableViewCell {
         ])
     }
     
-    // Method to configure the cell with data
     func configure(with goal: SavingsGoal) {
         goalImageView.image = goal.image
         goalNameLabel.text = goal.name

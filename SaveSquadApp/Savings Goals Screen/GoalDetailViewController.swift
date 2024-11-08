@@ -2,7 +2,7 @@
 //  GoalDetailViewController.swift
 //  SaveSquadApp
 //
-//  Created by Bubesh Dev on 11/7/24.
+//  Created by Haritha Selvakumaran on 11/7/24.
 //
 
 import UIKit
@@ -34,14 +34,12 @@ class GoalDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up goal details
         goalDetailView.goalImageView.image = goal.image
         goalDetailView.goalNameLabel.text = goal.name
         goalDetailView.goalDescriptionLabel.text = goal.description
         goalDetailView.goalCostLabel.text = String(format: "Cost: $%.2f", goal.cost)
         goalDetailView.goalTargetDateLabel.text = "Target Date: \(goal.targetDateFormatted)"
         
-        // Set up button actions
         goalDetailView.completeGoalButton.addTarget(self, action: #selector(completeGoal), for: .touchUpInside)
         goalDetailView.deleteGoalButton.addTarget(self, action: #selector(deleteGoal), for: .touchUpInside)
     }

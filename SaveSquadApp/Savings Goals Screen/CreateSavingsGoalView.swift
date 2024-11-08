@@ -2,14 +2,13 @@
 //  CreateSavingsGoalView.swift
 //  SaveSquadApp
 //
-//  Created by Bubesh Dev on 11/7/24.
+//  Created by Haritha Selvakumaran on 11/7/24.
 //
 
 import UIKit
 
 class CreateSavingsGoalView: UIView {
     
-    // Title label for "Create Savings Goal"
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Create Savings Goal"
@@ -20,7 +19,6 @@ class CreateSavingsGoalView: UIView {
         return label
     }()
     
-    // Gray background view for the title
     private let titleBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
@@ -28,20 +26,18 @@ class CreateSavingsGoalView: UIView {
         return view
     }()
     
-    // Circular image view placeholder for goal image
     let goalImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit  // Scale down to fit within the circular frame
-        imageView.layer.cornerRadius = 75 // Half of width and height for circular shape
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 75
         imageView.clipsToBounds = true
-        imageView.image = UIImage(systemName: "camera")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 40)) // Smaller camera icon
+        imageView.image = UIImage(systemName: "camera")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 40))
         imageView.tintColor = .gray
         imageView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    // Button to select or take a photo
     let addPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Upload Image", for: .normal)
@@ -50,7 +46,6 @@ class CreateSavingsGoalView: UIView {
         return button
     }()
     
-    // Text fields for goal details
     let nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Goal Name"
@@ -76,7 +71,6 @@ class CreateSavingsGoalView: UIView {
         return textField
     }()
     
-    // Label and date picker for target date
     let targetDateLabel: UILabel = {
         let label = UILabel()
         label.text = "Target Date"
@@ -94,7 +88,6 @@ class CreateSavingsGoalView: UIView {
         return datePicker
     }()
     
-    // Cancel and Create Goal buttons
     let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Cancel", for: .normal)
@@ -126,25 +119,21 @@ class CreateSavingsGoalView: UIView {
     private func setupView() {
         backgroundColor = .white
         
-        // Add the gray background and title label
         addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         
-        // Create a vertical stack for the image and upload button
         let imageStackView = UIStackView(arrangedSubviews: [goalImageView, addPhotoButton])
         imageStackView.axis = .vertical
         imageStackView.alignment = .center
         imageStackView.spacing = 8
         imageStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Create a horizontal stack for the target date label and picker
         let targetDateStackView = UIStackView(arrangedSubviews: [targetDateLabel, targetDatePicker])
         targetDateStackView.axis = .horizontal
         targetDateStackView.alignment = .center
         targetDateStackView.spacing = 8
         targetDateStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        // Arrange all components in a vertical stack
         let stackView = UIStackView(arrangedSubviews: [
             imageStackView,
             nameTextField,
@@ -161,25 +150,21 @@ class CreateSavingsGoalView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         
-        // Constraints for title background and title label
         NSLayoutConstraint.activate([
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleBackgroundView.heightAnchor.constraint(equalToConstant: 120), // Increased height
-            
+            titleBackgroundView.heightAnchor.constraint(equalToConstant: 120),
             titleLabel.centerXAnchor.constraint(equalTo: titleBackgroundView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: titleBackgroundView.centerYAnchor, constant: 30) // Adjusted vertical position
+            titleLabel.centerYAnchor.constraint(equalTo: titleBackgroundView.centerYAnchor, constant: 30)
         ])
         
-        // Constraints for the stack view
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: titleBackgroundView.bottomAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
         
-        // Constraints for specific elements
         NSLayoutConstraint.activate([
             goalImageView.heightAnchor.constraint(equalToConstant: 150),
             goalImageView.widthAnchor.constraint(equalToConstant: 150),
