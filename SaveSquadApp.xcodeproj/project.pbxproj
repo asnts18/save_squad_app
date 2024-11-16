@@ -22,6 +22,9 @@
 		4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E92E2CDBEDD10068129F /* SocialFeedViewController.swift */; };
 		4838E9322CDC0FC50068129F /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */; };
 		4838E9352CDC20E40068129F /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9342CDC20E40068129F /* AddIncomeViewController.swift */; };
+		4857D1F42CE95BE300408DE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */; };
+		4857D1F72CE95C9D00408DE6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F62CE95C9D00408DE6 /* FirebaseAuth */; };
+		4857D1F92CE95C9D00408DE6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */; };
 		5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */; };
 		5FC9FA3F2CDD65F600F50B9D /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */; };
 		5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */; };
@@ -79,6 +82,7 @@
 		4838E92E2CDBEDD10068129F /* SocialFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedViewController.swift; sourceTree = "<group>"; };
 		4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		4838E9342CDC20E40068129F /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
+		4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalCell.swift; sourceTree = "<group>"; };
 		5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
 		5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalView.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4857D1F72CE95C9D00408DE6 /* FirebaseAuth in Frameworks */,
+				4857D1F92CE95C9D00408DE6 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,11 +151,6 @@
 		4838E92D2CDBEAFA0068129F /* Savings Goals Screen */ = {
 			isa = PBXGroup;
 			children = (
-				5FC9FA462CDD6D1E00F50B9D /* GoalDetailViewController.swift */,
-				5FC9FA442CDD6D0300F50B9D /* GoalDetailView.swift */,
-				5FC9FA422CDD6A0200F50B9D /* CreateSavingsGoalViewController.swift */,
-				5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */,
-				5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */,
 				5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */,
 				4822FDC72CD9433300FDE851 /* SavingsGoalsView.swift */,
 				4838E92B2CDBEADE0068129F /* SavingsGoalsViewController.swift */,
@@ -184,12 +185,37 @@
 			path = "Add Income Screen";
 			sourceTree = "<group>";
 		};
+		4857D1F02CE95A0C00408DE6 /* Create Goal Screen */ = {
+			isa = PBXGroup;
+			children = (
+				5FC9FA422CDD6A0200F50B9D /* CreateSavingsGoalViewController.swift */,
+				5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */,
+			);
+			path = "Create Goal Screen";
+			sourceTree = "<group>";
+		};
+		4857D1F12CE95A2D00408DE6 /* Goal Details Screen */ = {
+			isa = PBXGroup;
+			children = (
+				5FC9FA462CDD6D1E00F50B9D /* GoalDetailViewController.swift */,
+				5FC9FA442CDD6D0300F50B9D /* GoalDetailView.swift */,
+			);
+			path = "Goal Details Screen";
+			sourceTree = "<group>";
+		};
+		4857D1F22CE95A4A00408DE6 /* Data models */ = {
+			isa = PBXGroup;
+			children = (
+				5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */,
+			);
+			name = "Data models";
+			path = "Savings Goals Screen/Data models";
+			sourceTree = "<group>";
+		};
 		BA5A74682CC9AF8700797481 = {
 			isa = PBXGroup;
 			children = (
 				BA5A74732CC9AF8700797481 /* SaveSquadApp */,
-				BA5A748A2CC9AF8800797481 /* SaveSquadAppTests */,
-				BA5A74942CC9AF8800797481 /* SaveSquadAppUITests */,
 				BA5A74722CC9AF8700797481 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -211,22 +237,28 @@
 				BA6B03142CD9BEFC0076F361 /* Home Screen */,
 				4838E9282CDBDF7B0068129F /* Expense Log Screen */,
 				4838E92D2CDBEAFA0068129F /* Savings Goals Screen */,
+				4857D1F02CE95A0C00408DE6 /* Create Goal Screen */,
+				4857D1F12CE95A2D00408DE6 /* Goal Details Screen */,
 				4838E9302CDBEDEC0068129F /* Social Feed Screen */,
 				4838E9292CDBDFF70068129F /* TabBarController.swift */,
 				4838E9332CDC0FCD0068129F /* Add Expense Screen */,
 				4838E9362CDC20F60068129F /* Add Income Screen */,
+				4857D1F22CE95A4A00408DE6 /* Data models */,
 				4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */,
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				4822FDC02CD9433300FDE851 /* GoalDetailsView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
+				BA6B031D2CDC79520076F361 /* Utilities.swift */,
+				BA6B031C2CDC78A90076F361 /* Data Models */,
 				BA5A747A2CC9AF8700797481 /* Main.storyboard */,
 				BA5A747D2CC9AF8800797481 /* Assets.xcassets */,
 				BA5A747F2CC9AF8800797481 /* LaunchScreen.storyboard */,
+				BA5A748A2CC9AF8800797481 /* SaveSquadAppTests */,
+				BA5A74942CC9AF8800797481 /* SaveSquadAppUITests */,
 				BA5A74822CC9AF8800797481 /* Info.plist */,
-				BA6B031C2CDC78A90076F361 /* Data Models */,
-				BA6B031D2CDC79520076F361 /* Utilities.swift */,
+				4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */,
 			);
 			path = SaveSquadApp;
 			sourceTree = "<group>";
@@ -291,6 +323,10 @@
 			dependencies = (
 			);
 			name = SaveSquadApp;
+			packageProductDependencies = (
+				4857D1F62CE95C9D00408DE6 /* FirebaseAuth */,
+				4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */,
+			);
 			productName = SaveSquadApp;
 			productReference = BA5A74712CC9AF8700797481 /* SaveSquadApp.app */;
 			productType = "com.apple.product-type.application";
@@ -363,6 +399,9 @@
 				Base,
 			);
 			mainGroup = BA5A74682CC9AF8700797481;
+			packageReferences = (
+				4857D1F52CE95C9D00408DE6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = BA5A74722CC9AF8700797481 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -380,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA5A747E2CC9AF8800797481 /* Assets.xcassets in Resources */,
+				4857D1F42CE95BE300408DE6 /* GoogleService-Info.plist in Resources */,
 				BA5A74812CC9AF8800797481 /* Base in Resources */,
 				BA5A747C2CC9AF8700797481 /* Base in Resources */,
 			);
@@ -777,6 +817,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4857D1F52CE95C9D00408DE6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4857D1F62CE95C9D00408DE6 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4857D1F52CE95C9D00408DE6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4857D1F52CE95C9D00408DE6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BA5A74692CC9AF8700797481 /* Project object */;
 }
