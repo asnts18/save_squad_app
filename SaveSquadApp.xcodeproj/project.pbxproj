@@ -27,6 +27,7 @@
 		4857D1F92CE95C9D00408DE6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */; };
 		4857D1FB2CE9786F00408DE6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */; };
 		4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */; };
+		48D5D5522CEA7B2F000FDB9C /* LoginFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */; };
 		5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */; };
 		5FC9FA3F2CDD65F600F50B9D /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */; };
 		5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */; };
@@ -87,6 +88,7 @@
 		4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirebaseManager.swift; sourceTree = "<group>"; };
+		48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFirebaseManager.swift; sourceTree = "<group>"; };
 		5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalCell.swift; sourceTree = "<group>"; };
 		5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
 		5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalView.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			children = (
 				BA6B030E2CD9BEFC0076F361 /* LoginView.swift */,
 				BA6B03102CD9BEFC0076F361 /* ViewController.swift */,
+				48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */,
 			);
 			path = "Login Screen";
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				BA6B03172CD9BEFC0076F361 /* ViewController.swift in Sources */,
 				4838E9352CDC20E40068129F /* AddIncomeViewController.swift in Sources */,
 				4822FDD02CD9433300FDE851 /* FriendRequestsView.swift in Sources */,
+				48D5D5522CEA7B2F000FDB9C /* LoginFirebaseManager.swift in Sources */,
 				4838E92C2CDBEADE0068129F /* SavingsGoalsViewController.swift in Sources */,
 				4822FDC92CD9433300FDE851 /* ExpenseDetailsView.swift in Sources */,
 				BA6B03182CD9BEFC0076F361 /* HomeScreenView.swift in Sources */,
