@@ -6,35 +6,47 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class ViewController: UIViewController {
     
     let loginScreen = LoginView()
-    let registerScreen = RegisterView()
-    let homeScreen = HomeScreenView()
-    let addExpenseScreen = AddExpenseView()
-    let addIncomeScreen = AddIncomeView()
-    let expenseLogScreen = ExpenseLogView()
-    let expenseDetailsScreen = ExpenseDetailsView()
-    let savingsGoalsScreen = SavingsGoalsView()
-    let createSavingsGoalScreen = CreateSavingsGoalView()
-    let goalDetailsScreen = GoalDetailsView()
-    let socialFeedScreen = SocialFeedView()
-    let friendsListScreen = FriendsListView()
-    let friendRequestsScreen = FriendRequestsView()
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var currentUser:FirebaseAuth.User?
     
     override func loadView() {
-        view = registerScreen
+        view = loginScreen
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        handleAuth = Auth.auth().addStateDidChangeListener { auth, user in
+            if user == nil {
+                self.currentUser = nil
+            } else {
+                self.currentUser = user
+                let tabBarController = TabBarController()
+                self.navigationController?.pushViewController(tabBarController, animated: true)
+            }
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loginScreen.buttonRegister.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         //Go right to Tab Bar controller to skip login/test post-login experience
         //Comment these next two lines out if you want to test login/register screens
+        /*
         let tabBarController = TabBarController()
-        navigationController?.pushViewController(tabBarController, animated: true)
+        navigationController?.pushViewController(tabBarController, animated: true)*/
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    @objc func registerButtonTapped() {
+        let registerViewController = RegisterViewController()
+        self.navigationController?.pushViewController(registerViewController, animated: true)
     }
 }
 

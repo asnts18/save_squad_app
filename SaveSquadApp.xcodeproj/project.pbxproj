@@ -25,6 +25,8 @@
 		4857D1F42CE95BE300408DE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */; };
 		4857D1F72CE95C9D00408DE6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F62CE95C9D00408DE6 /* FirebaseAuth */; };
 		4857D1F92CE95C9D00408DE6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */; };
+		4857D1FB2CE9786F00408DE6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */; };
+		4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */; };
 		5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */; };
 		5FC9FA3F2CDD65F600F50B9D /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */; };
 		5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */; };
@@ -83,6 +85,8 @@
 		4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		4838E9342CDC20E40068129F /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
 		4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirebaseManager.swift; sourceTree = "<group>"; };
 		5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalCell.swift; sourceTree = "<group>"; };
 		5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
 		5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalView.swift; sourceTree = "<group>"; };
@@ -212,6 +216,16 @@
 			path = "Savings Goals Screen/Data models";
 			sourceTree = "<group>";
 		};
+		4857D1FC2CE9789400408DE6 /* Register Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BA6B030F2CD9BEFC0076F361 /* RegisterView.swift */,
+				4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */,
+				4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */,
+			);
+			path = "Register Screen";
+			sourceTree = "<group>";
+		};
 		BA5A74682CC9AF8700797481 = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				BA6B03112CD9BEFC0076F361 /* Login Screen */,
+				4857D1FC2CE9789400408DE6 /* Register Screen */,
 				BA6B03142CD9BEFC0076F361 /* Home Screen */,
 				4838E9282CDBDF7B0068129F /* Expense Log Screen */,
 				4838E92D2CDBEAFA0068129F /* Savings Goals Screen */,
@@ -284,7 +299,6 @@
 			isa = PBXGroup;
 			children = (
 				BA6B030E2CD9BEFC0076F361 /* LoginView.swift */,
-				BA6B030F2CD9BEFC0076F361 /* RegisterView.swift */,
 				BA6B03102CD9BEFC0076F361 /* ViewController.swift */,
 			);
 			path = "Login Screen";
@@ -471,8 +485,10 @@
 				4822FDCD2CD9433300FDE851 /* FriendsListView.swift in Sources */,
 				5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */,
 				4822FDCB2CD9433300FDE851 /* GoalDetailsView.swift in Sources */,
+				4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */,
 				BA6B03152CD9BEFC0076F361 /* LoginView.swift in Sources */,
 				BA5A74752CC9AF8700797481 /* AppDelegate.swift in Sources */,
+				4857D1FB2CE9786F00408DE6 /* RegisterViewController.swift in Sources */,
 				4838E9272CDBDF750068129F /* ExpenseLogViewController.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
 				BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */,
