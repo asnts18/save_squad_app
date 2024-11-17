@@ -21,26 +21,18 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        handleAuth = Auth.auth().addStateDidChangeListener { auth, user in
-            if user == nil {
-                self.currentUser = nil
-            } else {
-                self.currentUser = user
-                let tabBarController = TabBarController()
-                self.navigationController?.pushViewController(tabBarController, animated: true)
-            }
+        if let currentUser = Auth.auth().currentUser {
+            self.currentUser = currentUser
+            let tabBarController = TabBarController()
+            self.navigationController?.pushViewController(tabBarController, animated: true)
+        } else {
+            self.currentUser = nil
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loginScreen.buttonRegister.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        //Go right to Tab Bar controller to skip login/test post-login experience
-        //Comment these next two lines out if you want to test login/register screens
-        /*
-        let tabBarController = TabBarController()
-        navigationController?.pushViewController(tabBarController, animated: true)*/
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
