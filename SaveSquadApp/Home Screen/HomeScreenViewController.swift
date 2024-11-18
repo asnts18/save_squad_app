@@ -44,11 +44,15 @@ class HomeScreenViewController: UIViewController {
                             var earliestDocument: QueryDocumentSnapshot?
                             var earliestDate: Date?
                             for document in documents{
-                                if let targetDate = document.get("targetDate") as? Timestamp {
-                                    let date = targetDate.dateValue()
-                                    if earliestDate == nil || date < earliestDate! {
-                                        earliestDate = date
-                                        earliestDocument = document
+                                if let completed = document.get("completed") as? Bool {
+                                    if completed == false {
+                                        if let targetDate = document.get("targetDate") as? Timestamp {
+                                            let date = targetDate.dateValue()
+                                            if earliestDate == nil || date < earliestDate! {
+                                                earliestDate = date
+                                                earliestDocument = document
+                                            }
+                                        }
                                     }
                                 }
                             }

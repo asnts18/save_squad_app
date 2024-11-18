@@ -15,6 +15,7 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
     var completedGoals: [SavingsGoal] = []
     let db = Firestore.firestore()
     var currentUser: FirebaseAuth.User?
+    var handleAuth: AuthStateDidChangeListenerHandle?
     
     override func loadView() {
         view = savingsGoalsScreen
@@ -22,10 +23,52 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let currentUser = Auth.auth().currentUser {
-            self.currentUser = currentUser
-        } else {
-            self.currentUser = nil
+        handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
+            if user == nil{
+                self.currentUser = nil
+                let loginViewController = ViewController()
+                let navController = UINavigationController(rootViewController: loginViewController)
+                navController.modalPresentationStyle = .fullScreen
+                            
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                    let window = windowScene.windows.first {
+                    window.rootViewController = navController
+                    window.makeKeyAndVisible()
+                }
+            }else{
+                self.currentUser = user
+                self.db.collection("users")
+                    .document((self.currentUser?.uid ?? ""))
+                    .collection("goals")
+                    .addSnapshotListener(includeMetadataChanges: false, listener: {querySnapshot, error in
+                        if let documents = querySnapshot?.documents{
+                            self.currentGoals.removeAll()
+                            self.completedGoals.removeAll()
+                            for document in documents{
+                                if let completed = document.get("completed") as? Bool {
+                                    if completed == false {
+                                        do{
+                                            let goal = try document.data(as: SavingsGoal.self)
+                                            self.currentGoals.append(goal)
+                                        }catch{
+                                            print(error)
+                                        }
+                                    } else {
+                                        do{
+                                            let goal = try document.data(as: SavingsGoal.self)
+                                            self.completedGoals.append(goal)
+                                        }catch{
+                                            print(error)
+                                        }
+                                    }
+                                }
+                            }
+                            self.currentGoals.sort(by: {$0.targetDate < $1.targetDate})
+                            self.completedGoals.sort(by: {$0.targetDate < $1.targetDate})
+                            self.savingsGoalsScreen.tableView.reloadData()
+                        }
+                    })
+            }
         }
     }
 
@@ -59,15 +102,12 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
             "targetDate": goal.targetDate,
             "completed": false
         ]
-        
-        
         db.collection("users").document(self.currentUser?.uid ?? "")
             .collection("goals").addDocument(data: messageData) { error in
             if let error = error {
                 print("Error saving message: \(error.localizedDescription)")
             } else {
                 print("Message saved successfully!")
-                self.currentGoals.append(goal)
                 self.savingsGoalsScreen.tableView.reloadData()
             }
         }

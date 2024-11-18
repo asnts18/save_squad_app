@@ -6,6 +6,8 @@
 //
 import UIKit
 import PhotosUI
+import FirebaseAuth
+import FirebaseFirestore
 
 protocol CreateSavingsGoalDelegate: AnyObject {
     func didCreateGoal(_ goal: SavingsGoal)
