@@ -7,10 +7,14 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class HomeScreenViewController: UIViewController {
 
     let homeScreen = HomeScreenView()
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var currentUser: FirebaseAuth.User?
+    let db = Firestore.firestore()
     
     override func loadView() {
         view = homeScreen
@@ -18,6 +22,45 @@ class HomeScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
+            if user == nil{
+                self.currentUser = nil
+                let loginViewController = ViewController()
+                let navController = UINavigationController(rootViewController: loginViewController)
+                navController.modalPresentationStyle = .fullScreen
+                            
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                    let window = windowScene.windows.first {
+                    window.rootViewController = navController
+                    window.makeKeyAndVisible()
+                }
+            }else{
+                self.currentUser = user
+                self.db.collection("users")
+                    .document((self.currentUser?.uid ?? ""))
+                    .collection("goals")
+                    .addSnapshotListener(includeMetadataChanges: false, listener: {querySnapshot, error in
+                        if let documents = querySnapshot?.documents{
+                            var earliestDocument: QueryDocumentSnapshot?
+                            var earliestDate: Date?
+                            for document in documents{
+                                if let targetDate = document.get("targetDate") as? Timestamp {
+                                    let date = targetDate.dateValue()
+                                    if earliestDate == nil || date < earliestDate! {
+                                        earliestDate = date
+                                        earliestDocument = document
+                                    }
+                                }
+                            }
+                            if let earliestDocument = earliestDocument {
+                                self.homeScreen.goalLabel2.text = earliestDocument.get("name") as? String ?? "No Name"
+                            } else {
+                                print("No valid targetDate found in documents")
+                            }
+                        }
+                    })
+            }
+        }
     }
 
     override func viewDidLoad() {

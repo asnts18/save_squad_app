@@ -5,16 +5,28 @@
 //  Created by Haritha Selvakumaran on 11/7/24.
 //
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CreateSavingsGoalDelegate {
     
     let savingsGoalsScreen = SavingsGoalsView()
-    
     var currentGoals: [SavingsGoal] = []
     var completedGoals: [SavingsGoal] = []
+    let db = Firestore.firestore()
+    var currentUser: FirebaseAuth.User?
     
     override func loadView() {
         view = savingsGoalsScreen
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let currentUser = Auth.auth().currentUser {
+            self.currentUser = currentUser
+        } else {
+            self.currentUser = nil
+        }
     }
 
     override func viewDidLoad() {
@@ -30,7 +42,6 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
@@ -41,8 +52,25 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func didCreateGoal(_ goal: SavingsGoal) {
-        currentGoals.append(goal)
-        savingsGoalsScreen.tableView.reloadData()
+        let messageData: [String: Any] = [
+            "name": goal.name,
+            "description": goal.description,
+            "cost": goal.cost,
+            "targetDate": goal.targetDate,
+            "completed": false
+        ]
+        
+        
+        db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("goals").addDocument(data: messageData) { error in
+            if let error = error {
+                print("Error saving message: \(error.localizedDescription)")
+            } else {
+                print("Message saved successfully!")
+                self.currentGoals.append(goal)
+                self.savingsGoalsScreen.tableView.reloadData()
+            }
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

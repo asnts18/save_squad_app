@@ -99,7 +99,6 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
         }
     }
 
- 
     @objc func createGoal() {
         guard let name = createSavingsGoalView.nameTextField.text, !name.isEmpty,
               let description = createSavingsGoalView.descriptionTextField.text, !description.isEmpty,
