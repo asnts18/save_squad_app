@@ -12,7 +12,6 @@
 		4822FDBC2CD9430900FDE851 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBB2CD9430900FDE851 /* SocialFeedView.swift */; };
 		4822FDC82CD9433300FDE851 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBD2CD9433200FDE851 /* AddExpenseView.swift */; };
 		4822FDC92CD9433300FDE851 /* ExpenseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */; };
-		4822FDCB2CD9433300FDE851 /* GoalDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC02CD9433300FDE851 /* GoalDetailsView.swift */; };
 		4822FDCD2CD9433300FDE851 /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC22CD9433300FDE851 /* FriendsListView.swift */; };
 		4822FDD02CD9433300FDE851 /* FriendRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */; };
 		4822FDD22CD9433300FDE851 /* SavingsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC72CD9433300FDE851 /* SavingsGoalsView.swift */; };
@@ -73,7 +72,6 @@
 		4822FDBB2CD9430900FDE851 /* SocialFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedView.swift; sourceTree = "<group>"; };
 		4822FDBD2CD9433200FDE851 /* AddExpenseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsView.swift; sourceTree = "<group>"; };
-		4822FDC02CD9433300FDE851 /* GoalDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalDetailsView.swift; sourceTree = "<group>"; };
 		4822FDC12CD9433300FDE851 /* ExpenseLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseLogView.swift; sourceTree = "<group>"; };
 		4822FDC22CD9433300FDE851 /* FriendsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
 		4822FDC42CD9433300FDE851 /* AddIncomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIncomeView.swift; sourceTree = "<group>"; };
@@ -264,7 +262,6 @@
 				4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */,
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
-				4822FDC02CD9433300FDE851 /* GoalDetailsView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
 				BA6B031D2CDC79520076F361 /* Utilities.swift */,
@@ -488,7 +485,6 @@
 				5FC9FA3F2CDD65F600F50B9D /* SavingsGoal.swift in Sources */,
 				4822FDCD2CD9433300FDE851 /* FriendsListView.swift in Sources */,
 				5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */,
-				4822FDCB2CD9433300FDE851 /* GoalDetailsView.swift in Sources */,
 				4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */,
 				BA6B03152CD9BEFC0076F361 /* LoginView.swift in Sources */,
 				BA5A74752CC9AF8700797481 /* AppDelegate.swift in Sources */,

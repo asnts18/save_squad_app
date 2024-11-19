@@ -173,11 +173,14 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
     }
     
     func deleteGoal(_ goal: SavingsGoal) {
-        if let index = currentGoals.firstIndex(where: { $0.name == goal.name }) {
-            currentGoals.remove(at: index)
-        } else if let index = completedGoals.firstIndex(where: { $0.name == goal.name }) {
-            completedGoals.remove(at: index)
-        }
+        db.collection("users").document((self.currentUser?.uid ?? ""))
+            .collection("goals").document("\(goal.id ?? "")").delete { error in
+                if let error = error {
+                    print("Error deleting document: \(error.localizedDescription)")
+                } else {
+                    print("Document successfully deleted")
+                }
+            }
         savingsGoalsScreen.tableView.reloadData()
     }
 }
