@@ -165,15 +165,20 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
 extension SavingsGoalsViewController: GoalDetailDelegate {
     
     func markGoalAsComplete(_ goal: SavingsGoal) {
-        if let index = currentGoals.firstIndex(where: { $0.name == goal.name }) {
-            currentGoals.remove(at: index)
-            completedGoals.append(goal)
-            savingsGoalsScreen.tableView.reloadData()
-        }
+        db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("goals").document("\(goal.id ?? "")").updateData([
+                "completed": true
+            ]) { error in
+                if let error = error {
+                    print("Error updating completion status: \(error.localizedDescription)")
+                } else {
+                    print("Completion status updated successfully!")
+                }
+            }
     }
     
     func deleteGoal(_ goal: SavingsGoal) {
-        db.collection("users").document((self.currentUser?.uid ?? ""))
+        db.collection("users").document(self.currentUser?.uid ?? "")
             .collection("goals").document("\(goal.id ?? "")").delete { error in
                 if let error = error {
                     print("Error deleting document: \(error.localizedDescription)")
@@ -181,6 +186,5 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
                     print("Document successfully deleted")
                 }
             }
-        savingsGoalsScreen.tableView.reloadData()
     }
 }
