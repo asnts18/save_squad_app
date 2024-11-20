@@ -58,6 +58,14 @@ class HomeScreenViewController: UIViewController {
                             }
                             if let earliestDocument = earliestDocument {
                                 self.homeScreen.goalLabel2.text = earliestDocument.get("name") as? String ?? "No Name"
+                                let cost = earliestDocument.get("cost") as? Double ?? 0.0
+                                if let timestamp = earliestDocument.get("targetDate") as? Timestamp {
+                                    let targetDate = timestamp.dateValue()
+                                    self.updateBudget(cost: cost, targetDate: targetDate)
+                                } else {
+                                    let targetDate = Date()
+                                    self.updateBudget(cost: cost, targetDate: targetDate)
+                                }
                             } else {
                                 print("No valid targetDate found in documents")
                             }
@@ -127,5 +135,35 @@ class HomeScreenViewController: UIViewController {
         )
         logoutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(logoutAlert, animated: true)
+    }
+    
+    @objc func updateBudget(cost: Double, targetDate: Date) {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        if let daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day {
+            let savePerDay = cost / Double(daysDifference)
+            let dailyBudget = 0 - savePerDay
+            if dailyBudget >= 0 {
+                self.homeScreen.spendLabel2.text = String(format: "$%.2f", dailyBudget)
+                self.homeScreen.goalLabel3.text = "You are on track to achieve your savings goal!"
+            } else {
+                self.homeScreen.spendLabel2.text = String(format: "-$%.2f", abs(dailyBudget))
+                self.homeScreen.goalLabel3.text = "You are not on track to achieve your savings goal..."
+            }
+            if let firstDayNextMonth = calendar.date(byAdding: .month, value: 1, to: calendar.startOfDay(for: today))?.startOfMonth {
+                var daysDifference = Int()
+                if targetDate < firstDayNextMonth {
+                    daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day ?? 0
+                } else {
+                    daysDifference = calendar.dateComponents([.day], from: today, to: firstDayNextMonth).day ?? 0
+                }
+                let budgetThisMonth = dailyBudget * Double(daysDifference)
+                if budgetThisMonth >= 0 {
+                    self.homeScreen.spendLabel3.text = String(format: "$%.2f", budgetThisMonth) + " remaining for the month"
+                } else {
+                    self.homeScreen.spendLabel3.text = String(format: "-$%.2f", abs(budgetThisMonth)) + " remaining for the month"
+                }
+            }
+        }
     }
 }
