@@ -2,16 +2,20 @@
 //  ExpenseLogViewController.swift
 //  SaveSquadApp
 //
-//  Created by Colin Kenny on 11/6/24.
+//  Created by Abegail Santos on 11/20/24.
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
-class ExpenseLogViewController: UIViewController {
-    
+class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {    
     // MARK: - Properties
-    var expenses = [Expense]()
     let expenseLogScreen = ExpenseLogView()
+    var expenses: [Expense] = []
+    let db = Firestore.firestore()
+    var currentUser: FirebaseAuth.User?
+    var handleAuth: AuthStateDidChangeListenerHandle?
     
     override func loadView() {
         view = expenseLogScreen
@@ -21,15 +25,15 @@ class ExpenseLogViewController: UIViewController {
         super.viewDidLoad()
         title = "Expense Log"
         
-        // Removing separator line from TableView
-        expenseLogScreen.tableViewExpense.separatorStyle = .none
-        
-        // Register the custom cell class with the table view
-        expenseLogScreen.tableViewExpense.register(TableViewExpenseCell.self, forCellReuseIdentifier: "expenses")
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         // Setting the table view delegate and data source
         expenseLogScreen.tableViewExpense.delegate = self
         expenseLogScreen.tableViewExpense.dataSource = self
+        
+        // Add notification observer
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNewExpense(_:)), name: NSNotification.Name("NewExpenseAdded"), object: nil)
+
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.backgroundColor = .gray
@@ -39,17 +43,91 @@ class ExpenseLogViewController: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
     }
     
-    
-    // MARK: - Add Expense Delegate Method
-    func delegateOnAddExpense(expense: Expense) {
-        print("Added expense: \(expense)") // Debugging statement
-        expenses.append(expense)
-        expenseLogScreen.tableViewExpense.reloadData()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
+            if user == nil{
+                self.currentUser = nil
+                let loginViewController = ViewController()
+                let navController = UINavigationController(rootViewController: loginViewController)
+                navController.modalPresentationStyle = .fullScreen
+                            
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                    let window = windowScene.windows.first {
+                    window.rootViewController = navController
+                    window.makeKeyAndVisible()
+                }
+            }else{
+                self.currentUser = user
+                self.db.collection("users")
+                    .document((self.currentUser?.uid ?? ""))
+                    .collection("expenses")
+                    .addSnapshotListener(includeMetadataChanges: false, listener: {querySnapshot, error in
+                        if let documents = querySnapshot?.documents{
+                            self.expenses.removeAll()
+                            for document in documents{
+                                do{
+                                    let expense = try document.data(as: Expense.self)
+                                    self.expenses.append(expense)
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                            self.expenses.sort(by: {$0.date < $1.date})
+                            self.expenseLogScreen.tableViewExpense.reloadData()
+                        }
+                    })
+            }
+        }
     }
-}
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
-extension ExpenseLogViewController: UITableViewDelegate, UITableViewDataSource {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
+    // MARK: Add new expense to Firestore and expense list
+    @objc func didReceiveNewExpense(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let newExpense = userInfo["newExpense"] as? Expense, // Access Expense object
+              let newExpenseData = userInfo["newExpenseData"] as? [String: Any] else {
+            return
+        }
+
+        print("New Expense Object: \(newExpense)")
+        print("New Expense Data Dictionary: \(newExpenseData)")
+
+        // Save the expense to Firestore using the newExpenseData dictionary
+        let userID = self.currentUser?.uid ?? "" // Ensure valid user ID
+        db.collection("users").document(userID)
+            .collection("expenses").addDocument(data: newExpenseData) { error in
+                if let error = error {
+                    print("Error saving expense: \(error.localizedDescription)")
+                } else {
+                    print("New Expense saved successfully!")
+                    self.expenses.append(newExpense) // Add newExpense object to expenses list
+                    self.expenseLogScreen.tableViewExpense.reloadData()  // Reload table
+                }
+            }
+    }
+
+
+    deinit {
+        // Remove observer
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("NewExpenseAdded"), object: nil)
+    }
+    
+    // MARK: deleting an Expense
+    func deleteExpense(_ expense: Expense) {
+        db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("expenses").document("\(expense.id ?? "")").delete { error in
+                if let error = error {
+                    print("Error deleting expense: \(error.localizedDescription)")
+                } else {
+                    print("Expense successfully deleted")
+                }
+            }
+    }
     
     // Returns the number of rows in the current section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,40 +136,14 @@ extension ExpenseLogViewController: UITableViewDelegate, UITableViewDataSource {
     
     // Populate a cell for the current row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TODO: debugging
         print("Cell at row \(indexPath.row) is being configured.")
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenses", for: indexPath) as! TableViewExpenseCell
         let expense = expenses[indexPath.row]
-        
-        if let uwDescription = expense.description {
-            cell.labelDescription.text = "Description: \(uwDescription)"
-        }
-        
-        if let uwAmount = expense.amount {
-            cell.labelAmount.text = "Amount: $\(uwAmount)"
-        }
-        
-        if let uwCategory = expense.category {
-            cell.labelCategory.text = "Type: \(uwCategory)"
-        }
-        
-        //MARK: setting the image of the receipt...
-        if let uwImage = expense.image{
-            cell.imageReceipt.image = uwImage
-        }
-        
-        
-        // Setting the date
-//        if let uwDate = expense.date {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateStyle = .medium
-//            dateFormatter.timeStyle = .none
-//            cell.labelDate.text = dateFormatter.string(from: uwDate)
-//        }
+        cell.configure(with: expense)
         return cell
     }
     
-    // Handle user interaction with a cell
+    // TODO: debug: Handle user interaction with a cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(self.expenses[indexPath.row])
     }

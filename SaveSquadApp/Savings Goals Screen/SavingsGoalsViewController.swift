@@ -95,7 +95,7 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func didCreateGoal(_ goal: SavingsGoal) {
-        let messageData: [String: Any] = [
+        let createdGoalData: [String: Any] = [
             "name": goal.name,
             "description": goal.description,
             "cost": goal.cost,
@@ -103,11 +103,11 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
             "completed": false
         ]
         db.collection("users").document(self.currentUser?.uid ?? "")
-            .collection("goals").addDocument(data: messageData) { error in
+            .collection("goals").addDocument(data: createdGoalData) { error in
             if let error = error {
                 print("Error saving message: \(error.localizedDescription)")
             } else {
-                print("Message saved successfully!")
+                print("Savings goal saved successfully!")
                 self.savingsGoalsScreen.tableView.reloadData()
             }
         }

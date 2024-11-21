@@ -139,7 +139,10 @@ class CreateSavingsGoalView: UIView {
             nameTextField,
             amountTextField,
             descriptionTextField,
-            targetDateStackView,
+            targetDateStackView
+        ])
+        
+        let buttonStackView = UIStackView(arrangedSubviews: [
             createGoalButton,
             cancelButton
         ])
@@ -149,6 +152,13 @@ class CreateSavingsGoalView: UIView {
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
+        
+        buttonStackView.axis = .vertical
+        buttonStackView.spacing = 16
+        buttonStackView.alignment = .fill
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(buttonStackView)
+        
         
         NSLayoutConstraint.activate([
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
@@ -165,6 +175,13 @@ class CreateSavingsGoalView: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
         
+        NSLayoutConstraint.activate([
+            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100)
+        ])
+        
+
         NSLayoutConstraint.activate([
             goalImageView.heightAnchor.constraint(equalToConstant: 150),
             goalImageView.widthAnchor.constraint(equalToConstant: 150),

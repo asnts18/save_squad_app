@@ -107,8 +107,7 @@ class HomeScreenViewController: UIViewController {
                                                         self.navigationController?.pushViewController(addIncomeViewController, animated: true)
                                                     }),
                                                     UIAction(title: "Add Expense",handler: {(_) in
-                                                        let addExpenseViewController = AddExpenseViewController()
-                                                        addExpenseViewController.delegate = ExpenseLogViewController()
+                                                        let addExpenseViewController = AddExpenseViewController()            
                                                         self.navigationController?.pushViewController(addExpenseViewController, animated: true)
                                                     })
                                                    ])

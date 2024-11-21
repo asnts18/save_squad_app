@@ -39,4 +39,3 @@ struct SavingsGoal: Codable {
         self.image = image
     }
 }
-

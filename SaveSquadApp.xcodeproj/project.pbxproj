@@ -29,7 +29,6 @@
 		4872709B2CED8234004683A8 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4872709A2CED8234004683A8 /* DateHelper.swift */; };
 		48D5D5522CEA7B2F000FDB9C /* LoginFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */; };
 		5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */; };
-		5FC9FA3F2CDD65F600F50B9D /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */; };
 		5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */; };
 		5FC9FA432CDD6A0D00F50B9D /* CreateSavingsGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA422CDD6A0200F50B9D /* CreateSavingsGoalViewController.swift */; };
 		5FC9FA452CDD6D0600F50B9D /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA442CDD6D0300F50B9D /* GoalDetailView.swift */; };
@@ -50,6 +49,7 @@
 		BA6B031B2CDC786F0076F361 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031A2CDC786F0076F361 /* Expense.swift */; };
 		BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031D2CDC79520076F361 /* Utilities.swift */; };
 		BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */; };
+		BACF9E2C2CEF99FD00260E86 /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +90,6 @@
 		4872709A2CED8234004683A8 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFirebaseManager.swift; sourceTree = "<group>"; };
 		5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalCell.swift; sourceTree = "<group>"; };
-		5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
 		5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalView.swift; sourceTree = "<group>"; };
 		5FC9FA422CDD6A0200F50B9D /* CreateSavingsGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalViewController.swift; sourceTree = "<group>"; };
 		5FC9FA442CDD6D0300F50B9D /* GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 		BA6B031A2CDC786F0076F361 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		BA6B031D2CDC79520076F361 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExpenseCell.swift; sourceTree = "<group>"; };
+		BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,15 +209,6 @@
 			path = "Goal Details Screen";
 			sourceTree = "<group>";
 		};
-		4857D1F22CE95A4A00408DE6 /* Data models */ = {
-			isa = PBXGroup;
-			children = (
-				5FC9FA3E2CDD65F100F50B9D /* SavingsGoal.swift */,
-			);
-			name = "Data models";
-			path = "Savings Goals Screen/Data models";
-			sourceTree = "<group>";
-		};
 		4857D1FC2CE9789400408DE6 /* Register Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,7 +251,6 @@
 				4838E9292CDBDFF70068129F /* TabBarController.swift */,
 				4838E9332CDC0FCD0068129F /* Add Expense Screen */,
 				4838E9362CDC20F60068129F /* Add Income Screen */,
-				4857D1F22CE95A4A00408DE6 /* Data models */,
 				4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */,
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
@@ -320,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				BA6B031A2CDC786F0076F361 /* Expense.swift */,
+				BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -486,8 +477,8 @@
 				4822FDD22CD9433300FDE851 /* SavingsGoalsView.swift in Sources */,
 				5FC9FA472CDD6D2000F50B9D /* GoalDetailViewController.swift in Sources */,
 				5FC9FA432CDD6A0D00F50B9D /* CreateSavingsGoalViewController.swift in Sources */,
-				5FC9FA3F2CDD65F600F50B9D /* SavingsGoal.swift in Sources */,
 				4822FDCD2CD9433300FDE851 /* FriendsListView.swift in Sources */,
+				BACF9E2C2CEF99FD00260E86 /* SavingsGoal.swift in Sources */,
 				5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */,
 				4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */,
 				BA6B03152CD9BEFC0076F361 /* LoginView.swift in Sources */,
