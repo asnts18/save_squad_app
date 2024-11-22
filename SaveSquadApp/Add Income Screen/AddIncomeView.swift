@@ -18,6 +18,8 @@ class AddIncomeView: UIView {
     var frequencyStack: UIStackView!
     var frequencyPic: UIImageView!
     var frequencyButton: UIButton!
+    var datePic: UIImageView!
+    var datePicker: UIDatePicker!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,6 +33,8 @@ class AddIncomeView: UIView {
         setupFrequencyStack()
         setupFrequencyPic()
         setupFrequencyButton()
+        setupDatePic()
+        setupDatePicker()
         initConstraints()
     }
     
@@ -45,7 +49,7 @@ class AddIncomeView: UIView {
     
     func setupAmountPic(){
         amountPic = UIImageView()
-        amountPic.image = UIImage(systemName: "dollarsign")?.withRenderingMode(.alwaysOriginal)
+        amountPic.image = UIImage(systemName: "dollarsign")?.withRenderingMode(.alwaysTemplate)
         amountPic.tintColor = .black
         amountPic.contentMode = .scaleAspectFit
         amountPic.backgroundColor = .white
@@ -75,7 +79,7 @@ class AddIncomeView: UIView {
     
     func setupDescriptionPic(){
         descriptionPic = UIImageView()
-        descriptionPic.image = UIImage(systemName: "square.and.pencil")?.withRenderingMode(.alwaysOriginal)
+        descriptionPic.image = UIImage(systemName: "square.and.pencil")?.withRenderingMode(.alwaysTemplate)
         descriptionPic.tintColor = .black
         descriptionPic.contentMode = .scaleAspectFit
         descriptionPic.backgroundColor = .white
@@ -104,7 +108,7 @@ class AddIncomeView: UIView {
     
     func setupFrequencyPic(){
         frequencyPic = UIImageView()
-        frequencyPic.image = UIImage(systemName: "banknote")?.withRenderingMode(.alwaysOriginal)
+        frequencyPic.image = UIImage(systemName: "banknote")?.withRenderingMode(.alwaysTemplate)
         frequencyPic.tintColor = .black
         frequencyPic.contentMode = .scaleAspectFit
         frequencyPic.backgroundColor = .white
@@ -117,13 +121,33 @@ class AddIncomeView: UIView {
     func setupFrequencyButton(){
         frequencyButton = UIButton(type: .system)
         frequencyButton.frame = CGRect(x: 20, y: 100, width: 300, height: 40)
-        frequencyButton.setTitle("Select an option", for: .normal)
+        frequencyButton.setTitle("Select Frequency", for: .normal)
         frequencyButton.layer.borderWidth = 1
         frequencyButton.layer.borderColor = UIColor.lightGray.cgColor
         frequencyButton.layer.cornerRadius = 5
         frequencyButton.translatesAutoresizingMaskIntoConstraints = false
         frequencyButton.setTitleColor(UIColor.black, for: .normal)
         frequencyStack.addArrangedSubview(frequencyButton)
+    }
+    
+    func setupDatePic(){
+        datePic = UIImageView()
+        datePic.image = UIImage(systemName: "calendar")?.withRenderingMode(.alwaysTemplate)
+        datePic.tintColor = .black
+        datePic.contentMode = .scaleAspectFit
+        datePic.backgroundColor = .white
+        datePic.clipsToBounds = true
+        datePic.layer.masksToBounds = true
+        datePic.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(datePic)
+    }
+    
+    func setupDatePicker() {
+        datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .compact
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(datePicker)
     }
     
     func initConstraints(){
@@ -148,6 +172,17 @@ class AddIncomeView: UIView {
             frequencyStack.heightAnchor.constraint(equalToConstant: 60),
             
             frequencyButton.widthAnchor.constraint(equalTo: frequencyStack.widthAnchor, multiplier: 0.9),
+            
+            datePic.topAnchor.constraint(equalTo: frequencyStack.bottomAnchor, constant: 32),
+            datePicker.topAnchor.constraint(equalTo: datePic.topAnchor, constant: -8),
+            
+            datePic.leadingAnchor.constraint(equalTo: frequencyPic.leadingAnchor),
+            datePicker.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            
+            datePic.widthAnchor.constraint(equalTo: frequencyPic.widthAnchor),
+            
+            datePic.heightAnchor.constraint(equalTo: frequencyPic.heightAnchor),
+            
         ])
     }
 
