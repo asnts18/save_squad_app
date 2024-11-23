@@ -26,6 +26,9 @@ class AddIncomeViewController: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
         self.navigationController?.navigationBar.tintColor = .white
         setupFrequencyMenu()
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
     }
 
     func setupFrequencyMenu(){
@@ -48,5 +51,12 @@ class AddIncomeViewController: UIViewController {
         ]
         addIncomeScreen.frequencyButton.menu = UIMenu(title: "Select Frequency", children: menuOptions)
         addIncomeScreen.frequencyButton.showsMenuAsPrimaryAction = true
+    }
+    
+    /*
+     Hides the keyboard.
+     */
+    @objc func hideKeyboardOnTap(){
+        view.endEditing(true)
     }
 }

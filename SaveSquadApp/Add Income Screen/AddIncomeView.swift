@@ -9,6 +9,7 @@ import UIKit
 
 class AddIncomeView: UIView {
     
+    var contentWrapper:UIScrollView!
     var amountStack: UIStackView!
     var amountPic: UIImageView!
     var amountTextField: UITextField!
@@ -20,10 +21,14 @@ class AddIncomeView: UIView {
     var frequencyButton: UIButton!
     var datePic: UIImageView!
     var datePicker: UIDatePicker!
+    var actionStack: UIStackView!
+    var cancelButton: UIButton!
+    var addButton: UIButton!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        setupContentWrapper()
         setupAmountStack()
         setupAmountPic()
         setupAmountTextField()
@@ -35,7 +40,16 @@ class AddIncomeView: UIView {
         setupFrequencyButton()
         setupDatePic()
         setupDatePicker()
+        setupActionStack()
+        setupCancelButton()
+        setupAddButton()
         initConstraints()
+    }
+    
+    func setupContentWrapper(){
+        contentWrapper = UIScrollView()
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
     }
     
     func setupAmountStack(){
@@ -44,7 +58,7 @@ class AddIncomeView: UIView {
         amountStack.alignment = .center
         amountStack.distribution = .fillProportionally
         amountStack.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(amountStack)
+        contentWrapper.addSubview(amountStack)
     }
     
     func setupAmountPic(){
@@ -74,7 +88,7 @@ class AddIncomeView: UIView {
         descriptionStack.alignment = .center
         descriptionStack.distribution = .fillProportionally
         descriptionStack.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(descriptionStack)
+        contentWrapper.addSubview(descriptionStack)
     }
     
     func setupDescriptionPic(){
@@ -103,7 +117,7 @@ class AddIncomeView: UIView {
         frequencyStack.alignment = .center
         frequencyStack.distribution = .fillProportionally
         frequencyStack.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(frequencyStack)
+        contentWrapper.addSubview(frequencyStack)
     }
     
     func setupFrequencyPic(){
@@ -139,7 +153,7 @@ class AddIncomeView: UIView {
         datePic.clipsToBounds = true
         datePic.layer.masksToBounds = true
         datePic.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(datePic)
+        contentWrapper.addSubview(datePic)
     }
     
     func setupDatePicker() {
@@ -147,42 +161,86 @@ class AddIncomeView: UIView {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .compact
         datePicker.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(datePicker)
+        contentWrapper.addSubview(datePicker)
+    }
+
+    func setupActionStack(){
+        actionStack = UIStackView()
+        actionStack.axis = .horizontal
+        actionStack.alignment = .center
+        actionStack.distribution = .fillProportionally
+        actionStack.translatesAutoresizingMaskIntoConstraints = false
+        contentWrapper.addSubview(actionStack)
+    }
+    
+    func setupCancelButton(){
+        cancelButton = UIButton(type: .system)
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.black.cgColor
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.layer.backgroundColor = UIColor.white.cgColor
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.setTitleColor(UIColor.black, for: .normal)
+        actionStack.addArrangedSubview(cancelButton)
+    }
+    
+    func setupAddButton(){
+        addButton = UIButton(type: .system)
+        addButton.setTitle("Add Income", for: .normal)
+        addButton.layer.cornerRadius = 5
+        addButton.layer.backgroundColor = UIColor.black.cgColor
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.setTitleColor(UIColor.white, for: .normal)
+        actionStack.addArrangedSubview(addButton)
     }
     
     func initConstraints(){
         NSLayoutConstraint.activate([
-            amountStack.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            amountStack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            amountStack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
+            amountStack.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 16),
+            amountStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            amountStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
             amountStack.heightAnchor.constraint(equalToConstant: 60),
             
             amountTextField.widthAnchor.constraint(equalTo: amountStack.widthAnchor, multiplier: 0.9),
             
             descriptionStack.topAnchor.constraint(equalTo: amountStack.bottomAnchor, constant: 16),
-            descriptionStack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            descriptionStack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            descriptionStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            descriptionStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
             descriptionStack.heightAnchor.constraint(equalToConstant: 60),
             
             descriptionTextField.widthAnchor.constraint(equalTo: descriptionStack.widthAnchor, multiplier: 0.9),
             
             frequencyStack.topAnchor.constraint(equalTo: descriptionStack.bottomAnchor, constant: 16),
-            frequencyStack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            frequencyStack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            frequencyStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            frequencyStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
             frequencyStack.heightAnchor.constraint(equalToConstant: 60),
             
             frequencyButton.widthAnchor.constraint(equalTo: frequencyStack.widthAnchor, multiplier: 0.9),
             
             datePic.topAnchor.constraint(equalTo: frequencyStack.bottomAnchor, constant: 32),
             datePicker.topAnchor.constraint(equalTo: datePic.topAnchor, constant: -8),
-            
             datePic.leadingAnchor.constraint(equalTo: frequencyPic.leadingAnchor),
-            datePicker.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            datePicker.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             datePic.widthAnchor.constraint(equalTo: frequencyPic.widthAnchor),
-            
             datePic.heightAnchor.constraint(equalTo: frequencyPic.heightAnchor),
             
+            actionStack.topAnchor.constraint(equalTo: datePic.bottomAnchor, constant: 32),
+            actionStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            actionStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
+            actionStack.heightAnchor.constraint(equalToConstant: 70),
+            
+            cancelButton.widthAnchor.constraint(equalTo: actionStack.widthAnchor, multiplier: 0.45),
+            addButton.widthAnchor.constraint(equalTo: actionStack.widthAnchor, multiplier: 0.45),
+            cancelButton.heightAnchor.constraint(equalToConstant: 50),
+            addButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            actionStack.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
 
