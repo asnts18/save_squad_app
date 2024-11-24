@@ -50,6 +50,7 @@
 		BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031D2CDC79520076F361 /* Utilities.swift */; };
 		BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */; };
 		BACF9E2C2CEF99FD00260E86 /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */; };
+		BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		BA6B031D2CDC79520076F361 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExpenseCell.swift; sourceTree = "<group>"; };
 		BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
+		BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +313,7 @@
 			children = (
 				BA6B031A2CDC786F0076F361 /* Expense.swift */,
 				BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */,
+				BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */,
 				4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */,
 				BA6B03192CD9BEFC0076F361 /* HomeScreenViewController.swift in Sources */,
+				BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */,
 				481EEEA52CDB20CF00A601B2 /* ExpenseLogView.swift in Sources */,
 				5FC9FA452CDD6D0600F50B9D /* GoalDetailView.swift in Sources */,
 				BA6B03172CD9BEFC0076F361 /* ViewController.swift in Sources */,

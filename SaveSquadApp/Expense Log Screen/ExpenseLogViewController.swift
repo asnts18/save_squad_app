@@ -106,7 +106,9 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
                     print("Error saving expense: \(error.localizedDescription)")
                 } else {
                     print("New Expense saved successfully!")
-                    NotificationCenter.default.post(name: NSNotification.Name("NewExpenseSuccessfullyAdded"), object: nil, userInfo: ["newExpenseData": newExpenseData])
+                    
+                    // Post notification to update budget in homescreen
+                    NotificationCenter.default.post(name: NSNotification.Name("UpdateBudget"), object: nil, userInfo: ["newExpenseData": newExpenseData])
 
                     self.expenses.append(newExpense) // Add newExpense object to expenses list
                     self.expenseLogScreen.tableViewExpense.reloadData()  // Reload table
