@@ -25,6 +25,7 @@ struct SavingsGoal: Codable {
         }
     }
     
+    
     var targetDateFormatted: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium

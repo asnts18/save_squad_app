@@ -26,6 +26,7 @@
 		4857D1F92CE95C9D00408DE6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */; };
 		4857D1FB2CE9786F00408DE6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */; };
 		4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */; };
+		486AC4312CF3A8B2009C81A6 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486AC4302CF3A8B2009C81A6 /* Income.swift */; };
 		4872709B2CED8234004683A8 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4872709A2CED8234004683A8 /* DateHelper.swift */; };
 		48D5D5522CEA7B2F000FDB9C /* LoginFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */; };
 		5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */; };
@@ -88,6 +89,7 @@
 		4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirebaseManager.swift; sourceTree = "<group>"; };
+		486AC4302CF3A8B2009C81A6 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		4872709A2CED8234004683A8 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFirebaseManager.swift; sourceTree = "<group>"; };
 		5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalCell.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				BA6B031A2CDC786F0076F361 /* Expense.swift */,
+				486AC4302CF3A8B2009C81A6 /* Income.swift */,
 				BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */,
 				BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */,
 			);
@@ -479,6 +482,7 @@
 				4838E92A2CDBDFF70068129F /* TabBarController.swift in Sources */,
 				4822FDC82CD9433300FDE851 /* AddExpenseView.swift in Sources */,
 				4822FDD22CD9433300FDE851 /* SavingsGoalsView.swift in Sources */,
+				486AC4312CF3A8B2009C81A6 /* Income.swift in Sources */,
 				5FC9FA472CDD6D2000F50B9D /* GoalDetailViewController.swift in Sources */,
 				5FC9FA432CDD6A0D00F50B9D /* CreateSavingsGoalViewController.swift in Sources */,
 				4822FDCD2CD9433300FDE851 /* FriendsListView.swift in Sources */,
