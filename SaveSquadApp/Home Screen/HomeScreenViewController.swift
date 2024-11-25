@@ -67,7 +67,10 @@ class HomeScreenViewController: UIViewController {
                                     self.updateBudget(cost: cost, targetDate: targetDate)
                                 }
                             } else {
-                                print("No valid targetDate found in documents")
+                                self.homeScreen.spendLabel2.text = "$00.00"
+                                self.homeScreen.spendLabel3.text = "$00.00 remaining for the month"
+                                self.homeScreen.goalLabel2.text = "None!"
+                                self.homeScreen.goalLabel3.text = "Go to Goals tab to create a new goal"
                             }
                         }
                     })
