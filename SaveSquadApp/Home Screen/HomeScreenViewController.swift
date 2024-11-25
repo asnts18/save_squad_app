@@ -140,29 +140,69 @@ class HomeScreenViewController: UIViewController {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
         if let daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day {
-            let savePerDay = cost / Double(daysDifference)
-            let dailyBudget = 0 - savePerDay
-            if dailyBudget >= 0 {
-                self.homeScreen.spendLabel2.text = String(format: "$%.2f", dailyBudget)
-                self.homeScreen.goalLabel3.text = "You are on track to achieve your savings goal!"
-            } else {
-                self.homeScreen.spendLabel2.text = String(format: "-$%.2f", abs(dailyBudget))
-                self.homeScreen.goalLabel3.text = "You are not on track to achieve your savings goal..."
-            }
-            if let firstDayNextMonth = calendar.date(byAdding: .month, value: 1, to: calendar.startOfDay(for: today))?.startOfMonth {
-                var daysDifference = Int()
-                if targetDate < firstDayNextMonth {
-                    daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day ?? 0
+            getTotalIncome(targetDate: targetDate) { totalIncome in
+                let dailyBudget = (totalIncome - cost) / Double(daysDifference)
+                if dailyBudget >= 0 {
+                    self.homeScreen.spendLabel2.text = String(format: "$%.2f", dailyBudget)
+                    self.homeScreen.goalLabel3.text = "You are on track to achieve your savings goal!"
                 } else {
-                    daysDifference = calendar.dateComponents([.day], from: today, to: firstDayNextMonth).day ?? 0
+                    self.homeScreen.spendLabel2.text = String(format: "-$%.2f", abs(dailyBudget))
+                    self.homeScreen.goalLabel3.text = "You are not on track to achieve your savings goal..."
                 }
-                let budgetThisMonth = dailyBudget * Double(daysDifference)
-                if budgetThisMonth >= 0 {
-                    self.homeScreen.spendLabel3.text = String(format: "$%.2f", budgetThisMonth) + " remaining for the month"
-                } else {
-                    self.homeScreen.spendLabel3.text = String(format: "-$%.2f", abs(budgetThisMonth)) + " remaining for the month"
+                if let firstDayNextMonth = calendar.date(byAdding: .month, value: 1, to: calendar.startOfDay(for: today))?.startOfMonth {
+                    var daysDifference = Int()
+                    if targetDate < firstDayNextMonth {
+                        daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day ?? 0
+                    } else {
+                        daysDifference = calendar.dateComponents([.day], from: today, to: firstDayNextMonth).day ?? 0
+                    }
+                    let budgetThisMonth = dailyBudget * Double(daysDifference)
+                    if budgetThisMonth >= 0 {
+                        self.homeScreen.spendLabel3.text = String(format: "$%.2f", budgetThisMonth) + " remaining for the month"
+                    } else {
+                        self.homeScreen.spendLabel3.text = String(format: "-$%.2f", abs(budgetThisMonth)) + " remaining for the month"
+                    }
                 }
             }
+        }
+    }
+    
+    @objc func getTotalIncome(targetDate: Date, completion: @escaping (Double) -> Void) {
+        var totalIncome = 0.0
+        let calendar = Calendar.current
+        self.db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("income").getDocuments { querySnapshot, error in
+                if let error = error {
+                    print("Error retrieving documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let incomeData = document.data()
+                        let amount = incomeData["amount"] as? Double ?? 0.0
+                        let frequency = incomeData["frequency"] as? String ?? "One-time"
+                        let incomeTimestamp = incomeData["incomeDate"] as? Timestamp ?? Timestamp(date: Date())
+                        let incomeDate = incomeTimestamp.dateValue()
+                        if frequency == "One-time" {
+                            totalIncome += amount
+                        } else {
+                            var dailyBudget = 0.0
+                            if frequency == "Weekly" {
+                                dailyBudget = amount / 7
+                            } else if frequency == "Semi-monthly" {
+                                dailyBudget = (amount * 24) / 365
+                            } else if frequency == "Monthly" {
+                                dailyBudget = (amount * 12) / 365
+                            } else if frequency == "Annual" {
+                                dailyBudget = amount / 365
+                            } else {
+                                continue
+                            }
+                            let dateDiff = calendar.dateComponents([.day], from: incomeDate, to: targetDate).day ?? 0
+                            let income = dailyBudget * Double(dateDiff)
+                            totalIncome += income
+                        }
+                    }
+                }
+                completion(totalIncome)
         }
     }
 }
