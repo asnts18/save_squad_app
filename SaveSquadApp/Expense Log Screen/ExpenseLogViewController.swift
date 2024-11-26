@@ -73,7 +73,7 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
                                     print(error)
                                 }
                             }
-                            self.expenses.sort(by: {$0.date < $1.date})
+                            self.expenses.sort(by: {$0.date > $1.date})
                             self.expenseLogScreen.tableViewExpense.reloadData()
                         }
                     })
@@ -122,18 +122,6 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("NewExpenseAdded"), object: nil)
     }
     
-    // MARK: deleting an Expense
-    func deleteExpense(_ expense: Expense) {
-        db.collection("users").document(self.currentUser?.uid ?? "")
-            .collection("expenses").document("\(expense.id ?? "")").delete { error in
-                if let error = error {
-                    print("Error deleting expense: \(error.localizedDescription)")
-                } else {
-                    print("Expense successfully deleted")
-                }
-            }
-    }
-    
     // Returns the number of rows in the current section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenses.count
@@ -141,15 +129,54 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
     
     // Populate a cell for the current row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Cell at row \(indexPath.row) is being configured.")
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenses", for: indexPath) as! TableViewExpenseCell
         let expense = expenses[indexPath.row]
         cell.configure(with: expense)
         return cell
     }
     
-    // TODO: debug: Handle user interaction with a cell
+    // Navigate to ExpenseDetailsViewController when clicking a cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(self.expenses[indexPath.row])
+        let selectedExpense = expenses[indexPath.row]
+        let expenseDetailsVC = ExpenseDetailsViewController(expense: selectedExpense)
+        expenseDetailsVC.delegate = self
+        navigationController?.pushViewController(expenseDetailsVC, animated: true)
     }
+
+}
+
+
+extension ExpenseLogViewController: ExpenseDetailDelegate {
+    
+    // TODO: Edit Expense
+    func editExpense(_ expense: Expense) {
+        db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("expenses").document("\(expense.id ?? "")").updateData([
+                "completed": true
+            ]) { error in
+                if let error = error {
+                    print("Error updating completion status: \(error.localizedDescription)")
+                } else {
+                    print("Completion status updated successfully!")
+                }
+            }
+    }
+    
+    func deleteExpense(_ expense: Expense) {
+        db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("expenses").document("\(expense.id ?? "")").delete { error in
+                if let error = error {
+                    print("Error deleting document: \(error.localizedDescription)")
+                } else {
+                    print("Document successfully deleted")
+                    
+                    // Reload the data in the table view
+                    if let index = self.expenses.firstIndex(where: { $0.id == expense.id }) {
+                        self.expenses.remove(at: index) // Remove expense from local array
+                        self.expenseLogScreen.tableViewExpense.reloadData() // Reload table to reflect changes
+                    }
+                }
+            }
+    }
+
 }
