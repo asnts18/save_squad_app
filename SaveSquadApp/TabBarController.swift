@@ -21,14 +21,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         )
         homeTab.tabBarItem = tabHomeBarItem
         homeTab.title = "Home"
-        let tabExpenses = UINavigationController(rootViewController: ExpenseLogViewController())
-        let tabExpensesBarItem = UITabBarItem(
-            title: "Expenses",
-            image: UIImage(systemName: "chart.bar")?.withRenderingMode(.alwaysTemplate),
-            selectedImage: UIImage(systemName: "chart.bar.fill")
-        )
-        tabExpenses.tabBarItem = tabExpensesBarItem
-        tabExpenses.title = "Expenses"
         let tabGoals = UINavigationController(rootViewController: SavingsGoalsViewController())
         let tabGoalsBarItem = UITabBarItem(
             title: "Goals",
@@ -37,6 +29,22 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         )
         tabGoals.tabBarItem = tabGoalsBarItem
         tabGoals.title = "Goals"
+        let tabIncome = UINavigationController(rootViewController: IncomeLogViewController())
+        let tabIncomeBarItem = UITabBarItem(
+            title: "Income",
+            image: UIImage(systemName: "banknote")?.withRenderingMode(.alwaysTemplate),
+            selectedImage: UIImage(systemName: "banknote.fill")
+        )
+        tabIncome.tabBarItem = tabIncomeBarItem
+        tabIncome.title = "Income"
+        let tabExpenses = UINavigationController(rootViewController: ExpenseLogViewController())
+        let tabExpensesBarItem = UITabBarItem(
+            title: "Expenses",
+            image: UIImage(systemName: "chart.bar")?.withRenderingMode(.alwaysTemplate),
+            selectedImage: UIImage(systemName: "chart.bar.fill")
+        )
+        tabExpenses.tabBarItem = tabExpensesBarItem
+        tabExpenses.title = "Expenses"
         let tabSocial = UINavigationController(rootViewController: SocialFeedViewController())
         let tabSocialBarItem = UITabBarItem(
             title: "Social",
@@ -45,7 +53,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         )
         tabSocial.tabBarItem = tabSocialBarItem
         tabSocial.title = "Social"
-        self.viewControllers = [homeTab, tabExpenses, tabGoals, tabSocial]
+        self.viewControllers = [homeTab, tabGoals, tabIncome, tabExpenses, tabSocial]
     }
     
     override func viewDidLoad() {

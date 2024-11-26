@@ -23,7 +23,7 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Expense Log"
+        title = "Expenses"
         
 //        self.navigationController?.setNavigationBarHidden(true, animated: false)
         

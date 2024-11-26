@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC42CD9433300FDE851 /* AddIncomeView.swift */; };
 		481EEEA52CDB20CF00A601B2 /* ExpenseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC12CD9433300FDE851 /* ExpenseLogView.swift */; };
+		482273492CF65D3900C001B6 /* IncomeLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482273482CF65D3900C001B6 /* IncomeLogViewController.swift */; };
+		4822734C2CF65DD700C001B6 /* IncomeLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822734B2CF65DD700C001B6 /* IncomeLogView.swift */; };
+		4822734E2CF666D600C001B6 /* TableViewIncomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822734D2CF666D600C001B6 /* TableViewIncomeCell.swift */; };
+		482273502CF67E3B00C001B6 /* IncomeLogTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822734F2CF67E3B00C001B6 /* IncomeLogTableViewManager.swift */; };
 		4822FDBC2CD9430900FDE851 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBB2CD9430900FDE851 /* SocialFeedView.swift */; };
 		4822FDC82CD9433300FDE851 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBD2CD9433200FDE851 /* AddExpenseView.swift */; };
 		4822FDC92CD9433300FDE851 /* ExpenseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */; };
@@ -73,6 +77,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		482273482CF65D3900C001B6 /* IncomeLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeLogViewController.swift; sourceTree = "<group>"; };
+		4822734B2CF65DD700C001B6 /* IncomeLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeLogView.swift; sourceTree = "<group>"; };
+		4822734D2CF666D600C001B6 /* TableViewIncomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewIncomeCell.swift; sourceTree = "<group>"; };
+		4822734F2CF67E3B00C001B6 /* IncomeLogTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeLogTableViewManager.swift; sourceTree = "<group>"; };
 		4822FDBB2CD9430900FDE851 /* SocialFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedView.swift; sourceTree = "<group>"; };
 		4822FDBD2CD9433200FDE851 /* AddExpenseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsView.swift; sourceTree = "<group>"; };
@@ -150,6 +158,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4822734A2CF65D4000C001B6 /* Income Log Screen */ = {
+			isa = PBXGroup;
+			children = (
+				482273482CF65D3900C001B6 /* IncomeLogViewController.swift */,
+				4822734B2CF65DD700C001B6 /* IncomeLogView.swift */,
+				4822734D2CF666D600C001B6 /* TableViewIncomeCell.swift */,
+				4822734F2CF67E3B00C001B6 /* IncomeLogTableViewManager.swift */,
+			);
+			path = "Income Log Screen";
+			sourceTree = "<group>";
+		};
 		4838E9282CDBDF7B0068129F /* Expense Log Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +280,7 @@
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
+				4822734A2CF65D4000C001B6 /* Income Log Screen */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
 				BA6B031D2CDC79520076F361 /* Utilities.swift */,
 				BA6B031C2CDC78A90076F361 /* Data Models */,
@@ -479,6 +499,7 @@
 				BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */,
 				481EEEA52CDB20CF00A601B2 /* ExpenseLogView.swift in Sources */,
 				5FC9FA452CDD6D0600F50B9D /* GoalDetailView.swift in Sources */,
+				482273502CF67E3B00C001B6 /* IncomeLogTableViewManager.swift in Sources */,
 				BA6B03172CD9BEFC0076F361 /* ViewController.swift in Sources */,
 				4838E9352CDC20E40068129F /* AddIncomeViewController.swift in Sources */,
 				4872709B2CED8234004683A8 /* DateHelper.swift in Sources */,
@@ -487,6 +508,7 @@
 				4838E92C2CDBEADE0068129F /* SavingsGoalsViewController.swift in Sources */,
 				4822FDC92CD9433300FDE851 /* ExpenseDetailsView.swift in Sources */,
 				BA6B03182CD9BEFC0076F361 /* HomeScreenView.swift in Sources */,
+				482273492CF65D3900C001B6 /* IncomeLogViewController.swift in Sources */,
 				BA6B03162CD9BEFC0076F361 /* RegisterView.swift in Sources */,
 				4822FDBC2CD9430900FDE851 /* SocialFeedView.swift in Sources */,
 				BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */,
@@ -504,7 +526,9 @@
 				BA5A74752CC9AF8700797481 /* AppDelegate.swift in Sources */,
 				4857D1FB2CE9786F00408DE6 /* RegisterViewController.swift in Sources */,
 				4838E9272CDBDF750068129F /* ExpenseLogViewController.swift in Sources */,
+				4822734E2CF666D600C001B6 /* TableViewIncomeCell.swift in Sources */,
 				BACF9E352CF5671A00260E86 /* ExpenseDetailsViewController.swift in Sources */,
+				4822734C2CF65DD700C001B6 /* IncomeLogView.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
 				BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */,
 				4838E9322CDC0FC50068129F /* AddExpenseViewController.swift in Sources */,
