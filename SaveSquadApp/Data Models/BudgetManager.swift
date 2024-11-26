@@ -8,137 +8,125 @@
 import Foundation
 
 class BudgetManager {
-    var monthlyIncome: Double
-    var monthlyExpenses: Double
-    var savingsGoalAmount: Double
-    var goalTargetDate: Date
-    var goalStartDate: Date
-    var currentDate: Date
+    var totalIncome: Double?
+    var totalExpenses: Double?
+    var savingsGoalAmount: Double?
+    var goalTargetDate: Date?
 
 
-    init(monthlyIncome: Double, monthlyExpenses: Double, savingsGoalAmount: Double,
-         goalTargetDate: Date,  goalStartDate: Date, currentDate: Date) {
-        self.monthlyIncome = monthlyIncome // get income from firebase, monthly breakdown ?? 0
-        self.monthlyExpenses = monthlyExpenses  // get sum of expenses from firebase for the month ?? 0
-        self.goalTargetDate = goalTargetDate  // get target date of current goal ?? none
-        self.savingsGoalAmount = savingsGoalAmount // get savings goals of current goal ?? 0
-        self.goalStartDate = goalStartDate  // get created date of current goal ?? none
-        self.currentDate = currentDate // today
-    }
-
-    // Update current date for testing
-    func updateCurrentDate(newDate: Date) {
-        self.currentDate = newDate
+    init(totalIncome: Double?, totalExpenses: Double?, savingsGoalAmount: Double?,
+         goalTargetDate: Date?) {
+        self.totalIncome = totalIncome ?? 0
+        self.totalExpenses = totalExpenses ?? 0
+        self.goalTargetDate = goalTargetDate
+        self.savingsGoalAmount = savingsGoalAmount ?? 0
     }
     
-    // MARK: SETTER AND GETTER METHODS
-
-    /* Gets the daily budget after accounting for daily savings requirement and expenses for the month */
-    func getAdjustedDailyBudget() -> Double {
-        return calculateAdjustedDailyBudget()
+    // MARK: SETTERS AND GETTERS
+ 
+    
+    /* Gets the daily budget */
+    func getDailyBudget() -> Double {
+        return calculateDailyBudget()
     }
     
-    /* Gets the remaining monthly budget after accounting for savings requirement and expenses for the month */
-//    func getRemainingMonthlyBudget() -> Double {
-//        return calculateRemainingMonthlyBudget()
-//    }
-    
-    /* Gets the monthly income */
-    func getIncome(newIncome: Double) {
-        self.monthlyIncome = newIncome
+    /* Gets the daily budget */
+    func getRemainingBudgetForThisMonth() -> Double {
+        return calculateRemainingBudgetForThisMonth()
     }
     
-    /* Sets the monthly income */
-    func setIncome(newIncome: Double) {
-        self.monthlyIncome = newIncome
-    }
-    
-    /* Gets the total expenses amount */
-    func getExpenses(newExpenses: Double) {
-        self.monthlyExpenses = newExpenses
-    }
-    
-    /* Sets the total expenses amount */
-    func setExpenses(newExpenses: Double) {
-        self.monthlyExpenses = newExpenses
-    }
-    
-    /* Sets current savings goal amount */
-    func setSavingsGoal(newSavingsGoalAmount: Double) {
-        self.savingsGoalAmount = newSavingsGoalAmount
-    }
-
-    /* Sets new target date based on current savings goal */
-    func setTargetDate(newGoalTargetDate: Date) {
-        self.goalTargetDate = newGoalTargetDate
-    }
-    
-    // MARK: BUDGET CALCULATION METHODS
     
     /* Calculates daily budget available to spend AFTER accounting for daily savings requirements and expenses */
-    private func calculateAdjustedDailyBudget() -> Double {
-        // Calculate daily allocation of monthly income and expenses
-         let dailyIncome = self.monthlyIncome / Double(calculateDaysInCurrentMonth())
-         let dailyExpenses = self.monthlyExpenses / Double(calculateDaysInCurrentMonth())
+    private func calculateDailyBudget() -> Double {
+        let daysToTargetDate: Double
         
-        // Calculate daily savings requirement to achieve the goal
-        var dailySavingsRequirement = 0.0
-         if self.currentDate <= self.goalTargetDate {
-             dailySavingsRequirement = self.savingsGoalAmount / Double(calculateStartDateToTargetDate())
+        if self.goalTargetDate != nil {
+            // If there is a target date, calculate days to target date
+            daysToTargetDate = Double(calculateCurrentDateToTargetDate() ?? 0)
+            print("daysToTargetDate: \(daysToTargetDate)")
+        } else {
+            // If there is no target date, use days in the current month
+            daysToTargetDate = Double(calculateDaysInCurrentMonth())
         }
         
-        // Adjusted Daily Budget: (Daily Income - Daily Savings Requirement - Daily Expenses)
-        return dailyIncome - dailySavingsRequirement - dailyExpenses
-    }
-    
-    /* Calculates the amount of savings that needs to be set aside for the current month
-     to meet savings goal by the target date. */
-    func calculateSavingsRequirementForCurrentMonth() -> Double {
-        let dailySavingsRequirement = self.savingsGoalAmount / Double(calculateStartDateToTargetDate())
-        let calendar = Calendar.current
-        
-        // Get the start and end of the current month
-        let range = calendar.range(of: .day, in: .month, for: self.currentDate)!
-        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: self.currentDate))!
-        let endOfMonth = calendar.date(byAdding: .day, value: range.count - 1, to: startOfMonth)!
-        
-        // Determine the relevant start and end dates for calculation
-        let start = max(self.goalStartDate, startOfMonth)
-        let end = min(self.goalTargetDate, endOfMonth)
-        
-        // If the range is valid within the current month
-        if start <= end {
-            let daysInRange = calendar.dateComponents([.day], from: start, to: end).day! + 1
-            print(daysInRange) // TODO: debug
-            return dailySavingsRequirement * Double(daysInRange)
+        // Ensure that we don't divide by zero if daysToTargetDate is zero
+        guard daysToTargetDate > 0 else {
+            return 0
         }
         
-        // Default case: No savings required in the current month
-        return 0.0
-    }
-    
-    // TODO: implement calculateRemainingMonthlyBudget()
-    
-    // MARK: Helper methods
-    
-    /* Calculates number of days from Goal Start Date to Target Date */
-    func calculateStartDateToTargetDate() -> Int {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: goalStartDate, to: goalTargetDate)
-        
-        // Add 1 to include the start date from the calculation
-        return components.day! + 1
+        let totalIncome = self.totalIncome ?? 0
+        let savingsGoalAmount = self.savingsGoalAmount ?? 0
+        let totalExpenses = self.totalExpenses ?? 0
+        print("totalIncome: \(totalIncome), savingsGoalAmount: \(savingsGoalAmount), totalExpenses: \(totalExpenses),")
+
+
+        return (totalIncome - savingsGoalAmount - totalExpenses) / daysToTargetDate
     }
 
     
-    /* Calculates number of days in current month */
-    func calculateDaysInCurrentMonth() -> Int {
+    /* Calculates remaining budget for the month */
+    private func calculateRemainingBudgetForThisMonth() -> Double {
         let calendar = Calendar.current
-        return calendar.range(of: .day, in: .month, for: currentDate)!.count
+        let today = calendar.startOfDay(for: Date())
+        let dailyBudget = calculateDailyBudget()
+
+        if let firstDayNextMonth = calendar.date(byAdding: .month, value: 1, to: calendar.startOfDay(for: today))?.startOfMonth {
+            print("firstDayNextMonth: \(firstDayNextMonth)")
+
+            var daysDifference = 0
+            
+            // If there is a targetDate, calculate days difference to target date
+            if let targetDate = goalTargetDate {
+                if targetDate < firstDayNextMonth {
+                    daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day ?? 0
+                    print("days from today to target date: \(daysDifference)")
+
+                } else {
+                    daysDifference = calendar.dateComponents([.day], from: today, to: firstDayNextMonth).day ?? 0
+                    print("days from today to firstDayNextMonth: \(daysDifference)")
+
+                }
+            } else {
+                // If no targetDate, calculate days to the first day of next month
+                daysDifference = calendar.dateComponents([.day], from: today, to: firstDayNextMonth).day ?? 0
+            }
+            
+            // Calculate the remaining budget for the month
+            let budgetThisMonth = dailyBudget * Double(daysDifference)
+            print("budgetThisMonth: \(budgetThisMonth)")
+
+            return budgetThisMonth
+        }
+        
+        // Return 0 if we couldn't calculate firstDayNextMonth (safety check)
+        return 0
     }
-    
-    // MARK: Income helper methods
-    
-    
+
+    // MARK: HELPER METHODS
+ 
+    /* Calculates number of days from Current Date to Target Date */
+    func calculateCurrentDateToTargetDate() -> Int? {
+        guard let targetDate = self.goalTargetDate else {
+            return nil
+        }
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date()) // Get the start of today's date
+        let daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day
+        return daysDifference
+    }
+
+
+    /* Calculates number of days in the current month */
+    private func calculateDaysInCurrentMonth() -> Int {
+        let calendar = Calendar.current
+        let today = Date() // Get today's date
+        
+        // Get the range of days in the current month
+        let range = calendar.range(of: .day, in: .month, for: today)
+        
+        // Return the count of days in the current month
+        return range?.count ?? 0
+    }
+
 
 }

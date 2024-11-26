@@ -52,6 +52,7 @@
 		BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */; };
 		BACF9E2C2CEF99FD00260E86 /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */; };
 		BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */; };
+		BACF9E352CF5671A00260E86 /* ExpenseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E342CF5671A00260E86 /* ExpenseDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		BA6B031F2CDC7CB10076F361 /* TableViewExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExpenseCell.swift; sourceTree = "<group>"; };
 		BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
 		BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManager.swift; sourceTree = "<group>"; };
+		BACF9E342CF5671A00260E86 /* ExpenseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +257,7 @@
 				4838E9292CDBDFF70068129F /* TabBarController.swift */,
 				4838E9332CDC0FCD0068129F /* Add Expense Screen */,
 				4838E9362CDC20F60068129F /* Add Income Screen */,
-				4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */,
+				BACF9E312CF5655500260E86 /* Expense Details Screen */,
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
@@ -319,6 +321,15 @@
 				BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */,
 			);
 			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		BACF9E312CF5655500260E86 /* Expense Details Screen */ = {
+			isa = PBXGroup;
+			children = (
+				4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */,
+				BACF9E342CF5671A00260E86 /* ExpenseDetailsViewController.swift */,
+			);
+			path = "Expense Details Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,6 +504,7 @@
 				BA5A74752CC9AF8700797481 /* AppDelegate.swift in Sources */,
 				4857D1FB2CE9786F00408DE6 /* RegisterViewController.swift in Sources */,
 				4838E9272CDBDF750068129F /* ExpenseLogViewController.swift in Sources */,
+				BACF9E352CF5671A00260E86 /* ExpenseDetailsViewController.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
 				BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */,
 				4838E9322CDC0FC50068129F /* AddExpenseViewController.swift in Sources */,

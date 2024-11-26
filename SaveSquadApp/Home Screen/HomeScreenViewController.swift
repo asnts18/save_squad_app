@@ -15,6 +15,8 @@ class HomeScreenViewController: UIViewController {
     var handleAuth: AuthStateDidChangeListenerHandle?
     var currentUser: FirebaseAuth.User?
     let db = Firestore.firestore()
+    var budgetManager: BudgetManager?
+
     
     override func loadView() {
         view = homeScreen
@@ -74,6 +76,7 @@ class HomeScreenViewController: UIViewController {
                             }
                         }
                     })
+            
             }
         }
     }
@@ -139,35 +142,44 @@ class HomeScreenViewController: UIViewController {
         self.present(logoutAlert, animated: true)
     }
     
+    
     @objc func updateBudget(cost: Double, targetDate: Date) {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        if let daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day {
-            getTotalIncome(targetDate: targetDate) { totalIncome in
-                let dailyBudget = (totalIncome - cost) / Double(daysDifference)
-                if dailyBudget >= 0 {
-                    self.homeScreen.spendLabel2.text = String(format: "$%.2f", dailyBudget)
-                    self.homeScreen.goalLabel3.text = "You are on track to achieve your savings goal!"
-                } else {
-                    self.homeScreen.spendLabel2.text = String(format: "-$%.2f", abs(dailyBudget))
-                    self.homeScreen.goalLabel3.text = "You are not on track to achieve your savings goal..."
+
+        // Fetch total income and total expenses
+        getTotalIncome(targetDate: targetDate) { totalIncome in
+            self.getTotalExpenses { totalExpenses in
+                
+                // Initialize the BudgetManager with the data
+                print("Total Income: \(totalIncome), Total Expenses: \(totalExpenses), Savings Goal Amount: \(cost), Target Date: \(targetDate)")
+                self.budgetManager = BudgetManager(totalIncome: totalIncome, totalExpenses: totalExpenses, savingsGoalAmount: cost, goalTargetDate: targetDate)
+                
+                // Get the daily budget and  remaining budget for the month
+                if let dailyBudget = self.budgetManager?.getDailyBudget(),
+                   let remainingBudget = self.budgetManager?.getRemainingBudgetForThisMonth()
+                {
+                    // Update the budget labels
+                    self.updateBudgetLabels(dailyBudget: dailyBudget, remainingBudget: remainingBudget)
                 }
-                if let firstDayNextMonth = calendar.date(byAdding: .month, value: 1, to: calendar.startOfDay(for: today))?.startOfMonth {
-                    var daysDifference = Int()
-                    if targetDate < firstDayNextMonth {
-                        daysDifference = calendar.dateComponents([.day], from: today, to: targetDate).day ?? 0
-                    } else {
-                        daysDifference = calendar.dateComponents([.day], from: today, to: firstDayNextMonth).day ?? 0
-                    }
-                    let budgetThisMonth = dailyBudget * Double(daysDifference)
-                    if budgetThisMonth >= 0 {
-                        self.homeScreen.spendLabel3.text = String(format: "$%.2f", budgetThisMonth) + " remaining for the month"
-                    } else {
-                        self.homeScreen.spendLabel3.text = String(format: "-$%.2f", abs(budgetThisMonth)) + " remaining for the month"
-                    }
-                }
+                
             }
         }
+    }
+    
+    func updateBudgetLabels(dailyBudget: Double, remainingBudget: Double) {
+        if dailyBudget >= 0 {
+            self.homeScreen.spendLabel2.text = String(format: "$%.2f", dailyBudget)
+            self.homeScreen.goalLabel3.text = "You are on track to achieve your savings goal!"
+        } else {
+            self.homeScreen.spendLabel2.text = String(format: "-$%.2f", abs(dailyBudget))
+            self.homeScreen.goalLabel3.text = "You are not on track to achieve your savings goal..."
+        }
+        
+        if remainingBudget >= 0 {
+            self.homeScreen.spendLabel3.text = String(format: "$%.2f", remainingBudget) + " remaining for the month"
+        } else {
+            self.homeScreen.spendLabel3.text = String(format: "-$%.2f", abs(remainingBudget)) + " remaining for the month"
+        }
+    
     }
     
     @objc func getTotalIncome(targetDate: Date, completion: @escaping (Double) -> Void) {
@@ -208,4 +220,32 @@ class HomeScreenViewController: UIViewController {
                 completion(totalIncome)
         }
     }
+    
+    @objc func getTotalExpenses(completion: @escaping (Double) -> Void) {
+        var totalExpenses = 0.0
+        
+        guard let uid = self.currentUser?.uid else {
+            completion(totalExpenses)
+            return
+        }
+        
+        self.db.collection("users").document(uid)
+            .collection("expenses")
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    print("Error retrieving documents: \(error)")
+                    completion(totalExpenses)
+                } else {
+                    for document in querySnapshot!.documents {
+                        let expenseData = document.data()
+                        let amount = expenseData["amount"] as? Double ?? 0.0
+                        totalExpenses += amount
+                    }
+                    completion(totalExpenses)
+                }
+            }
+    }
+
+
+    
 }
