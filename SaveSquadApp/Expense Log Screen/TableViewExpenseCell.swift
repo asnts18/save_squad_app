@@ -93,27 +93,6 @@ class TableViewExpenseCell: UITableViewCell {
             labelDate.leadingAnchor.constraint(equalTo: labelDescription.leadingAnchor),
             labelDate.trailingAnchor.constraint(equalTo: labelDescription.trailingAnchor),
             labelDate.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-//            expenseImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-//            expenseImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-//            expenseImageView.widthAnchor.constraint(equalToConstant: 50),
-//            expenseImageView.heightAnchor.constraint(equalToConstant: 50),
-//            
-//            labelDescription.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-//            labelDescription.leadingAnchor.constraint(equalTo: expenseImageView.trailingAnchor, constant: 15),
-//            labelDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-//            
-//            labelAmount.topAnchor.constraint(equalTo: labelDescription.bottomAnchor, constant: 2),
-//            labelAmount.leadingAnchor.constraint(equalTo: expenseImageView.trailingAnchor, constant: 15),
-//            labelAmount.trailingAnchor.constraint(equalTo: labelDescription.trailingAnchor),
-//            
-//            labelCategory.topAnchor.constraint(equalTo: labelAmount.bottomAnchor, constant: 5),
-//            labelCategory.leadingAnchor.constraint(equalTo: labelDescription.leadingAnchor),
-//            labelCategory.trailingAnchor.constraint(equalTo: labelDescription.trailingAnchor),
-//
-//            labelDate.topAnchor.constraint(equalTo: labelCategory.bottomAnchor, constant: 5),
-//            labelDate.leadingAnchor.constraint(equalTo: labelDescription.leadingAnchor),
-//            labelDate.trailingAnchor.constraint(equalTo: labelDescription.trailingAnchor),
-//            labelDate.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }
     
@@ -122,7 +101,7 @@ class TableViewExpenseCell: UITableViewCell {
         labelDescription.text = expense.description
         labelAmount.text = String(format: "-$%.2f", expense.amount ?? 0)
         labelCategory.text = "Category: \(expense.category ?? "Personal")"
-        labelDate.text = "Date: \(expense.date)"
+        labelDate.text = "Date: \(expense.targetDateFormatted)"
         
     }
     
