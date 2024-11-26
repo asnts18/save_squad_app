@@ -42,21 +42,26 @@ class HomeScreenView: UIView {
         floatingButtonAdd = UIButton(type: .system)
         floatingButtonAdd.setTitle("", for: .normal)
         floatingButtonAdd.setImage(
-            UIImage(systemName: "plus.circle.fill")?.withRenderingMode(.alwaysTemplate), for: .normal
+            UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate), for: .normal
         )
-        floatingButtonAdd.tintColor = .black
-        floatingButtonAdd.contentHorizontalAlignment = .fill
-        floatingButtonAdd.contentVerticalAlignment = .fill
-        floatingButtonAdd.imageView?.contentMode = .scaleAspectFit
-        floatingButtonAdd.layer.cornerRadius = 16
-        floatingButtonAdd.imageView?.layer.shadowOffset = .zero
-        floatingButtonAdd.imageView?.layer.shadowRadius = 0.8
-        floatingButtonAdd.imageView?.layer.shadowOpacity = 0.7
+        floatingButtonAdd.tintColor = .white
+        floatingButtonAdd.backgroundColor = Utilities.purple
+        floatingButtonAdd.contentHorizontalAlignment = .center
+        floatingButtonAdd.contentVerticalAlignment = .center
+        floatingButtonAdd.layer.cornerRadius = 30
+        
+        floatingButtonAdd.layer.shadowColor = UIColor.black.cgColor
+        floatingButtonAdd.layer.shadowOffset = CGSize(width: 0, height: 2)
+        floatingButtonAdd.layer.shadowRadius = 4
+        floatingButtonAdd.layer.shadowOpacity = 0.7
+        floatingButtonAdd.clipsToBounds = false 
         floatingButtonAdd.imageView?.clipsToBounds = true
+        
         floatingButtonAdd.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(floatingButtonAdd)
     }
     
+
     func setupSpendStack(){
         spendStack = UIStackView()
         spendStack.axis = .vertical

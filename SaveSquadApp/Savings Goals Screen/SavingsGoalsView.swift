@@ -37,9 +37,15 @@ class SavingsGoalsView: UIView {
     let addGoalButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.backgroundColor = .purple
+        button.backgroundColor = Utilities.purple
         button.tintColor = .white
-        button.layer.cornerRadius = 25
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.7
+        button.clipsToBounds = false
+        button.imageView?.clipsToBounds = true
+        button.layer.cornerRadius = 30
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -77,8 +83,8 @@ class SavingsGoalsView: UIView {
             
             addGoalButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             addGoalButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            addGoalButton.widthAnchor.constraint(equalToConstant: 50),
-            addGoalButton.heightAnchor.constraint(equalToConstant: 50)
+            addGoalButton.widthAnchor.constraint(equalToConstant: 60),
+            addGoalButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }

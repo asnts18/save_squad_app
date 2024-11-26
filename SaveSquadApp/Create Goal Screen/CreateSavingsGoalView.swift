@@ -41,7 +41,7 @@ class CreateSavingsGoalView: UIView {
     let addPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Upload Image", for: .normal)
-        button.setTitleColor(.purple, for: .normal)
+        button.setTitleColor(Utilities.purple, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -91,7 +91,10 @@ class CreateSavingsGoalView: UIView {
     let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(.red, for: .normal)
+        button.setTitleColor(Utilities.purple, for: .normal)
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
+        button.layer.borderColor = Utilities.purple.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -99,7 +102,7 @@ class CreateSavingsGoalView: UIView {
     let createGoalButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Create Goal", for: .normal)
-        button.backgroundColor = .purple
+        button.backgroundColor = Utilities.purple
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -141,24 +144,23 @@ class CreateSavingsGoalView: UIView {
             descriptionTextField,
             targetDateStackView
         ])
-        
-        let buttonStackView = UIStackView(arrangedSubviews: [
-            createGoalButton,
-            cancelButton
-        ])
-        
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         
-        buttonStackView.axis = .vertical
-        buttonStackView.spacing = 16
+        let buttonStackView = UIStackView(arrangedSubviews: [
+            cancelButton,
+            createGoalButton
+        ])
+        buttonStackView.axis = .horizontal
+        buttonStackView.spacing = 10
         buttonStackView.alignment = .fill
+        buttonStackView.distribution = .fillEqually
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(buttonStackView)
-        
+    
         
         NSLayoutConstraint.activate([
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
@@ -178,7 +180,7 @@ class CreateSavingsGoalView: UIView {
         NSLayoutConstraint.activate([
             buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100)
+            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -150)
         ])
         
 

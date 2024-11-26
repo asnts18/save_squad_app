@@ -177,11 +177,11 @@ class AddIncomeView: UIView {
         cancelButton = UIButton(type: .system)
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.layer.borderWidth = 1
-        cancelButton.layer.borderColor = UIColor.black.cgColor
+        cancelButton.layer.borderColor = Utilities.purple.cgColor
         cancelButton.layer.cornerRadius = 5
         cancelButton.layer.backgroundColor = UIColor.white.cgColor
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.setTitleColor(UIColor.black, for: .normal)
+        cancelButton.setTitleColor(Utilities.purple, for: .normal)
         actionStack.addArrangedSubview(cancelButton)
     }
     
@@ -189,7 +189,7 @@ class AddIncomeView: UIView {
         addButton = UIButton(type: .system)
         addButton.setTitle("Add Income", for: .normal)
         addButton.layer.cornerRadius = 5
-        addButton.layer.backgroundColor = UIColor.black.cgColor
+        addButton.layer.backgroundColor = Utilities.purple.cgColor
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.setTitleColor(UIColor.white, for: .normal)
         actionStack.addArrangedSubview(addButton)
