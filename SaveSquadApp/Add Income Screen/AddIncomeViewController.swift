@@ -134,11 +134,11 @@ class AddIncomeViewController: UIViewController {
     }
     
     /*
-     Returns a boolean value based on whether the inputted string is a valid phone number.
+     Returns a boolean value based on whether the inputted string is a valid amount.
      */
-    func isValidAmount(_ phone: String) -> Bool {
-        let phoneRegEx = "[0-9.]{1,10}"
-        let phonePred = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
-        return phonePred.evaluate(with: phone)
+    func isValidAmount(_ amount: String) -> Bool {
+        let amountRegEx = "[0-9.]{1,10}"
+        let amountPred = NSPredicate(format:"SELF MATCHES %@", amountRegEx)
+        return amountPred.evaluate(with: amount)
     }
 }
