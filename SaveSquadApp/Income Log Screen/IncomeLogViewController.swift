@@ -80,8 +80,8 @@ class IncomeLogViewController: UIViewController {
                                     }
                                 }
                             }
-                            self.oneTimeIncomes.sort(by: {$0.incomeDate < $1.incomeDate})
-                            self.recurringIncomes.sort(by: {$0.incomeDate < $1.incomeDate})
+                            self.oneTimeIncomes.sort(by: {$0.incomeDate > $1.incomeDate})
+                            self.recurringIncomes.sort(by: {$0.incomeDate > $1.incomeDate})
                             self.incomeLogScreen.tableViewIncome.reloadData()
                         }
                     })
