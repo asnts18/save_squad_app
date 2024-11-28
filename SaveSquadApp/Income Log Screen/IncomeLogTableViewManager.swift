@@ -25,11 +25,10 @@ extension IncomeLogViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let selectedIncome = indexPath.section == 0 ? recurringIncomes[indexPath.row] : oneTimeIncomes[indexPath.row]
-        //let incomeDetailVC = IncomeDetailViewController(goal: selectedIncome)
-        // don't think this is necessary if I have a snapshot listener constantly populating and updating the income arrays
-        //incomeDetailVC.delegate = self
-        //navigationController?.pushViewController(incomeDetailVC, animated: true)
+        let selectedIncome = indexPath.section == 0 ? recurringIncomes[indexPath.row] : oneTimeIncomes[indexPath.row]
+        let incomeDetailVC = IncomeDetailViewController()
+        incomeDetailVC.income = selectedIncome
+        navigationController?.pushViewController(incomeDetailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -33,6 +33,8 @@
 		486AC4312CF3A8B2009C81A6 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486AC4302CF3A8B2009C81A6 /* Income.swift */; };
 		4872709B2CED8234004683A8 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4872709A2CED8234004683A8 /* DateHelper.swift */; };
 		48D5D5522CEA7B2F000FDB9C /* LoginFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */; };
+		48D6E9132CF800CF00D1AD51 /* IncomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6E9122CF800CF00D1AD51 /* IncomeDetailViewController.swift */; };
+		48D6E9162CF8035700D1AD51 /* IncomeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6E9152CF8035700D1AD51 /* IncomeDetailsView.swift */; };
 		5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */; };
 		5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */; };
 		5FC9FA432CDD6A0D00F50B9D /* CreateSavingsGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9FA422CDD6A0200F50B9D /* CreateSavingsGoalViewController.swift */; };
@@ -101,6 +103,8 @@
 		486AC4302CF3A8B2009C81A6 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		4872709A2CED8234004683A8 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFirebaseManager.swift; sourceTree = "<group>"; };
+		48D6E9122CF800CF00D1AD51 /* IncomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDetailViewController.swift; sourceTree = "<group>"; };
+		48D6E9152CF8035700D1AD51 /* IncomeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDetailsView.swift; sourceTree = "<group>"; };
 		5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalCell.swift; sourceTree = "<group>"; };
 		5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalView.swift; sourceTree = "<group>"; };
 		5FC9FA422CDD6A0200F50B9D /* CreateSavingsGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +248,15 @@
 			path = "Register Screen";
 			sourceTree = "<group>";
 		};
+		48D6E9142CF8033B00D1AD51 /* Income Details Screen */ = {
+			isa = PBXGroup;
+			children = (
+				48D6E9122CF800CF00D1AD51 /* IncomeDetailViewController.swift */,
+				48D6E9152CF8035700D1AD51 /* IncomeDetailsView.swift */,
+			);
+			path = "Income Details Screen";
+			sourceTree = "<group>";
+		};
 		BA5A74682CC9AF8700797481 = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +292,7 @@
 				BACF9E312CF5655500260E86 /* Expense Details Screen */,
 				4822734A2CF65D4000C001B6 /* Income Log Screen */,
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
+				48D6E9142CF8033B00D1AD51 /* Income Details Screen */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
@@ -496,6 +510,7 @@
 				481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */,
 				4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */,
 				BA6B03192CD9BEFC0076F361 /* HomeScreenViewController.swift in Sources */,
+				48D6E9162CF8035700D1AD51 /* IncomeDetailsView.swift in Sources */,
 				BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */,
 				481EEEA52CDB20CF00A601B2 /* ExpenseLogView.swift in Sources */,
 				5FC9FA452CDD6D0600F50B9D /* GoalDetailView.swift in Sources */,
@@ -513,6 +528,7 @@
 				4822FDBC2CD9430900FDE851 /* SocialFeedView.swift in Sources */,
 				BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */,
 				4838E92A2CDBDFF70068129F /* TabBarController.swift in Sources */,
+				48D6E9132CF800CF00D1AD51 /* IncomeDetailViewController.swift in Sources */,
 				4822FDC82CD9433300FDE851 /* AddExpenseView.swift in Sources */,
 				4822FDD22CD9433300FDE851 /* SavingsGoalsView.swift in Sources */,
 				486AC4312CF3A8B2009C81A6 /* Income.swift in Sources */,

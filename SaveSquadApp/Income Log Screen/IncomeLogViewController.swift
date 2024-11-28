@@ -87,10 +87,5 @@ class IncomeLogViewController: UIViewController {
                     })
             }
         }
-        /*
-        let income = Income(amount: 0.0, description: "testlong name fasdkfjkasdjfkjasdfkjasdklfjlaksdjflkasdjflkasdjfklasdjklfjasdklfjasdklfjkl", frequency: "One-time", incomeDate: Date())
-        let income2 = Income(amount: 8888888.888, description: "test2", frequency: "Annual", incomeDate: Date())
-        self.oneTimeIncomes.append(income)
-        self.recurringIncomes.append(income2)*/
     }
 }
