@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class IncomeDetailViewController: UIViewController {
     
     var income:Income!
     let incomeDetailsScreen = IncomeDetailsView()
+    var currentUser:FirebaseAuth.User?
+    let db = Firestore.firestore()
     
     override func loadView() {
         view = incomeDetailsScreen
@@ -31,6 +35,12 @@ class IncomeDetailViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = smallTitleAttributes
         self.navigationController?.navigationBar.tintColor = .white
         setLabelsText()
+        incomeDetailsScreen.buttonDelete.addTarget(self, action: #selector(deleteIncome), for: .touchUpInside)
+        if let currentUser = Auth.auth().currentUser {
+            self.currentUser = currentUser
+        } else {
+            self.currentUser = nil
+        }
     }
 
 
@@ -39,5 +49,17 @@ class IncomeDetailViewController: UIViewController {
         incomeDetailsScreen.labelAmount.text = String(format: "Amount: $%.2f", income.amount)
         incomeDetailsScreen.labelFrequency.text = "Frequency: \(income.frequency)"
         incomeDetailsScreen.labelDate.text = "Date: \(income.incomeDateFormatted)"
+    }
+    
+    @objc func deleteIncome() {
+        db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("income").document("\(income.id ?? "")").delete { error in
+                if let error = error {
+                    print("Error deleting document: \(error.localizedDescription)")
+                } else {
+                    print("Document successfully deleted")
+                }
+            }
+        navigationController?.popViewController(animated: true)
     }
 }
