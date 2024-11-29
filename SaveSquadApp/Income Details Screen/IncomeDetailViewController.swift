@@ -36,13 +36,13 @@ class IncomeDetailViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .white
         setLabelsText()
         incomeDetailsScreen.buttonDelete.addTarget(self, action: #selector(deleteIncome), for: .touchUpInside)
+        incomeDetailsScreen.buttonEdit.addTarget(self, action: #selector(editIncome), for: .touchUpInside)
         if let currentUser = Auth.auth().currentUser {
             self.currentUser = currentUser
         } else {
             self.currentUser = nil
         }
     }
-
 
     func setLabelsText() {
         incomeDetailsScreen.labelDescription.text = income.description
@@ -61,5 +61,11 @@ class IncomeDetailViewController: UIViewController {
                 }
             }
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func editIncome() {
+        let editIncomeVC = EditIncomeViewController()
+        editIncomeVC.income = self.income
+        navigationController?.pushViewController(editIncomeVC, animated: true)
     }
 }

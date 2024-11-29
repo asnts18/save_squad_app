@@ -32,6 +32,8 @@
 		4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */; };
 		486AC4312CF3A8B2009C81A6 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486AC4302CF3A8B2009C81A6 /* Income.swift */; };
 		4872709B2CED8234004683A8 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4872709A2CED8234004683A8 /* DateHelper.swift */; };
+		487621DF2CFA1A6F00CEE666 /* EditIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487621DE2CFA1A6F00CEE666 /* EditIncomeViewController.swift */; };
+		487621E22CFA1D0000CEE666 /* EditIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487621E12CFA1D0000CEE666 /* EditIncomeView.swift */; };
 		48D5D5522CEA7B2F000FDB9C /* LoginFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */; };
 		48D6E9132CF800CF00D1AD51 /* IncomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6E9122CF800CF00D1AD51 /* IncomeDetailViewController.swift */; };
 		48D6E9162CF8035700D1AD51 /* IncomeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6E9152CF8035700D1AD51 /* IncomeDetailsView.swift */; };
@@ -102,6 +104,8 @@
 		4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirebaseManager.swift; sourceTree = "<group>"; };
 		486AC4302CF3A8B2009C81A6 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		4872709A2CED8234004683A8 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		487621DE2CFA1A6F00CEE666 /* EditIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIncomeViewController.swift; sourceTree = "<group>"; };
+		487621E12CFA1D0000CEE666 /* EditIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIncomeView.swift; sourceTree = "<group>"; };
 		48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFirebaseManager.swift; sourceTree = "<group>"; };
 		48D6E9122CF800CF00D1AD51 /* IncomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDetailViewController.swift; sourceTree = "<group>"; };
 		48D6E9152CF8035700D1AD51 /* IncomeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDetailsView.swift; sourceTree = "<group>"; };
@@ -248,6 +252,15 @@
 			path = "Register Screen";
 			sourceTree = "<group>";
 		};
+		487621E02CFA1AA400CEE666 /* Edit Income Screen */ = {
+			isa = PBXGroup;
+			children = (
+				487621DE2CFA1A6F00CEE666 /* EditIncomeViewController.swift */,
+				487621E12CFA1D0000CEE666 /* EditIncomeView.swift */,
+			);
+			path = "Edit Income Screen";
+			sourceTree = "<group>";
+		};
 		48D6E9142CF8033B00D1AD51 /* Income Details Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +306,7 @@
 				4822734A2CF65D4000C001B6 /* Income Log Screen */,
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				48D6E9142CF8033B00D1AD51 /* Income Details Screen */,
+				487621E02CFA1AA400CEE666 /* Edit Income Screen */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
@@ -506,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA6B031B2CDC786F0076F361 /* Expense.swift in Sources */,
+				487621DF2CFA1A6F00CEE666 /* EditIncomeViewController.swift in Sources */,
 				5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */,
 				481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */,
 				4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */,
@@ -544,6 +559,7 @@
 				4838E9272CDBDF750068129F /* ExpenseLogViewController.swift in Sources */,
 				4822734E2CF666D600C001B6 /* TableViewIncomeCell.swift in Sources */,
 				BACF9E352CF5671A00260E86 /* ExpenseDetailsViewController.swift in Sources */,
+				487621E22CFA1D0000CEE666 /* EditIncomeView.swift in Sources */,
 				4822734C2CF65DD700C001B6 /* IncomeLogView.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
 				BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */,
