@@ -10,6 +10,7 @@ import UIKit
 class EditIncomeView: UIView {
     
     var titleBackgroundView: UIView!
+    var contentWrapper: UIScrollView!
     var labelDescription: UILabel!
     var textFieldDescription: UITextField!
     var labelAmount: UILabel!
@@ -18,11 +19,15 @@ class EditIncomeView: UIView {
     var buttonFrequency: UIButton!
     var labelDate: UILabel!
     var datePicker: UIDatePicker!
+    var actionStack: UIStackView!
+    var cancelButton: UIButton!
+    var saveButton: UIButton!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
         setupBackgroundView()
+        setupContentWrapper()
         setupLabelDescription()
         setupTextFieldDescription()
         setupLabelAmount()
@@ -31,6 +36,9 @@ class EditIncomeView: UIView {
         setupButtonFrequency()
         setupLabelDate()
         setupDatePicker()
+        setupActionStack()
+        setupCancelButton()
+        setupSaveButton()
         initConstraints()
     }
 
@@ -41,20 +49,28 @@ class EditIncomeView: UIView {
         self.addSubview(titleBackgroundView)
     }
     
+    func setupContentWrapper(){
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
+    }
+    
     func setupLabelDescription() {
         labelDescription = UILabel()
         labelDescription.font = UIFont.boldSystemFont(ofSize: 24)
         labelDescription.textAlignment = .center
         labelDescription.text = "Description:"
         labelDescription.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelDescription)
+        contentWrapper.addSubview(labelDescription)
     }
     
     func setupTextFieldDescription() {
         textFieldDescription = UITextField()
         textFieldDescription.borderStyle = .roundedRect
         textFieldDescription.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldDescription)
+        contentWrapper.addSubview(textFieldDescription)
     }
     
     func setupLabelAmount() {
@@ -63,7 +79,7 @@ class EditIncomeView: UIView {
         labelAmount.textAlignment = .center
         labelAmount.text = "Amount:"
         labelAmount.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelAmount)
+        contentWrapper.addSubview(labelAmount)
     }
     
     func setupTextFieldAmount() {
@@ -71,7 +87,7 @@ class EditIncomeView: UIView {
         textFieldAmount.borderStyle = .roundedRect
         textFieldAmount.keyboardType = .decimalPad
         textFieldAmount.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldAmount)
+        contentWrapper.addSubview(textFieldAmount)
     }
     
     func setupLabelFrequency() {
@@ -80,7 +96,7 @@ class EditIncomeView: UIView {
         labelFrequency.textAlignment = .center
         labelFrequency.text = "Frequency:"
         labelFrequency.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelFrequency)
+        contentWrapper.addSubview(labelFrequency)
     }
     
     func setupButtonFrequency() {
@@ -91,7 +107,7 @@ class EditIncomeView: UIView {
         buttonFrequency.layer.cornerRadius = 5
         buttonFrequency.translatesAutoresizingMaskIntoConstraints = false
         buttonFrequency.setTitleColor(UIColor.black, for: .normal)
-        self.addSubview(buttonFrequency)
+        contentWrapper.addSubview(buttonFrequency)
     }
     
     func setupLabelDate() {
@@ -100,7 +116,7 @@ class EditIncomeView: UIView {
         labelDate.textAlignment = .center
         labelDate.text = "Date:"
         labelDate.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelDate)
+        contentWrapper.addSubview(labelDate)
     }
     
     func setupDatePicker() {
@@ -108,7 +124,38 @@ class EditIncomeView: UIView {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .compact
         datePicker.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(datePicker)
+        contentWrapper.addSubview(datePicker)
+    }
+    
+    func setupActionStack(){
+        actionStack = UIStackView()
+        actionStack.axis = .horizontal
+        actionStack.alignment = .center
+        actionStack.distribution = .fillProportionally
+        actionStack.translatesAutoresizingMaskIntoConstraints = false
+        contentWrapper.addSubview(actionStack)
+    }
+    
+    func setupCancelButton(){
+        cancelButton = UIButton(type: .system)
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = Utilities.purple.cgColor
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.layer.backgroundColor = UIColor.white.cgColor
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.setTitleColor(Utilities.purple, for: .normal)
+        actionStack.addArrangedSubview(cancelButton)
+    }
+    
+    func setupSaveButton(){
+        saveButton = UIButton(type: .system)
+        saveButton.setTitle("Save", for: .normal)
+        saveButton.layer.cornerRadius = 5
+        saveButton.layer.backgroundColor = Utilities.purple.cgColor
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        saveButton.setTitleColor(UIColor.white, for: .normal)
+        actionStack.addArrangedSubview(saveButton)
     }
     
     func initConstraints(){
@@ -118,35 +165,53 @@ class EditIncomeView: UIView {
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             titleBackgroundView.heightAnchor.constraint(equalToConstant: 55),
             
-            labelDescription.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            labelDescription.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
+            labelDescription.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 20),
+            labelDescription.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             
             textFieldDescription.topAnchor.constraint(equalTo: labelDescription.bottomAnchor, constant: 20),
-            textFieldDescription.centerXAnchor.constraint(equalTo: centerXAnchor),
+            textFieldDescription.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             textFieldDescription.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             textFieldDescription.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
             labelAmount.topAnchor.constraint(equalTo: textFieldDescription.bottomAnchor, constant: 20),
-            labelAmount.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            labelAmount.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             
             textFieldAmount.topAnchor.constraint(equalTo: labelAmount.bottomAnchor, constant: 20),
-            textFieldAmount.centerXAnchor.constraint(equalTo: centerXAnchor),
-            textFieldAmount.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            textFieldAmount.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            textFieldAmount.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
+            textFieldAmount.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            textFieldAmount.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
             
             labelFrequency.topAnchor.constraint(equalTo: textFieldAmount.bottomAnchor, constant: 20),
-            labelFrequency.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            labelFrequency.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             
             buttonFrequency.topAnchor.constraint(equalTo: labelFrequency.bottomAnchor, constant: 20),
-            buttonFrequency.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonFrequency.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            buttonFrequency.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            buttonFrequency.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
+            buttonFrequency.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            buttonFrequency.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
             
             labelDate.topAnchor.constraint(equalTo: buttonFrequency.bottomAnchor, constant: 20),
-            labelDate.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            labelDate.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             
             datePicker.topAnchor.constraint(equalTo: labelDate.bottomAnchor, constant: 20),
-            datePicker.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            datePicker.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
+            
+            actionStack.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 32),
+            actionStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            actionStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
+            actionStack.heightAnchor.constraint(equalToConstant: 70),
+            
+            cancelButton.widthAnchor.constraint(equalTo: actionStack.widthAnchor, multiplier: 0.45),
+            cancelButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            saveButton.widthAnchor.constraint(equalTo: actionStack.widthAnchor, multiplier: 0.45),
+            saveButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            actionStack.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
     

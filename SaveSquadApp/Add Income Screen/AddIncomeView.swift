@@ -48,6 +48,8 @@ class AddIncomeView: UIView {
     
     func setupContentWrapper(){
         contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
         contentWrapper.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(contentWrapper)
     }
