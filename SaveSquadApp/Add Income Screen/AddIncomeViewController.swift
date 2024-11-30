@@ -76,6 +76,7 @@ class AddIncomeViewController: UIViewController {
             if !amountText.isEmpty{
                 if !isValidAmount(amountText) {
                     showErrorAlert(message: "Please enter a proper numerical value for the Amount.")
+                    return
                 }
                 if let uw_amount = Double(amountText) {
                     amount = uw_amount
@@ -88,6 +89,7 @@ class AddIncomeViewController: UIViewController {
                 description = descriptionText
             } else {
                 self.showErrorAlert(message: "Fields cannot be left empty.")
+                return
             }
             if !(frequencyText == "Select Frequency"){
                 self.selectedFrequency = frequencyText

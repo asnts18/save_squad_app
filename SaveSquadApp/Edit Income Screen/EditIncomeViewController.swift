@@ -40,6 +40,13 @@ class EditIncomeViewController: UIViewController {
         tapRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(tapRecognizer)
         setupFrequencyMenu()
+        editIncomeScreen.cancelButton.addTarget(self, action: #selector(onCancelButtonTapped), for: .touchUpInside)
+        editIncomeScreen.saveButton.addTarget(self, action: #selector(onSaveButtonTapped), for: .touchUpInside)
+        if let currentUser = Auth.auth().currentUser {
+            self.currentUser = currentUser
+        } else {
+            self.currentUser = nil
+        }
     }
 
     func populateTextFields() {
@@ -67,5 +74,88 @@ class EditIncomeViewController: UIViewController {
         editIncomeScreen.buttonFrequency.menu = UIMenu(title: "Select Frequency", children: menuItems)
         editIncomeScreen.buttonFrequency.showsMenuAsPrimaryAction = true
         editIncomeScreen.datePicker.date = income.incomeDate
+    }
+    
+    @objc func onCancelButtonTapped(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func onSaveButtonTapped() {
+        var amount: Double = 0.0
+        var description: String = ""
+        if let amountText = editIncomeScreen.textFieldAmount.text,
+           let descriptionText = editIncomeScreen.textFieldDescription.text,
+           let frequencyText = editIncomeScreen.buttonFrequency.titleLabel?.text {
+            if !amountText.isEmpty{
+                if !isValidAmount(amountText) {
+                    showErrorAlert(message: "Please enter a proper numerical value for the Amount.")
+                    return
+                }
+                if let uw_amount = Double(amountText) {
+                    amount = uw_amount
+                }
+            } else {
+                self.showErrorAlert(message: "Fields cannot be left empty.")
+                return
+            }
+            if !descriptionText.isEmpty{
+                description = descriptionText
+            } else {
+                self.showErrorAlert(message: "Fields cannot be left empty.")
+                return
+            }
+            if !(frequencyText == "Select Frequency"){
+                self.selectedFrequency = frequencyText
+            } else {
+                self.showErrorAlert(message: "You must choose a frequency.")
+                return
+            }
+            //showActivityIndicator()
+            let incomeDate = editIncomeScreen.datePicker.date
+            let editedIncome = Income(amount: amount, description: description, frequency: self.selectedFrequency, incomeDate: incomeDate)
+            let editedIncomeData: [String: Any] = [
+                "amount": editedIncome.amount,
+                "description": editedIncome.description,
+                "frequency": editedIncome.frequency,
+                "incomeDate": editedIncome.incomeDate
+            ]
+            db.collection("users").document(self.currentUser?.uid ?? "")
+                .collection("income").document("\(self.income.id ?? "")").updateData(editedIncomeData) { error in
+                    if let error = error {
+                        print("Error updating completion status: \(error.localizedDescription)")
+                    } else {
+                        print("Completion status updated successfully!")
+                    }
+                }
+            navigationController?.popViewController(animated: true)
+            //SEND NOTIFICATION BACK TO INCOME DETAILS WITH editedIncome object TO UPDATE LABELS. Or Snapshot state listener?
+            //self.hideActivityIndicator()
+        }
+        else{
+            self.showErrorAlert(message: "Fields cannot be left empty.")
+            //self.hideActivityIndicator()
+            return
+        }
+    }
+    
+    /*
+     Returns a boolean value based on whether the inputted string is a valid amount.
+     */
+    func isValidAmount(_ amount: String) -> Bool {
+        let amountRegEx = "[0-9.]{1,10}"
+        let amountPred = NSPredicate(format:"SELF MATCHES %@", amountRegEx)
+        return amountPred.evaluate(with: amount)
+    }
+    
+    /*
+     Shows appropriate error alert depending on the message value that is inputted.
+     */
+    func showErrorAlert(message:String){
+        let alert = UIAlertController(
+                title: "Error!", message: message,
+                preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
