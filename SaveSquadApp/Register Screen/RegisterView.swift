@@ -10,6 +10,7 @@ import UIKit
 class RegisterView: UIView {
     
     // MARK: - Properties
+    var contentWrapper: UIScrollView!
     var labelRegister: UILabel!  // Label: Register an Account
     var labelEnterInfo: UILabel! // Label: Enter Contact Info
     var textFieldFirstName: UITextField!
@@ -27,6 +28,7 @@ class RegisterView: UIView {
         self.backgroundColor = .white
 
         // set up methods
+        setupContentWrapper()
         setupLabelRegister()
         setupLabelEnterInfo()
         setupTextFieldFirstName()
@@ -42,6 +44,14 @@ class RegisterView: UIView {
         initConstraints()
     }
     
+    func setupContentWrapper() {
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
+    }
+    
     // MARK: - Setup Methods
     func setupLabelRegister() {
         labelRegister = UILabel()
@@ -50,7 +60,7 @@ class RegisterView: UIView {
         labelRegister.textAlignment = .center
         labelRegister.textColor = UIColor(red: 123/255, green: 87/255, blue: 252/255, alpha: 1) // Hex color #7b57fc
         labelRegister.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelRegister)
+        contentWrapper.addSubview(labelRegister)
     }
     
     func setupLabelEnterInfo() {
@@ -58,7 +68,7 @@ class RegisterView: UIView {
         labelEnterInfo.text = "Enter Contact Info"
         labelEnterInfo.font = UIFont.systemFont(ofSize: 20)
         labelEnterInfo.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelEnterInfo)
+        contentWrapper.addSubview(labelEnterInfo)
     }
     
     func setupTextFieldFirstName() {
@@ -66,7 +76,7 @@ class RegisterView: UIView {
         textFieldFirstName.placeholder = "First Name"
         textFieldFirstName.borderStyle = .roundedRect
         textFieldFirstName.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldFirstName)
+        contentWrapper.addSubview(textFieldFirstName)
     }
     
     func setupTextFieldLastName() {
@@ -74,7 +84,7 @@ class RegisterView: UIView {
         textFieldLastName.placeholder = "Last Name"
         textFieldLastName.borderStyle = .roundedRect
         textFieldLastName.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldLastName)
+        contentWrapper.addSubview(textFieldLastName)
     }
 
     
@@ -85,7 +95,7 @@ class RegisterView: UIView {
         textFieldEmail.autocapitalizationType = .none
         textFieldEmail.keyboardType = .emailAddress
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldEmail)
+        contentWrapper.addSubview(textFieldEmail)
     }
     
     func setupLabelCreatePassword() {
@@ -93,7 +103,7 @@ class RegisterView: UIView {
         labelCreatePassword.text = "Create Password"
         labelCreatePassword.font = UIFont.systemFont(ofSize: 20)
         labelCreatePassword.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelCreatePassword)
+        contentWrapper.addSubview(labelCreatePassword)
     }
     
     func setupTextFieldPassword() {
@@ -102,7 +112,7 @@ class RegisterView: UIView {
         textFieldPassword.borderStyle = .roundedRect
         textFieldPassword.isSecureTextEntry = true
         textFieldPassword.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldPassword)
+        contentWrapper.addSubview(textFieldPassword)
     }
     
     func setupTextFieldVerifyPassword() {
@@ -111,7 +121,7 @@ class RegisterView: UIView {
         textFieldVerifyPassword.borderStyle = .roundedRect
         textFieldVerifyPassword.isSecureTextEntry = true
         textFieldVerifyPassword.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldVerifyPassword)
+        contentWrapper.addSubview(textFieldVerifyPassword)
     }
     
     func setupButtonCreateAccount() {
@@ -121,7 +131,7 @@ class RegisterView: UIView {
         buttonCreateAccount.setTitleColor(.white, for: .normal)
         buttonCreateAccount.layer.cornerRadius = 5
         buttonCreateAccount.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(buttonCreateAccount)
+        contentWrapper.addSubview(buttonCreateAccount)
     }
     
     func setupButtonCancel() {
@@ -131,68 +141,74 @@ class RegisterView: UIView {
         buttonCancel.setTitleColor(.white, for: .normal)
         buttonCancel.layer.cornerRadius = 5
         buttonCancel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(buttonCancel)
+        contentWrapper.addSubview(buttonCancel)
     }
     
     // MARK: - Constraints
     func initConstraints() {
         NSLayoutConstraint.activate([
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
             // Label Register constraints
-            labelRegister.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            labelRegister.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            labelRegister.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            labelRegister.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 20),
+            labelRegister.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            labelRegister.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             
             // Label Enter Info constraints
             labelEnterInfo.topAnchor.constraint(equalTo: labelRegister.bottomAnchor, constant: 20),
-            labelEnterInfo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            labelEnterInfo.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            labelEnterInfo.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            labelEnterInfo.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             
             // First Name TextField constraints
             textFieldFirstName.topAnchor.constraint(equalTo: labelEnterInfo.bottomAnchor, constant: 20),
-            textFieldFirstName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            textFieldFirstName.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -10),
+            textFieldFirstName.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            textFieldFirstName.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor, constant: -10),
             textFieldFirstName.heightAnchor.constraint(equalToConstant: 40),
             
             // Last Name TextField constraints
             textFieldLastName.topAnchor.constraint(equalTo: textFieldFirstName.topAnchor),
-            textFieldLastName.leadingAnchor.constraint(equalTo: self.centerXAnchor, constant: 10),
-            textFieldLastName.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            textFieldLastName.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor, constant: 10),
+            textFieldLastName.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             textFieldLastName.heightAnchor.constraint(equalToConstant: 40),
             
             // Email TextField constraints
             textFieldEmail.topAnchor.constraint(equalTo: textFieldFirstName.bottomAnchor, constant: 20),
-            textFieldEmail.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            textFieldEmail.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            textFieldEmail.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            textFieldEmail.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             textFieldEmail.heightAnchor.constraint(equalToConstant: 40),
             
             // Label Create Password constraints
             labelCreatePassword.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 40),
-            labelCreatePassword.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            labelCreatePassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            labelCreatePassword.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            labelCreatePassword.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             
             // Password TextField constraints
             textFieldPassword.topAnchor.constraint(equalTo: labelCreatePassword.bottomAnchor, constant: 20),
-            textFieldPassword.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            textFieldPassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            textFieldPassword.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            textFieldPassword.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             textFieldPassword.heightAnchor.constraint(equalToConstant: 40),
             
             // Verify Password TextField constraints
             textFieldVerifyPassword.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 20),
-            textFieldVerifyPassword.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            textFieldVerifyPassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            textFieldVerifyPassword.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            textFieldVerifyPassword.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             textFieldVerifyPassword.heightAnchor.constraint(equalToConstant: 40),
             
             // Create Account Button constraints
-            buttonCreateAccount.bottomAnchor.constraint(equalTo: buttonCancel.topAnchor, constant: -20),
-            buttonCreateAccount.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            buttonCreateAccount.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            buttonCreateAccount.topAnchor.constraint(equalTo: textFieldVerifyPassword.bottomAnchor, constant: 30),
+            buttonCreateAccount.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            buttonCreateAccount.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             buttonCreateAccount.heightAnchor.constraint(equalToConstant: 50),
             
             // Cancel Button constraints
-            buttonCancel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40),
-            buttonCancel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            buttonCancel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            buttonCancel.topAnchor.constraint(equalTo: buttonCreateAccount.bottomAnchor, constant: 10),
+            buttonCancel.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            buttonCancel.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             buttonCancel.heightAnchor.constraint(equalToConstant: 50),
+            buttonCancel.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -40),
 
         ])
     }

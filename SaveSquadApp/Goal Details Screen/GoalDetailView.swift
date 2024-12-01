@@ -9,6 +9,8 @@ import UIKit
 
 class GoalDetailView: UIView {
     
+    var contentWrapper: UIScrollView!
+
     let goalImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -76,11 +78,16 @@ class GoalDetailView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupContentWrapper()
         setupView()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func setupContentWrapper() {
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
     }
     
     private func setupView() {
@@ -99,29 +106,39 @@ class GoalDetailView: UIView {
         buttonStackView.distribution = .fillEqually
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(goalImageView)
-        addSubview(goalNameLabel)
-        addSubview(infoStackView)
-        addSubview(buttonStackView)
+        contentWrapper.addSubview(goalImageView)
+        contentWrapper.addSubview(goalNameLabel)
+        contentWrapper.addSubview(infoStackView)
+        contentWrapper.addSubview(buttonStackView)
         
         NSLayoutConstraint.activate([
-            goalImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            goalImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
+            goalImageView.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 20),
+            goalImageView.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             goalImageView.widthAnchor.constraint(equalToConstant: 150),
             goalImageView.heightAnchor.constraint(equalToConstant: 150),
             
             goalNameLabel.topAnchor.constraint(equalTo: goalImageView.bottomAnchor, constant: 20),
-            goalNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            goalNameLabel.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             
             infoStackView.topAnchor.constraint(equalTo: goalNameLabel.bottomAnchor, constant: 20),
-            infoStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            infoStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            infoStackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            infoStackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             
             buttonStackView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 20),
-            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            buttonStackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             completeGoalButton.heightAnchor.constraint(equalToConstant: 50),
-            deleteGoalButton.heightAnchor.constraint(equalToConstant: 50)
+            deleteGoalButton.heightAnchor.constraint(equalToConstant: 50),
+            buttonStackView.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -16)
         ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -77,12 +77,12 @@ class SavingsGoalsView: UIView {
             titleLabel.centerYAnchor.constraint(equalTo: titleBackgroundView.centerYAnchor, constant: 20),
             
             tableView.topAnchor.constraint(equalTo: titleBackgroundView.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: addGoalButton.topAnchor, constant: -20),
             
-            addGoalButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            addGoalButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            addGoalButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            addGoalButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             addGoalButton.widthAnchor.constraint(equalToConstant: 60),
             addGoalButton.heightAnchor.constraint(equalToConstant: 60)
         ])

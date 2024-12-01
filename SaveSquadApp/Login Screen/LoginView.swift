@@ -10,6 +10,7 @@ import UIKit
 class LoginView: UIView {
     
     // MARK: - Properties
+    var contentWrapper: UIScrollView!
     var labelTitle: UILabel!
     var imageLogo: UIImageView!
     var textFieldEmail: UITextField!
@@ -23,6 +24,7 @@ class LoginView: UIView {
         self.backgroundColor = .white
 
         // set up methods
+        setupContentWrapper()
         setupLabelTitle()
         setupImageLogo()
         setupTextFieldEmail()
@@ -34,6 +36,14 @@ class LoginView: UIView {
         initConstraints()
     }
     
+    func setupContentWrapper() {
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
+    }
+    
     // MARK: - Setup Methods
     func setupLabelTitle() {
         labelTitle = UILabel()
@@ -42,7 +52,7 @@ class LoginView: UIView {
         labelTitle.textAlignment = .center
         labelTitle.textColor = UIColor(red: 123/255, green: 87/255, blue: 252/255, alpha: 1) // Hex color #7b57fc
         labelTitle.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(labelTitle)
+        contentWrapper.addSubview(labelTitle)
     }
     
     func setupImageLogo() {
@@ -51,7 +61,7 @@ class LoginView: UIView {
         imageLogo.contentMode = .scaleAspectFill
         imageLogo.clipsToBounds = true
         imageLogo.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(imageLogo)
+        contentWrapper.addSubview(imageLogo)
     }
     
     func setupTextFieldEmail() {
@@ -61,7 +71,7 @@ class LoginView: UIView {
         textFieldEmail.autocapitalizationType = .none
         textFieldEmail.keyboardType = .emailAddress
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldEmail)
+        contentWrapper.addSubview(textFieldEmail)
     }
     
     func setupTextFieldPassword() {
@@ -70,7 +80,7 @@ class LoginView: UIView {
         textFieldPassword.borderStyle = .roundedRect
         textFieldPassword.isSecureTextEntry = true
         textFieldPassword.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(textFieldPassword)
+        contentWrapper.addSubview(textFieldPassword)
     }
     
     func setupButtonLogin() {
@@ -80,7 +90,7 @@ class LoginView: UIView {
         buttonLogin.setTitleColor(.white, for: .normal)
         buttonLogin.layer.cornerRadius = 5
         buttonLogin.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(buttonLogin)
+        contentWrapper.addSubview(buttonLogin)
     }
     
     func setupButtonRegister() {
@@ -90,27 +100,32 @@ class LoginView: UIView {
         buttonRegister.setTitleColor(.white, for: .normal)
         buttonRegister.layer.cornerRadius = 5
         buttonRegister.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(buttonRegister)
+        contentWrapper.addSubview(buttonRegister)
     }
     
     // MARK: - Constraints
     func initConstraints() {
         NSLayoutConstraint.activate([
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
             // Title Label constraints
-            labelTitle.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            labelTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            labelTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            labelTitle.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 20),
+            labelTitle.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            labelTitle.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             
             // Image Logo constraints
             imageLogo.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 20),
-            imageLogo.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            imageLogo.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             imageLogo.widthAnchor.constraint(equalToConstant: 150),
             imageLogo.heightAnchor.constraint(equalToConstant: 150),
 
             // Email TextField constraints
             textFieldEmail.topAnchor.constraint(equalTo: imageLogo.bottomAnchor, constant: 40),
-            textFieldEmail.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
-            textFieldEmail.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            textFieldEmail.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 40),
+            textFieldEmail.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -40),
             textFieldEmail.heightAnchor.constraint(equalToConstant: 40),
             
             // Password TextField constraints
@@ -120,16 +135,17 @@ class LoginView: UIView {
             textFieldPassword.heightAnchor.constraint(equalToConstant: 40),
             
             // Login Button constraints
-            buttonLogin.bottomAnchor.constraint(equalTo: buttonRegister.topAnchor, constant: -20),
-            buttonLogin.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
-            buttonLogin.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            buttonLogin.topAnchor.constraint(equalTo: textFieldPassword.bottomAnchor, constant: 30),
+            buttonLogin.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 40),
+            buttonLogin.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -40),
             buttonLogin.heightAnchor.constraint(equalToConstant: 50),
             
             // Register Button constraints
-            buttonRegister.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40),
-            buttonRegister.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
-            buttonRegister.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            buttonRegister.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 10),
+            buttonRegister.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 40),
+            buttonRegister.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -40),
             buttonRegister.heightAnchor.constraint(equalToConstant: 50),
+            buttonRegister.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -40),
         ])
     }
     required init?(coder: NSCoder) {

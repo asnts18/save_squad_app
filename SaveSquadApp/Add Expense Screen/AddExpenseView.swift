@@ -9,16 +9,7 @@ import UIKit
 
 class AddExpenseView: UIView {
     
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Add New Expense"
-        label.font = UIFont.boldSystemFont(ofSize: 24) // Large font size
-        label.textColor = .white
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    var contentWrapper: UIScrollView!
     
     private let titleBackgroundView: UIView = {
         let view = UIView()
@@ -171,15 +162,22 @@ class AddExpenseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        pickerDate.minimumDate = Date()
+        setupContentWrapper()
         setupView()
+    }
+    
+    func setupContentWrapper() {
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
     }
     
     private func setupView() {
         backgroundColor = .white
         
-        addSubview(titleBackgroundView)
-        titleBackgroundView.addSubview(titleLabel)
+        self.addSubview(titleBackgroundView)
         
         // Image and button stack (expenseImageView and buttonAddPhoto)
         let imageStackView = UIStackView(arrangedSubviews: [expenseImageView, buttonAddPhoto])
@@ -231,7 +229,7 @@ class AddExpenseView: UIView {
         stackView.spacing = 16
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
+        contentWrapper.addSubview(stackView)
         
         // Button stack for 'Add Expense' and 'Cancel'
         let buttonStackView = UIStackView(arrangedSubviews: [
@@ -243,7 +241,7 @@ class AddExpenseView: UIView {
         buttonStackView.alignment = .fill
         buttonStackView.distribution = .fillEqually
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(buttonStackView)
+        contentWrapper.addSubview(buttonStackView)
         
         
         // Constraints for the title section
@@ -251,23 +249,27 @@ class AddExpenseView: UIView {
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleBackgroundView.heightAnchor.constraint(equalToConstant: 120),
-            titleLabel.centerXAnchor.constraint(equalTo: titleBackgroundView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: titleBackgroundView.centerYAnchor, constant: 30)
+            titleBackgroundView.heightAnchor.constraint(equalToConstant: 55),
+            
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
         ])
         
         // Main stack view constraints
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: titleBackgroundView.bottomAnchor, constant: 50),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            stackView.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 30),
+            stackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20)
         ])
         
         // Button stack view constraints
         NSLayoutConstraint.activate([
-            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -150)
+            buttonStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
+            buttonStackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
+            buttonStackView.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -50)
         ])
         
         // Image and button size constraints

@@ -9,6 +9,7 @@ import UIKit
 
 class HomeScreenView: UIView {
     
+    var contentWrapper: UIScrollView!
     var floatingButtonAdd: UIButton!
     var spendStack: UIStackView!
     var spendLabel1: UILabel!
@@ -24,6 +25,7 @@ class HomeScreenView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        setupContentWrapper()
         setupFloatingButtonAdd()
         setupSpendStack()
         setupSpendLabel1()
@@ -36,6 +38,14 @@ class HomeScreenView: UIView {
         setupGoalPic()
         setupGoalLabel3()
         initConstraints()
+    }
+    
+    func setupContentWrapper(){
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
     }
     
     func setupFloatingButtonAdd(){
@@ -56,19 +66,17 @@ class HomeScreenView: UIView {
         floatingButtonAdd.layer.shadowOpacity = 0.7
         floatingButtonAdd.clipsToBounds = false 
         floatingButtonAdd.imageView?.clipsToBounds = true
-        
         floatingButtonAdd.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(floatingButtonAdd)
     }
     
-
     func setupSpendStack(){
         spendStack = UIStackView()
         spendStack.axis = .vertical
         spendStack.alignment = .center
         spendStack.distribution = .fillProportionally
         spendStack.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(spendStack)
+        contentWrapper.addSubview(spendStack)
     }
     
     func setupSpendLabel1(){
@@ -104,7 +112,7 @@ class HomeScreenView: UIView {
         goalStack.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         goalStack.isLayoutMarginsRelativeArrangement = true
         goalStack.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(goalStack)
+        contentWrapper.addSubview(goalStack)
     }
     
     func setupGoalLabel1(){
@@ -156,19 +164,24 @@ class HomeScreenView: UIView {
     
     func initConstraints(){
         NSLayoutConstraint.activate([
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
             floatingButtonAdd.widthAnchor.constraint(equalToConstant: 60),
             floatingButtonAdd.heightAnchor.constraint(equalToConstant: 60),
             floatingButtonAdd.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             floatingButtonAdd.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -32),
             
-            spendStack.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            spendStack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            spendStack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            spendStack.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 16),
+            spendStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            spendStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
             spendStack.heightAnchor.constraint(equalToConstant: 150),
             
             goalStack.topAnchor.constraint(equalTo: spendStack.bottomAnchor, constant: 60),
-            goalStack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            goalStack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            goalStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
+            goalStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
             goalStack.heightAnchor.constraint(equalToConstant: 280),
             
             imageContainer.widthAnchor.constraint(equalToConstant: 150),
@@ -178,6 +191,8 @@ class HomeScreenView: UIView {
             goalPic.heightAnchor.constraint(equalTo: imageContainer.heightAnchor, multiplier: 0.8),
             goalPic.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
             goalPic.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor),
+            
+            goalStack.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
 

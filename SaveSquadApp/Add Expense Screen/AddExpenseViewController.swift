@@ -27,31 +27,21 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Add Expense"
-        
-        addExpenseScreen.buttonCategory.menu = getMenuTypes()
-        addExpenseScreen.buttonAddPhoto.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
-        addExpenseScreen.buttonAddExpense.addTarget(self, action: #selector(onAddButtonTapped), for: .touchUpInside)
-        addExpenseScreen.buttonCancel.addTarget(self, action: #selector(onCancelButtonTapped), for: .touchUpInside)
-        
         navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.backgroundColor = .gray
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white
         ]
-        self.navigationController?.navigationBar.titleTextAttributes = attributes
         self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        let smallTitleAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.titleTextAttributes = smallTitleAttributes
         self.navigationController?.navigationBar.tintColor = .white
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        addExpenseScreen.buttonCategory.menu = getMenuTypes()
+        addExpenseScreen.buttonAddPhoto.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
+        addExpenseScreen.buttonAddExpense.addTarget(self, action: #selector(onAddButtonTapped), for: .touchUpInside)
+        addExpenseScreen.buttonCancel.addTarget(self, action: #selector(onCancelButtonTapped), for: .touchUpInside)
     }
     
     //MARK: menu for buttonCategory setup
