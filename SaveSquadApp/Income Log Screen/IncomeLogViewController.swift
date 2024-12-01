@@ -65,7 +65,6 @@ class IncomeLogViewController: UIViewController {
                                         do{
                                             let income = try document.data(as: Income.self)
                                             self.oneTimeIncomes.append(income)
-                                            print("one-time")
                                         }catch{
                                             print(error)
                                         }

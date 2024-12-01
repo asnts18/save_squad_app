@@ -16,6 +16,7 @@ class EditIncomeViewController: UIViewController {
     var currentUser:FirebaseAuth.User?
     let db = Firestore.firestore()
     var selectedFrequency: String!
+    let notificationCenter = NotificationCenter.default
     
     override func loadView() {
         view = editIncomeScreen
@@ -128,7 +129,9 @@ class EditIncomeViewController: UIViewController {
                     }
                 }
             navigationController?.popViewController(animated: true)
-            //SEND NOTIFICATION BACK TO INCOME DETAILS WITH editedIncome object TO UPDATE LABELS. Or Snapshot state listener?
+            self.notificationCenter.post(
+                name: Notification.Name("incomeEdited"),
+                object: editedIncome)
             //self.hideActivityIndicator()
         }
         else{

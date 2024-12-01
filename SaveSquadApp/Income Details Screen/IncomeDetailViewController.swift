@@ -15,6 +15,7 @@ class IncomeDetailViewController: UIViewController {
     let incomeDetailsScreen = IncomeDetailsView()
     var currentUser:FirebaseAuth.User?
     let db = Firestore.firestore()
+    let notificationCenter = NotificationCenter.default
     
     override func loadView() {
         view = incomeDetailsScreen
@@ -42,6 +43,11 @@ class IncomeDetailViewController: UIViewController {
         } else {
             self.currentUser = nil
         }
+        notificationCenter.addObserver(
+                    self,
+                    selector: #selector(notificationReceivedForIncomeEdited(notification:)),
+                    name: Notification.Name("incomeEdited"),
+                    object: nil)
     }
 
     func setLabelsText() {
@@ -67,5 +73,11 @@ class IncomeDetailViewController: UIViewController {
         let editIncomeVC = EditIncomeViewController()
         editIncomeVC.income = self.income
         navigationController?.pushViewController(editIncomeVC, animated: true)
+    }
+    
+    @objc func notificationReceivedForIncomeEdited(notification: Notification){
+        let editedIncome = notification.object as! Income
+        self.income = editedIncome
+        setLabelsText()
     }
 }
