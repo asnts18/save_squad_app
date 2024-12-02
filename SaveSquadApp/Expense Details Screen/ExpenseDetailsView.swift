@@ -9,6 +9,7 @@ import UIKit
 
 class ExpenseDetailsView: UIView {
     
+    var titleBackgroundView: UIView!
     var contentWrapper: UIScrollView!
     
     let expenseImageView: UIImageView = {
@@ -78,12 +79,16 @@ class ExpenseDetailsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupBackgroundView()
         setupContentWrapper()
         setupView()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func setupBackgroundView() {
+        titleBackgroundView = UIView()
+        titleBackgroundView.backgroundColor = .gray
+        titleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(titleBackgroundView)
     }
     
     func setupContentWrapper() {
@@ -116,6 +121,11 @@ class ExpenseDetailsView: UIView {
         contentWrapper.addSubview(buttonStackView)
         
         NSLayoutConstraint.activate([
+            titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
+            titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            titleBackgroundView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            
             contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
@@ -141,5 +151,9 @@ class ExpenseDetailsView: UIView {
             
             buttonStackView.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -50)
         ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

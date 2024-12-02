@@ -9,6 +9,7 @@ import UIKit
 
 class GoalDetailView: UIView {
     
+    var titleBackgroundView: UIView!
     var contentWrapper: UIScrollView!
 
     let goalImageView: UIImageView = {
@@ -78,8 +79,16 @@ class GoalDetailView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupBackgroundView()
         setupContentWrapper()
         setupView()
+    }
+    
+    func setupBackgroundView() {
+        titleBackgroundView = UIView()
+        titleBackgroundView.backgroundColor = .gray
+        titleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(titleBackgroundView)
     }
     
     func setupContentWrapper() {
@@ -112,6 +121,11 @@ class GoalDetailView: UIView {
         contentWrapper.addSubview(buttonStackView)
         
         NSLayoutConstraint.activate([
+            titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
+            titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            titleBackgroundView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            
             contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),

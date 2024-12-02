@@ -162,6 +162,8 @@ class AddExpenseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
+        self.addSubview(titleBackgroundView)
         setupContentWrapper()
         setupView()
     }
@@ -175,9 +177,6 @@ class AddExpenseView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
-        
-        self.addSubview(titleBackgroundView)
         
         // Image and button stack (expenseImageView and buttonAddPhoto)
         let imageStackView = UIStackView(arrangedSubviews: [expenseImageView, buttonAddPhoto])
@@ -249,7 +248,7 @@ class AddExpenseView: UIView {
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleBackgroundView.heightAnchor.constraint(equalToConstant: 55),
+            titleBackgroundView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             
             contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),

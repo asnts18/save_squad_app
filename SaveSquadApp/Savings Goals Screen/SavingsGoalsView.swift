@@ -60,7 +60,7 @@ class SavingsGoalsView: UIView {
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleBackgroundView.heightAnchor.constraint(equalToConstant: 55),
+            titleBackgroundView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             
             tableView.topAnchor.constraint(equalTo: titleBackgroundView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),

@@ -163,7 +163,7 @@ class EditIncomeView: UIView {
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleBackgroundView.heightAnchor.constraint(equalToConstant: 55),
+            titleBackgroundView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             
             contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),

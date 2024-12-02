@@ -9,6 +9,7 @@ import UIKit
 
 class AddIncomeView: UIView {
     
+    var titleBackgroundView: UIView!
     var contentWrapper:UIScrollView!
     var amountStack: UIStackView!
     var amountPic: UIImageView!
@@ -28,6 +29,7 @@ class AddIncomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        setupBackgroundView()
         setupContentWrapper()
         setupAmountStack()
         setupAmountPic()
@@ -44,6 +46,13 @@ class AddIncomeView: UIView {
         setupCancelButton()
         setupAddButton()
         initConstraints()
+    }
+    
+    func setupBackgroundView() {
+        titleBackgroundView = UIView()
+        titleBackgroundView.backgroundColor = .gray
+        titleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(titleBackgroundView)
     }
     
     func setupContentWrapper(){
@@ -199,6 +208,11 @@ class AddIncomeView: UIView {
     
     func initConstraints(){
         NSLayoutConstraint.activate([
+            titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
+            titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            titleBackgroundView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            
             contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
