@@ -111,7 +111,6 @@ class EditIncomeViewController: UIViewController {
                 self.showErrorAlert(message: "You must choose a frequency.")
                 return
             }
-            //showActivityIndicator()
             let incomeDate = editIncomeScreen.datePicker.date
             let editedIncome = Income(amount: amount, description: description, frequency: self.selectedFrequency, incomeDate: incomeDate)
             let editedIncomeData: [String: Any] = [
@@ -132,11 +131,9 @@ class EditIncomeViewController: UIViewController {
             self.notificationCenter.post(
                 name: Notification.Name("incomeEdited"),
                 object: editedIncome)
-            //self.hideActivityIndicator()
         }
         else{
             self.showErrorAlert(message: "Fields cannot be left empty.")
-            //self.hideActivityIndicator()
             return
         }
     }

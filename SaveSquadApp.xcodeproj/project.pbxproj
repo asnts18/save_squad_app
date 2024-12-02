@@ -25,6 +25,10 @@
 		4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E92E2CDBEDD10068129F /* SocialFeedViewController.swift */; };
 		4838E9322CDC0FC50068129F /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */; };
 		4838E9352CDC20E40068129F /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9342CDC20E40068129F /* AddIncomeViewController.swift */; };
+		484F15FB2CFE389200D3C1CF /* ProgressSpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F15FA2CFE389200D3C1CF /* ProgressSpinnerViewController.swift */; };
+		484F15FD2CFE38AB00D3C1CF /* ProgressSpinnerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F15FC2CFE38AB00D3C1CF /* ProgressSpinnerDelegate.swift */; };
+		484F15FF2CFE390C00D3C1CF /* LoginProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F15FE2CFE390C00D3C1CF /* LoginProgressIndicatorManager.swift */; };
+		484F16012CFE3A2900D3C1CF /* RegisterProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F16002CFE3A2900D3C1CF /* RegisterProgressIndicatorManager.swift */; };
 		4857D1F42CE95BE300408DE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */; };
 		4857D1F72CE95C9D00408DE6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F62CE95C9D00408DE6 /* FirebaseAuth */; };
 		4857D1F92CE95C9D00408DE6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */; };
@@ -99,6 +103,10 @@
 		4838E92E2CDBEDD10068129F /* SocialFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedViewController.swift; sourceTree = "<group>"; };
 		4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		4838E9342CDC20E40068129F /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
+		484F15FA2CFE389200D3C1CF /* ProgressSpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSpinnerViewController.swift; sourceTree = "<group>"; };
+		484F15FC2CFE38AB00D3C1CF /* ProgressSpinnerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSpinnerDelegate.swift; sourceTree = "<group>"; };
+		484F15FE2CFE390C00D3C1CF /* LoginProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgressIndicatorManager.swift; sourceTree = "<group>"; };
+		484F16002CFE3A2900D3C1CF /* RegisterProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterProgressIndicatorManager.swift; sourceTree = "<group>"; };
 		4857D1F32CE95BE300408DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirebaseManager.swift; sourceTree = "<group>"; };
@@ -224,6 +232,15 @@
 			path = "Add Income Screen";
 			sourceTree = "<group>";
 		};
+		484F15F92CFE385900D3C1CF /* Progress Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				484F15FA2CFE389200D3C1CF /* ProgressSpinnerViewController.swift */,
+				484F15FC2CFE38AB00D3C1CF /* ProgressSpinnerDelegate.swift */,
+			);
+			path = "Progress Indicator";
+			sourceTree = "<group>";
+		};
 		4857D1F02CE95A0C00408DE6 /* Create Goal Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +264,7 @@
 			children = (
 				BA6B030F2CD9BEFC0076F361 /* RegisterView.swift */,
 				4857D1FA2CE9786F00408DE6 /* RegisterViewController.swift */,
+				484F16002CFE3A2900D3C1CF /* RegisterProgressIndicatorManager.swift */,
 				4857D1FD2CE97B2300408DE6 /* RegisterFirebaseManager.swift */,
 			);
 			path = "Register Screen";
@@ -309,6 +327,7 @@
 				487621E02CFA1AA400CEE666 /* Edit Income Screen */,
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
+				484F15F92CFE385900D3C1CF /* Progress Indicator */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
 				BA6B031D2CDC79520076F361 /* Utilities.swift */,
 				BA6B031C2CDC78A90076F361 /* Data Models */,
@@ -345,6 +364,7 @@
 			children = (
 				BA6B030E2CD9BEFC0076F361 /* LoginView.swift */,
 				BA6B03102CD9BEFC0076F361 /* ViewController.swift */,
+				484F15FE2CFE390C00D3C1CF /* LoginProgressIndicatorManager.swift */,
 				48D5D5512CEA7B2F000FDB9C /* LoginFirebaseManager.swift */,
 			);
 			path = "Login Screen";
@@ -528,6 +548,7 @@
 				48D6E9162CF8035700D1AD51 /* IncomeDetailsView.swift in Sources */,
 				BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */,
 				481EEEA52CDB20CF00A601B2 /* ExpenseLogView.swift in Sources */,
+				484F15FB2CFE389200D3C1CF /* ProgressSpinnerViewController.swift in Sources */,
 				5FC9FA452CDD6D0600F50B9D /* GoalDetailView.swift in Sources */,
 				482273502CF67E3B00C001B6 /* IncomeLogTableViewManager.swift in Sources */,
 				BA6B03172CD9BEFC0076F361 /* ViewController.swift in Sources */,
@@ -546,6 +567,7 @@
 				48D6E9132CF800CF00D1AD51 /* IncomeDetailViewController.swift in Sources */,
 				4822FDC82CD9433300FDE851 /* AddExpenseView.swift in Sources */,
 				4822FDD22CD9433300FDE851 /* SavingsGoalsView.swift in Sources */,
+				484F16012CFE3A2900D3C1CF /* RegisterProgressIndicatorManager.swift in Sources */,
 				486AC4312CF3A8B2009C81A6 /* Income.swift in Sources */,
 				5FC9FA472CDD6D2000F50B9D /* GoalDetailViewController.swift in Sources */,
 				5FC9FA432CDD6A0D00F50B9D /* CreateSavingsGoalViewController.swift in Sources */,
@@ -554,12 +576,14 @@
 				5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */,
 				4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */,
 				BA6B03152CD9BEFC0076F361 /* LoginView.swift in Sources */,
+				484F15FF2CFE390C00D3C1CF /* LoginProgressIndicatorManager.swift in Sources */,
 				BA5A74752CC9AF8700797481 /* AppDelegate.swift in Sources */,
 				4857D1FB2CE9786F00408DE6 /* RegisterViewController.swift in Sources */,
 				4838E9272CDBDF750068129F /* ExpenseLogViewController.swift in Sources */,
 				4822734E2CF666D600C001B6 /* TableViewIncomeCell.swift in Sources */,
 				BACF9E352CF5671A00260E86 /* ExpenseDetailsViewController.swift in Sources */,
 				487621E22CFA1D0000CEE666 /* EditIncomeView.swift in Sources */,
+				484F15FD2CFE38AB00D3C1CF /* ProgressSpinnerDelegate.swift in Sources */,
 				4822734C2CF65DD700C001B6 /* IncomeLogView.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
 				BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */,

@@ -38,7 +38,7 @@ extension ViewController{
                 return
             }
         }
-        //showActivityIndicator()
+        showActivityIndicator()
         Auth.auth().signIn(withEmail: email, password: password, completion: {(result, error) in
             if error == nil{
                 let tabBarController = TabBarController()
@@ -46,7 +46,7 @@ extension ViewController{
             }else{
                 self.showErrorAlert(message: "Incorrect email or password.")
             }
-            //self.hideActivityIndicator()
+            self.hideActivityIndicator()
         })
     }
 }

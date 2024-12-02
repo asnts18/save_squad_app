@@ -16,7 +16,6 @@ class HomeScreenViewController: UIViewController {
     var currentUser: FirebaseAuth.User?
     let db = Firestore.firestore()
     var budgetManager: BudgetManager?
-
     
     override func loadView() {
         view = homeScreen
@@ -127,22 +126,20 @@ class HomeScreenViewController: UIViewController {
     @objc func onLogOutBarButtonTapped(){
         let logoutAlert = UIAlertController(title: "Logging out!", message: "Are you sure want to log out?", preferredStyle: .actionSheet)
         logoutAlert.addAction(UIAlertAction(title: "Yes, log out!", style: .default, handler: {(_) in
-                do{
-                    try Auth.auth().signOut()
-                    let loginViewController = ViewController()
-                    let navController = UINavigationController(rootViewController: loginViewController)
-                    navController.modalPresentationStyle = .fullScreen
-                                
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                        let window = windowScene.windows.first {
-                        window.rootViewController = navController
-                        window.makeKeyAndVisible()
-                    }
-                }catch{
-                    print("Error occured!")
+            do{
+                try Auth.auth().signOut()
+                let loginViewController = ViewController()
+                let navController = UINavigationController(rootViewController: loginViewController)
+                navController.modalPresentationStyle = .fullScreen
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                    let window = windowScene.windows.first {
+                    window.rootViewController = navController
+                    window.makeKeyAndVisible()
                 }
-            })
-        )
+            }catch{
+                print("Error occured!")
+            }
+        }))
         logoutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(logoutAlert, animated: true)
     }

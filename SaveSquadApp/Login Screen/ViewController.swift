@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     let loginScreen = LoginView()
     var handleAuth: AuthStateDidChangeListenerHandle?
     var currentUser:FirebaseAuth.User?
+    let childProgressView = ProgressSpinnerViewController()
     
     override func loadView() {
         view = loginScreen

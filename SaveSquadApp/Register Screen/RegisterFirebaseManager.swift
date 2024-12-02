@@ -64,7 +64,7 @@ extension RegisterViewController{
                 self.showErrorAlert(message: "Fields cannot be left empty.")
                 return
             }
-            //showActivityIndicator()
+            showActivityIndicator()
             Auth.auth().createUser(withEmail: email, password: password, completion: {result, error in
                 if error == nil{
                     let fullName = "\(firstName) \(lastName)"
@@ -77,14 +77,13 @@ extension RegisterViewController{
                     ])
                 }else{
                     self.showErrorAlert(message: "There was an error creating the user because the email address is already in use.")
-                    //self.hideActivityIndicator()
+                    self.hideActivityIndicator()
                     return
                 }
             })
         }
         else{
             self.showErrorAlert(message: "Fields cannot be left empty.")
-            //self.hideActivityIndicator()
             return
         }
     }
@@ -94,10 +93,11 @@ extension RegisterViewController{
         changeRequest?.displayName = name
         changeRequest?.commitChanges(completion: {(error) in
             if error == nil{
-                //self.hideActivityIndicator()
+                self.hideActivityIndicator()
                 self.navigationController?.popViewController(animated: true)
             }else{
                 print("Error occured: \(String(describing: error))")
+                self.hideActivityIndicator()
             }
         })
     }
