@@ -26,7 +26,7 @@ class EditIncomeViewController: UIViewController {
         super.viewDidLoad()
         title = "Edit Income"
         navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.backgroundColor = .gray
+        self.navigationController?.navigationBar.backgroundColor = Utilities.purple
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white
         ]

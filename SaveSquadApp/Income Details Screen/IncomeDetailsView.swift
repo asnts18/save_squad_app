@@ -35,7 +35,7 @@ class IncomeDetailsView: UIView {
     
     func setupBackgroundView() {
         titleBackgroundView = UIView()
-        titleBackgroundView.backgroundColor = .gray
+        titleBackgroundView.backgroundColor = Utilities.purple
         titleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(titleBackgroundView)
     }

@@ -76,7 +76,7 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         title = "Goals"
         navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.backgroundColor = .gray
+        self.navigationController?.navigationBar.backgroundColor = Utilities.purple
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white
         ]

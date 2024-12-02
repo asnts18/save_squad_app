@@ -15,7 +15,6 @@ class ExpenseLogView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        
         setupBackgroundView()
         setupTableViewExpense()
         initConstraints()
@@ -23,7 +22,7 @@ class ExpenseLogView: UIView {
     
     func setupBackgroundView() {
         titleBackgroundView = UIView()
-        titleBackgroundView.backgroundColor = .gray
+        titleBackgroundView.backgroundColor = Utilities.purple
         titleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(titleBackgroundView)
     }

@@ -84,7 +84,7 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         title = "Home"
         navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.backgroundColor = .gray
+        self.navigationController?.navigationBar.backgroundColor = Utilities.purple
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white
         ]

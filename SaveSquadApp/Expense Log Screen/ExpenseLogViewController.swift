@@ -25,7 +25,7 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         title = "Expenses"
         navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.backgroundColor = .gray
+        self.navigationController?.navigationBar.backgroundColor = Utilities.purple
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white
         ]

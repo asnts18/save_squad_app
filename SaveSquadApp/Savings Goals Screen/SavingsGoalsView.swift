@@ -11,7 +11,7 @@ class SavingsGoalsView: UIView {
 
     private let titleBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray
+        view.backgroundColor = Utilities.purple
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
