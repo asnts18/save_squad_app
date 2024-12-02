@@ -24,8 +24,17 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Expenses"
-        
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        let smallTitleAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.titleTextAttributes = smallTitleAttributes
+        self.navigationController?.navigationBar.tintColor = .white
         
         // Setting the table view delegate and data source
         expenseLogScreen.tableViewExpense.delegate = self
@@ -33,14 +42,6 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
         
         // Add notification observer
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNewExpense(_:)), name: NSNotification.Name("NewExpenseAdded"), object: nil)
-
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.backgroundColor = .gray
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white
-        ]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
     }
     
     override func viewWillAppear(_ animated: Bool) {

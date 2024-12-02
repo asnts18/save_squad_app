@@ -9,6 +9,8 @@ import UIKit
 
 class ExpenseDetailsView: UIView {
     
+    var contentWrapper: UIScrollView!
+    
     let expenseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -76,6 +78,7 @@ class ExpenseDetailsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupContentWrapper()
         setupView()
     }
     
@@ -83,8 +86,16 @@ class ExpenseDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupContentWrapper() {
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
+    }
+    
     private func setupView() {
-        backgroundColor = .white
+        self.backgroundColor = .white
         
         let infoStackView = UIStackView(arrangedSubviews: [labelAmount, labelCategory, labelDate])
         infoStackView.axis = .vertical
@@ -99,29 +110,36 @@ class ExpenseDetailsView: UIView {
         buttonStackView.distribution = .fillEqually
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(expenseImageView)
-        addSubview(labelDescription)
-        addSubview(infoStackView)
-        addSubview(buttonStackView)
+        contentWrapper.addSubview(expenseImageView)
+        contentWrapper.addSubview(labelDescription)
+        contentWrapper.addSubview(infoStackView)
+        contentWrapper.addSubview(buttonStackView)
         
         NSLayoutConstraint.activate([
-            expenseImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            expenseImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
+            expenseImageView.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 20),
+            expenseImageView.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             expenseImageView.widthAnchor.constraint(equalToConstant: 150),
             expenseImageView.heightAnchor.constraint(equalToConstant: 150),
             
             labelDescription.topAnchor.constraint(equalTo: expenseImageView.bottomAnchor, constant: 20),
-            labelDescription.centerXAnchor.constraint(equalTo: centerXAnchor),
+            labelDescription.centerXAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.centerXAnchor),
             
             infoStackView.topAnchor.constraint(equalTo: labelDescription.bottomAnchor, constant: 20),
-            infoStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            infoStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            infoStackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            infoStackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             
             buttonStackView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 20),
-            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            buttonStackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
             buttonEditExpense.heightAnchor.constraint(equalToConstant: 50),
-            buttonDeleteExpense.heightAnchor.constraint(equalToConstant: 50)
+            buttonDeleteExpense.heightAnchor.constraint(equalToConstant: 50),
+            
+            buttonStackView.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -50)
         ])
     }
 }

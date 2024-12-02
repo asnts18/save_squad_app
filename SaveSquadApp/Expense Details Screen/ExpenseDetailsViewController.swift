@@ -30,7 +30,14 @@ class ExpenseDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Expense Details"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        self.navigationController?.navigationBar.tintColor = .white
         expenseDetailsScreen.expenseImageView.image = expense.image
         expenseDetailsScreen.labelDescription.text = expense.description
         expenseDetailsScreen.labelCategory.text = "Category: \(expense.category ?? "Personal")"

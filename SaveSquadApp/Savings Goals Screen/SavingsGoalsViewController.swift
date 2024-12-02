@@ -74,9 +74,18 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-
+        title = "Goals"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        let smallTitleAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.titleTextAttributes = smallTitleAttributes
+        self.navigationController?.navigationBar.tintColor = .white
         savingsGoalsScreen.tableView.delegate = self
         savingsGoalsScreen.tableView.dataSource = self
 

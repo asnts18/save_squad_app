@@ -42,6 +42,18 @@ class GoalDetailViewController: UIViewController {
         
         goalDetailView.completeGoalButton.addTarget(self, action: #selector(completeGoal), for: .touchUpInside)
         goalDetailView.deleteGoalButton.addTarget(self, action: #selector(deleteGoal), for: .touchUpInside)
+        title = "Goal Details"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = .gray
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        let smallTitleAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.titleTextAttributes = smallTitleAttributes
+        self.navigationController?.navigationBar.tintColor = .white
     }
     
     // MARK: - Actions

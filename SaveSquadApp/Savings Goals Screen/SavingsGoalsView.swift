@@ -15,16 +15,6 @@ class SavingsGoalsView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Goals"
-        label.font = UIFont.boldSystemFont(ofSize: 24) // Large font size
-        label.textColor = .white
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -63,7 +53,6 @@ class SavingsGoalsView: UIView {
         backgroundColor = .white
         
         addSubview(titleBackgroundView)
-        titleBackgroundView.addSubview(titleLabel)
         addSubview(tableView)
         addSubview(addGoalButton)
         
@@ -71,10 +60,7 @@ class SavingsGoalsView: UIView {
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleBackgroundView.heightAnchor.constraint(equalToConstant: 120),
-            
-            titleLabel.centerXAnchor.constraint(equalTo: titleBackgroundView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: titleBackgroundView.centerYAnchor, constant: 20),
+            titleBackgroundView.heightAnchor.constraint(equalToConstant: 55),
             
             tableView.topAnchor.constraint(equalTo: titleBackgroundView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),

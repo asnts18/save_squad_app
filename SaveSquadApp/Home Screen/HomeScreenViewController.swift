@@ -84,12 +84,17 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.backgroundColor = .gray
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white
         ]
         self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        let smallTitleAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.titleTextAttributes = smallTitleAttributes
+        self.navigationController?.navigationBar.tintColor = .white
         let barIcon = UIBarButtonItem(
             image: UIImage(systemName: "rectangle.portrait.and.arrow.forward"),
             style: .plain,
