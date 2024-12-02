@@ -24,23 +24,23 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Create Goal"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.backgroundColor = Utilities.purple
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
+        let smallTitleAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white
+        ]
+        navigationController?.navigationBar.titleTextAttributes = smallTitleAttributes
+        self.navigationController?.navigationBar.tintColor = .white
         createSavingsGoalView.addPhotoButton.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         createSavingsGoalView.createGoalButton.addTarget(self, action: #selector(createGoal), for: .touchUpInside)
         createSavingsGoalView.cancelButton.addTarget(self, action: #selector(cancelCreation), for: .touchUpInside)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
-    
+        
     @objc func selectPhoto() {
         let alertController = UIAlertController(title: "Select Photo", message: "Choose a photo for your goal", preferredStyle: .actionSheet)
         

@@ -9,22 +9,8 @@ import UIKit
 
 class CreateSavingsGoalView: UIView {
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Create Savings Goal"
-        label.font = UIFont.boldSystemFont(ofSize: 24) // Large font size
-        label.textColor = .white
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let titleBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Utilities.purple
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    var titleBackgroundView: UIView!
+    var contentWrapper: UIScrollView!
     
     let goalImageView: UIImageView = {
         let imageView = UIImageView()
@@ -111,19 +97,29 @@ class CreateSavingsGoalView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        targetDatePicker.minimumDate = Date() 
+        self.backgroundColor = .white
+        setupBackgroundView()
+        setupContentWrapper()
+        targetDatePicker.minimumDate = Date()
         setupView()
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    func setupBackgroundView() {
+        titleBackgroundView = UIView()
+        titleBackgroundView.backgroundColor = Utilities.purple
+        titleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(titleBackgroundView)
+    }
+    
+    func setupContentWrapper(){
+        contentWrapper = UIScrollView()
+        contentWrapper.delaysContentTouches = false
+        contentWrapper.canCancelContentTouches = true
+        contentWrapper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(contentWrapper)
     }
     
     private func setupView() {
-        backgroundColor = .white
-        
-        addSubview(titleBackgroundView)
-        titleBackgroundView.addSubview(titleLabel)
         
         let imageStackView = UIStackView(arrangedSubviews: [goalImageView, addPhotoButton])
         imageStackView.axis = .vertical
@@ -148,7 +144,7 @@ class CreateSavingsGoalView: UIView {
         stackView.spacing = 16
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
+        contentWrapper.addSubview(stackView)
         
         let buttonStackView = UIStackView(arrangedSubviews: [
             cancelButton,
@@ -159,28 +155,32 @@ class CreateSavingsGoalView: UIView {
         buttonStackView.alignment = .fill
         buttonStackView.distribution = .fillEqually
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(buttonStackView)
+        contentWrapper.addSubview(buttonStackView)
     
         
         NSLayoutConstraint.activate([
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleBackgroundView.heightAnchor.constraint(equalToConstant: 120),
-            titleLabel.centerXAnchor.constraint(equalTo: titleBackgroundView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: titleBackgroundView.centerYAnchor, constant: 30)
+            titleBackgroundView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            
+            contentWrapper.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: titleBackgroundView.bottomAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            stackView.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -150)
+            buttonStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
+            buttonStackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
+            buttonStackView.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -50)
         ])
         
 
@@ -191,5 +191,9 @@ class CreateSavingsGoalView: UIView {
             createGoalButton.heightAnchor.constraint(equalToConstant: 50),
             cancelButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
