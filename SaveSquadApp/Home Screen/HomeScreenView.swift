@@ -185,9 +185,9 @@ class HomeScreenView: UIView {
             
             floatingButtonAdd.widthAnchor.constraint(equalToConstant: 60),
             floatingButtonAdd.heightAnchor.constraint(equalToConstant: 60),
-            floatingButtonAdd.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            floatingButtonAdd.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            
+            floatingButtonAdd.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            floatingButtonAdd.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+                        
             spendStack.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 16),
             spendStack.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 16),
             spendStack.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -16),
