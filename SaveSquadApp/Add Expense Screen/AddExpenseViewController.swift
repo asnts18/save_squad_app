@@ -45,10 +45,14 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
     }
     
     //MARK: menu for buttonCategory setup
-    func getMenuTypes() -> UIMenu{
+    func getMenuTypes() -> UIMenu {
         var menuItems = [UIAction]()
         
-        for category in Utilities.categories{
+        // Sort the categories array in alphabetical order
+        let sortedCategories = Utilities.categories.sorted()
+        
+        // Create menu items from the sorted array
+        for category in sortedCategories {
             let menuItem = UIAction(title: category, handler: {(_) in
                 self.selectedCategory = category
                 self.addExpenseScreen.buttonCategory.setTitle(self.selectedCategory, for: .normal)
@@ -58,7 +62,6 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
         
         return UIMenu(title: "Select Category", children: menuItems)
     }
-    
     
     
     //MARK: action for tapping buttonAdd -- adding a new Expense
@@ -132,7 +135,7 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
 extension AddExpenseViewController: PHPickerViewControllerDelegate, UIImagePickerControllerDelegate {
     
     @objc func selectPhoto() {
-        let alertController = UIAlertController(title: "Select Photo", message: "Choose a photo for your goal", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Select Photo", message: "Choose a photo for your expense", preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
             self.openCamera()
