@@ -65,6 +65,7 @@
 		BACF9E2C2CEF99FD00260E86 /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */; };
 		BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */; };
 		BACF9E352CF5671A00260E86 /* ExpenseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E342CF5671A00260E86 /* ExpenseDetailsViewController.swift */; };
+		BACF9E3A2CFF7C0900260E86 /* EditExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E392CFF7C0900260E86 /* EditExpenseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		BACF9E2B2CEF99FD00260E86 /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
 		BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManager.swift; sourceTree = "<group>"; };
 		BACF9E342CF5671A00260E86 /* ExpenseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsViewController.swift; sourceTree = "<group>"; };
+		BACF9E392CFF7C0900260E86 /* EditExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 			children = (
 				4822FDBD2CD9433200FDE851 /* AddExpenseView.swift */,
 				4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */,
+				BACF9E392CFF7C0900260E86 /* EditExpenseViewController.swift */,
 			);
 			path = "Add Expense Screen";
 			sourceTree = "<group>";
@@ -325,8 +328,8 @@
 				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				48D6E9142CF8033B00D1AD51 /* Income Details Screen */,
 				487621E02CFA1AA400CEE666 /* Edit Income Screen */,
-				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
+				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				484F15F92CFE385900D3C1CF /* Progress Indicator */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
 				BA6B031D2CDC79520076F361 /* Utilities.swift */,
@@ -548,6 +551,7 @@
 				48D6E9162CF8035700D1AD51 /* IncomeDetailsView.swift in Sources */,
 				BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */,
 				481EEEA52CDB20CF00A601B2 /* ExpenseLogView.swift in Sources */,
+				BACF9E3A2CFF7C0900260E86 /* EditExpenseViewController.swift in Sources */,
 				484F15FB2CFE389200D3C1CF /* ProgressSpinnerViewController.swift in Sources */,
 				5FC9FA452CDD6D0600F50B9D /* GoalDetailView.swift in Sources */,
 				482273502CF67E3B00C001B6 /* IncomeLogTableViewManager.swift in Sources */,
