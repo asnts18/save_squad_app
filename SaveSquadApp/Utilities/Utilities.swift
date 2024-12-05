@@ -13,6 +13,9 @@ class Utilities{
     static let frequencies = ["One-time", "Weekly", "Semi-monthly", "Monthly", "Annual"]
     
     static let purple = UIColor(hex: "#7b57fc")
+    static let lightPurple = UIColor(hex: "#BDABFD")
+    static let lightBlue = UIColor(hex: "#AAC5FD")
+    
 }
 
 
