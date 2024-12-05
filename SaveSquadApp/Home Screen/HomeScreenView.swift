@@ -117,7 +117,9 @@ class HomeScreenView: UIView {
         goalStack.axis = .vertical
         goalStack.alignment = .center
         goalStack.distribution = .equalSpacing
-        goalStack.backgroundColor = .lightGray
+        goalStack.layer.borderWidth = 2
+        goalStack.layer.borderColor = Utilities.lightBlue.cgColor
+        goalStack.layer.cornerRadius = 10
         goalStack.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         goalStack.isLayoutMarginsRelativeArrangement = true
         goalStack.translatesAutoresizingMaskIntoConstraints = false
@@ -152,13 +154,8 @@ class HomeScreenView: UIView {
     func setupGoalPic(){
         goalPic = UIImageView()
         goalPic.image = UIImage(systemName: "photo")?.withRenderingMode(.alwaysOriginal)
-        goalPic.tintColor = .black
-        goalPic.contentMode = .scaleAspectFit
-        goalPic.backgroundColor = .white
-        goalPic.layer.borderColor = UIColor.white.cgColor
-        goalPic.layer.borderWidth = 3
+        goalPic.contentMode = .scaleAspectFill
         goalPic.clipsToBounds = true
-        goalPic.layer.masksToBounds = true
         goalPic.translatesAutoresizingMaskIntoConstraints = false
         imageContainer.addSubview(goalPic)
     }
@@ -201,10 +198,15 @@ class HomeScreenView: UIView {
             imageContainer.widthAnchor.constraint(equalToConstant: 150),
             imageContainer.heightAnchor.constraint(equalToConstant: 150),
             
-            goalPic.widthAnchor.constraint(equalTo: imageContainer.widthAnchor, multiplier: 0.8),
-            goalPic.heightAnchor.constraint(equalTo: imageContainer.heightAnchor, multiplier: 0.8),
-            goalPic.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
-            goalPic.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor),
+//            goalPic.widthAnchor.constraint(equalTo: imageContainer.widthAnchor, multiplier: 0.8),
+//            goalPic.heightAnchor.constraint(equalTo: imageContainer.heightAnchor, multiplier: 0.8),
+//            goalPic.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
+//            goalPic.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor),
+            
+            goalPic.topAnchor.constraint(equalTo: imageContainer.topAnchor),
+            goalPic.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor),
+            goalPic.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor),
+            goalPic.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor),
             
             goalStack.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -16)
         ])
