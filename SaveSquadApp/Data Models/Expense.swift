@@ -14,30 +14,20 @@ struct Expense: Codable {
     var description: String? // Description of expense
     var category: String? // Category of expense
     var date: Date // Date of transaction
-    
+    var imageURL: String? // URL of the image in Firebase Storage
+
     var targetDateFormatted: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         return dateFormatter.string(from: date)
     }
     
-    var imageData: Data? // Store image as Data
-    var image: UIImage? {
-        get {
-            guard let imageData else { return nil }
-            return UIImage(data: imageData)
-        }
-        set {
-            imageData = newValue?.jpegData(compressionQuality: 0.8)
-        }
-    }
-    
-    init(amount: Double, description: String, category: String, date: Date, image: UIImage?) {
+    init(amount: Double, description: String, category: String, date: Date, imageURL: String?) {
         self.amount = amount
         self.description = description
         self.category = category
         self.date = date
-        self.image = image
+        self.imageURL = imageURL
     }
     
     func toDictionary() -> [String: Any] {
@@ -47,6 +37,10 @@ struct Expense: Codable {
             "category": category ?? "",
             "date": date
         ]
+        
+        if let imageURL = imageURL {
+            dict["imageURL"] = imageURL
+        }
 
         return dict
     }

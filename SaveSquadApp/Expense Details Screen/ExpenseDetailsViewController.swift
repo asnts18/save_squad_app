@@ -69,10 +69,16 @@ class ExpenseDetailsViewController: UIViewController {
     }
     
     private func setLabelsText() {
-        expenseDetailsScreen.expenseImageView.image = expense.image
+        if let imageURLString = expense.imageURL, let imageURL = URL(string: imageURLString) {
+            expenseDetailsScreen.expenseImageView.loadRemoteImage(from: imageURL)
+        } else {
+            // Set a placeholder image
+            expenseDetailsScreen.expenseImageView.image = UIImage(named: "photo")
+        }
+        
         expenseDetailsScreen.labelDescription.text = expense.description
         expenseDetailsScreen.labelCategory.text = "Category: \(expense.category ?? "Personal")"
-        expenseDetailsScreen.labelAmount.text = String(format: "Amount: $%.2f", expense.amount ?? 0.00)
+        expenseDetailsScreen.labelAmount.text = String(format: "Amount: $%.2f", expense.amount ?? 00.00)
         expenseDetailsScreen.labelDate.text = "Date: \(expense.targetDateFormatted)"
     }
     

@@ -66,6 +66,8 @@
 		BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */; };
 		BACF9E352CF5671A00260E86 /* ExpenseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E342CF5671A00260E86 /* ExpenseDetailsViewController.swift */; };
 		BACF9E3A2CFF7C0900260E86 /* EditExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E392CFF7C0900260E86 /* EditExpenseViewController.swift */; };
+		BACF9E3C2D012F9000260E86 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BACF9E3B2D012F9000260E86 /* FirebaseStorage */; };
+		BACF9E412D01465800260E86 /* ImageViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9E402D01465800260E86 /* ImageViewUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +149,7 @@
 		BACF9E2D2CF2C06700260E86 /* BudgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManager.swift; sourceTree = "<group>"; };
 		BACF9E342CF5671A00260E86 /* ExpenseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsViewController.swift; sourceTree = "<group>"; };
 		BACF9E392CFF7C0900260E86 /* EditExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewController.swift; sourceTree = "<group>"; };
+		BACF9E402D01465800260E86 /* ImageViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,7 @@
 			files = (
 				4857D1F72CE95C9D00408DE6 /* FirebaseAuth in Frameworks */,
 				4857D1F92CE95C9D00408DE6 /* FirebaseFirestore in Frameworks */,
+				BACF9E3C2D012F9000260E86 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +336,7 @@
 				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				484F15F92CFE385900D3C1CF /* Progress Indicator */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
-				BA6B031D2CDC79520076F361 /* Utilities.swift */,
+				BACF9E3D2D01464000260E86 /* Utilities */,
 				BA6B031C2CDC78A90076F361 /* Data Models */,
 				BA5A747A2CC9AF8700797481 /* Main.storyboard */,
 				BA5A747D2CC9AF8800797481 /* Assets.xcassets */,
@@ -403,6 +407,15 @@
 			path = "Expense Details Screen";
 			sourceTree = "<group>";
 		};
+		BACF9E3D2D01464000260E86 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BA6B031D2CDC79520076F361 /* Utilities.swift */,
+				BACF9E402D01465800260E86 /* ImageViewUtils.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -422,6 +435,7 @@
 			packageProductDependencies = (
 				4857D1F62CE95C9D00408DE6 /* FirebaseAuth */,
 				4857D1F82CE95C9D00408DE6 /* FirebaseFirestore */,
+				BACF9E3B2D012F9000260E86 /* FirebaseStorage */,
 			);
 			productName = SaveSquadApp;
 			productReference = BA5A74712CC9AF8700797481 /* SaveSquadApp.app */;
@@ -543,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA6B031B2CDC786F0076F361 /* Expense.swift in Sources */,
+				BACF9E412D01465800260E86 /* ImageViewUtils.swift in Sources */,
 				487621DF2CFA1A6F00CEE666 /* EditIncomeViewController.swift in Sources */,
 				5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */,
 				481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */,
@@ -954,6 +969,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4857D1F52CE95C9D00408DE6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		BACF9E3B2D012F9000260E86 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4857D1F52CE95C9D00408DE6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

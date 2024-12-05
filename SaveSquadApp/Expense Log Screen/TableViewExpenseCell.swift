@@ -97,13 +97,17 @@ class TableViewExpenseCell: UITableViewCell {
     }
     
     func configure(with expense: Expense) {
-        expenseImageView.image = expense.image
+        if let imageURLString = expense.imageURL, let imageURL = URL(string: imageURLString) {
+            expenseImageView.loadRemoteImage(from: imageURL)
+        } else {
+            expenseImageView.image = UIImage(systemName: "photo") // Fallback to default image
+        }
         labelDescription.text = expense.description
-        labelAmount.text = String(format: "-$%.2f", expense.amount ?? 0)
+        labelAmount.text = String(format: "-$%.2f", expense.amount ?? 00.00)
         labelCategory.text = "Category: \(expense.category ?? "Personal")"
         labelDate.text = "Date: \(expense.targetDateFormatted)"
-        
     }
+
     
     //MARK: unused methods...
     required init?(coder: NSCoder) {

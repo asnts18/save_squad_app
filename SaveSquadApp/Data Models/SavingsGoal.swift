@@ -21,7 +21,7 @@ struct SavingsGoal: Codable {
             return UIImage(data: imageData)
         }
         set {
-            imageData = newValue?.jpegData(compressionQuality: 0.8)
+            imageData = newValue?.jpegData(compressionQuality: 0.5)
         }
     }
     

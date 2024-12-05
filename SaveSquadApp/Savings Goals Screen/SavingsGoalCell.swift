@@ -78,7 +78,11 @@ class SavingsGoalCell: UITableViewCell {
     }
     
     func configure(with goal: SavingsGoal) {
-        goalImageView.image = goal.image
+        if let goalImage = goal.image {
+            goalImageView.image = goalImage
+        } else {
+            goalImageView.image = UIImage(systemName: "photo") // Fallback to default image
+        }
         goalNameLabel.text = goal.name
         goalTargetAmountLabel.text = String(format: "$%.2f", goal.cost)
         goalTargetDateLabel.text = "Target Date: \(goal.targetDateFormatted)"

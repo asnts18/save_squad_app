@@ -9,16 +9,18 @@ import UIKit
 import PhotosUI
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 class AddExpenseViewController: UIViewController, UINavigationControllerDelegate {
     
     let addExpenseScreen = AddExpenseView()
     let db = Firestore.firestore()
     var currentUser: FirebaseAuth.User?
+    let storage = Storage.storage()
     
     // default values
     var selectedCategory = "Personal"
-    var pickedImage = UIImage(systemName: "photo")
+    var pickedImage:UIImage?
     
     override func loadView() {
         view = addExpenseScreen
@@ -64,24 +66,24 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
     }
     
     
-    //MARK: action for tapping buttonAdd -- adding a new Expense
+    // MARK: Action for tapping buttonAdd -- adding a new Expense
     @objc func onAddButtonTapped() {
         
-        var description:String = ""
-        var amount:Double = 0.0
+        var description: String = ""
+        var amount: Double = 0.0
         
-        // validate description text field input
+        // Validate description text field input
         if let descriptionText = addExpenseScreen.textfieldDescription.text,
            let amountText = addExpenseScreen.textfieldAmount.text {
             
-            if !descriptionText.isEmpty{
+            if !descriptionText.isEmpty {
                 description = descriptionText
             } else {
-                showErrorAlert(message: "Please add description.")
+                showErrorAlert(message: "Please add a description.")
                 return
             }
             
-            // validate amount text field input
+            // Validate amount text field input
             if !amountText.isEmpty {
                 if let uwAmount = Double(amountText) {
                     amount = uwAmount
@@ -97,19 +99,41 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
             let image = addExpenseScreen.expenseImageView.image
             let date = addExpenseScreen.pickerDate.date
             
-            // create newExpense object
-            let newExpense = Expense(amount: amount, description: description, category: selectedCategory, date: date, image: image)
-            
-            // convert to dictionary
-            let newExpenseData = newExpense.toDictionary()
-            
-            // Post notification with both newExpense and newExpenseData. This will be processed in ExpenseLogViewController
-            NotificationCenter.default.post(name: NSNotification.Name("NewExpenseAdded"), object: nil, userInfo: [
-                "newExpense": newExpense,
-                "newExpenseData": newExpenseData
-            ])
-            
-            navigationController?.popViewController(animated: true)
+            // Upload the image if it exists
+            if let image = image {
+                pickedImage = image // Assign the picked image to the property used in uploadExpensePhotoToStorage
+                uploadExpensePhotoToStorage { [weak self] imageURL in
+                    guard let self = self else { return }
+                    
+                    // Create newExpense object with the image URL
+                    let newExpense = Expense(amount: amount, description: description, category: self.selectedCategory, date: date, imageURL: imageURL)
+                    
+                    // Convert to dictionary
+                    let newExpenseData = newExpense.toDictionary()
+                    
+                    // Post notification with both newExpense and newExpenseData
+                    NotificationCenter.default.post(name: NSNotification.Name("NewExpenseAdded"), object: nil, userInfo: [
+                        "newExpense": newExpense,
+                        "newExpenseData": newExpenseData
+                    ])
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                // Create newExpense object without an image URL
+                let newExpense = Expense(amount: amount, description: description, category: selectedCategory, date: date, imageURL: nil)
+                
+                // Convert to dictionary
+                let newExpenseData = newExpense.toDictionary()
+                
+                // Post notification with both newExpense and newExpenseData
+                NotificationCenter.default.post(name: NSNotification.Name("NewExpenseAdded"), object: nil, userInfo: [
+                    "newExpense": newExpense,
+                    "newExpenseData": newExpenseData
+                ])
+                
+                navigationController?.popViewController(animated: true)
+            }
         }
     }
         
@@ -189,5 +213,39 @@ extension AddExpenseViewController: PHPickerViewControllerDelegate, UIImagePicke
             }
         }
     }
+    
+    // MARK: Upload the image to Firebase Storage
+    func uploadExpensePhotoToStorage(completion: @escaping (String?) -> Void) {
+        // Ensure pickedImage is not nil and convert it to JPEG data
+        guard let pickedImage = pickedImage, let jpegData = pickedImage.jpegData(compressionQuality: 0.5) else {
+            completion(nil)  // Return nil if image is not picked or data conversion fails
+            return
+        }
+        
+        // Create a reference to Firebase Storage
+        let storageRef = storage.reference()
+        let imagesRepo = storageRef.child("expense_images")
+        let imageRef = imagesRepo.child("\(UUID().uuidString).jpg")
+        
+        // Upload image data to Firebase Storage
+        imageRef.putData(jpegData, metadata: nil) { (metadata, error) in
+            if let error = error {
+                print("Error uploading image: \(error.localizedDescription)")
+                completion(nil)  // Return nil if upload fails
+                return
+            }
+            
+            // Get the download URL for the uploaded image
+            imageRef.downloadURL { (url, error) in
+                if let error = error {
+                    print("Error fetching download URL: \(error.localizedDescription)")
+                    completion(nil)  // Return nil if fetching URL fails
+                } else {
+                    completion(url?.absoluteString)  // Return the image URL on success
+                }
+            }
+        }
+    }
+
     
 }

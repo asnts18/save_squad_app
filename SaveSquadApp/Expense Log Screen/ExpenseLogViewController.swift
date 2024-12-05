@@ -100,7 +100,8 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
         print("New Expense Data Dictionary: \(newExpenseData)")
 
         // Save the expense to Firestore using the newExpenseData dictionary
-        let userID = self.currentUser?.uid ?? "" // Ensure valid user ID
+        guard let userID = self.currentUser?.uid else { return }
+        
         db.collection("users").document(userID)
             .collection("expenses").addDocument(data: newExpenseData) { error in
                 if let error = error {
@@ -112,7 +113,6 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
                     NotificationCenter.default.post(name: NSNotification.Name("UpdateBudget"), object: nil, userInfo: ["newExpenseData": newExpenseData])
 
                     self.expenses.append(newExpense) // Add newExpense object to expenses list
-                    self.expenseLogScreen.tableViewExpense.reloadData()  // Reload table
                 }
             }
     }
@@ -149,7 +149,6 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
 
 extension ExpenseLogViewController: ExpenseDetailDelegate {
     
-    // TODO: Edit Expense
     func editExpense(_ expense: Expense) {
         db.collection("users").document(self.currentUser?.uid ?? "")
             .collection("expenses").document("\(expense.id ?? "")").updateData([

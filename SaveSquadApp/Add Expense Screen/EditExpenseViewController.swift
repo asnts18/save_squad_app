@@ -30,9 +30,13 @@ class EditExpenseViewController: AddExpenseViewController {
     }
 
     private func populateExpenseDetails() {
-        // Populate the fields with the existing expense details
-        addExpenseScreen.expenseImageView.image = expense.image
-        addExpenseScreen.textfieldAmount.text = String(format: "%.2f", expense.amount ?? 0.00)
+        if let imageURLString = expense.imageURL, let imageURL = URL(string: imageURLString) {
+            addExpenseScreen.expenseImageView.loadRemoteImage(from: imageURL)
+        } else {
+            // Set a placeholder image if there is no image URL
+            addExpenseScreen.expenseImageView.image = UIImage(named: "photo")
+        }
+        addExpenseScreen.textfieldAmount.text = String(format: "%.2f", expense.amount ?? 00.00)
         addExpenseScreen.textfieldDescription.text = expense.description
         addExpenseScreen.buttonCategory.setTitle(expense.category ?? "Select Category", for: .normal)
         addExpenseScreen.pickerDate.date = expense.date
@@ -40,9 +44,10 @@ class EditExpenseViewController: AddExpenseViewController {
     }
 
     // Override the onAddButtonTapped to handle updating the expense
+    // TODO: Current cannot edit expense.
     override func onAddButtonTapped() {
-        var description:String = ""
-        var amount:Double = 0.0
+        var description: String = ""
+        var amount: Double = 0.0
 
         // validate description text field input
         if let descriptionText = addExpenseScreen.textfieldDescription.text,
@@ -71,27 +76,42 @@ class EditExpenseViewController: AddExpenseViewController {
             let image = addExpenseScreen.expenseImageView.image
             let date = addExpenseScreen.pickerDate.date
 
-            // create updatedExpense object
-            let updatedExpense = Expense(amount: amount, description: description, category: selectedCategory, date: date, image: image)
-
-            // convert to dictionary
-            let updatedExpenseData = updatedExpense.toDictionary()
-            
-            // TODO: Delete after. Debugging statements to check values
-            print("Updating expense with data: \(updatedExpenseData)")
-            
-            // Update Firestore with the new data
-            db.collection("users").document(self.currentUser?.uid ?? "")
-                .collection("expenses").document("\(self.expense.id ?? "")").updateData(updatedExpenseData) { error in
-                    if let error = error {
-                        self.showErrorAlert(message: "Error updating expense: \(error.localizedDescription)")
-                    } else {
-                        // post notification to NotificationCenter
-                        NotificationCenter.default.post(name: NSNotification.Name("expenseUpdated"), object: updatedExpense)
-                        self.navigationController?.popViewController(animated: true)
+            // Upload the new image if it exists
+            if let pickedImage = image, pickedImage != UIImage(named: "photo") {
+                uploadExpensePhotoToStorage { imageURL in
+                    guard let imageURL = imageURL else {
+                        self.showErrorAlert(message: "Error uploading image.")
+                        return
                     }
+                    self.updateExpense(description: description, amount: amount, date: date, imageURL: imageURL)
                 }
+            } else {
+                updateExpense(description: description, amount: amount, date: date, imageURL: expense.imageURL)
+            }
         }
+    }
+
+    private func updateExpense(description: String, amount: Double, date: Date, imageURL: String?) {
+        // Create updatedExpense object
+        let updatedExpense = Expense(amount: amount, description: description, category: selectedCategory, date: date, imageURL: imageURL)
+
+        // Convert to dictionary
+        let updatedExpenseData = updatedExpense.toDictionary()
+        
+        // Debugging statements to check values
+        print("Updating expense with data: \(updatedExpenseData)")
+        
+        // Update Firestore with the new data
+        db.collection("users").document(self.currentUser?.uid ?? "")
+            .collection("expenses").document("\(self.expense.id ?? "")").updateData(updatedExpenseData) { error in
+                if let error = error {
+                    self.showErrorAlert(message: "Error updating expense: \(error.localizedDescription)")
+                } else {
+                    // post notification to NotificationCenter
+                    NotificationCenter.default.post(name: NSNotification.Name("expenseUpdated"), object: updatedExpense)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
     }
 }
 
