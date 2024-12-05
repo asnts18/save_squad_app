@@ -10,7 +10,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 protocol ExpenseDetailDelegate: AnyObject {
-    func editExpense(_ expense: Expense)
     func deleteExpense(_ expense: Expense)
 }
 

@@ -149,19 +149,6 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
 
 extension ExpenseLogViewController: ExpenseDetailDelegate {
     
-    func editExpense(_ expense: Expense) {
-        db.collection("users").document(self.currentUser?.uid ?? "")
-            .collection("expenses").document("\(expense.id ?? "")").updateData([
-                "completed": true
-            ]) { error in
-                if let error = error {
-                    print("Error updating completion status: \(error.localizedDescription)")
-                } else {
-                    print("Completion status updated successfully!")
-                }
-            }
-    }
-    
     func deleteExpense(_ expense: Expense) {
         db.collection("users").document(self.currentUser?.uid ?? "")
             .collection("expenses").document("\(expense.id ?? "")").delete { error in
