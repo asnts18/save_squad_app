@@ -7,8 +7,8 @@
 import UIKit
 
 class SocialGoalCell: UITableViewCell {
-    private let userNameLabel = UILabel()
-    private let goalDetailsLabel = UILabel()
+    private let userEmailLabel = UILabel()
+    private let goalNameLabel = UILabel()
     private let goalDateLabel = UILabel()
     private let goalImageView = UIImageView()
     private let containerView = UIView()
@@ -27,27 +27,27 @@ class SocialGoalCell: UITableViewCell {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
 
-        userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        userNameLabel.textColor = .darkGray
-        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(userNameLabel)
-
-        goalDetailsLabel.font = UIFont.systemFont(ofSize: 14)
-        goalDetailsLabel.textColor = .black
-        goalDetailsLabel.numberOfLines = 2
-        goalDetailsLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(goalDetailsLabel)
-
-        goalDateLabel.font = UIFont.systemFont(ofSize: 12)
-        goalDateLabel.textColor = .gray
-        goalDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(goalDateLabel)
-
         goalImageView.contentMode = .scaleAspectFill
         goalImageView.layer.cornerRadius = 8
         goalImageView.clipsToBounds = true
         goalImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(goalImageView)
+
+        userEmailLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        userEmailLabel.textColor = .darkGray
+        userEmailLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(userEmailLabel)
+
+        goalNameLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        goalNameLabel.textColor = .black
+        goalNameLabel.numberOfLines = 1
+        goalNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(goalNameLabel)
+
+        goalDateLabel.font = UIFont.systemFont(ofSize: 12)
+        goalDateLabel.textColor = .gray
+        goalDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(goalDateLabel)
     }
 
     private func setupConstraints() {
@@ -62,40 +62,59 @@ class SocialGoalCell: UITableViewCell {
             goalImageView.widthAnchor.constraint(equalToConstant: 60),
             goalImageView.heightAnchor.constraint(equalToConstant: 60),
 
-            userNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-            userNameLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 10),
-            userNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            userEmailLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            userEmailLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 10),
+            userEmailLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
 
-            goalDetailsLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
-            goalDetailsLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
-            goalDetailsLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
+            goalNameLabel.topAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 5),
+            goalNameLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
+            goalNameLabel.trailingAnchor.constraint(equalTo: userEmailLabel.trailingAnchor),
 
-            goalDateLabel.topAnchor.constraint(equalTo: goalDetailsLabel.bottomAnchor, constant: 5),
-            goalDateLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
-            goalDateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
+            goalDateLabel.topAnchor.constraint(equalTo: goalNameLabel.bottomAnchor, constant: 5),
+            goalDateLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
+            goalDateLabel.trailingAnchor.constraint(equalTo: userEmailLabel.trailingAnchor),
+            goalDateLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -10)
         ])
     }
 
     func configure(with goal: SocialGoal) {
-        userNameLabel.text = goal.userEmail
-        goalDetailsLabel.text = "Goal Achieved: \(goal.goalName)"
+        userEmailLabel.text = goal.userEmail
+        goalNameLabel.text = "Goal Achieved: \(goal.goalName)"
         goalDateLabel.text = DateFormatter.localizedString(from: goal.completedDate, dateStyle: .medium, timeStyle: .short)
 
-        if let imageURL = goal.imageURL, let url = URL(string: imageURL) {
-            loadImage(from: url)
+        if let imageURL = goal.imageURL {
+            print("Configuring with imageURL: \(imageURL)") // Debug print
+            if let url = URL(string: imageURL) {
+                loadImage(from: url)
+            } else {
+                print("Invalid URL format: \(imageURL)")
+                goalImageView.image = UIImage(systemName: "photo") // Placeholder
+            }
         } else {
-            goalImageView.image = UIImage(systemName: "photo")
+            print("No image URL available for this goal.")
+            goalImageView.image = UIImage(systemName: "photo") // Placeholder
         }
     }
 
+
     private func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data, error == nil else { return }
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            if let error = error {
+                print("Error loading image: \(error.localizedDescription)")
+                return
+            }
+
+            guard let data = data, let image = UIImage(data: data) else {
+                print("Failed to decode image data.")
+                return
+            }
+
             DispatchQueue.main.async {
-                self?.goalImageView.image = UIImage(data: data)
+                self?.goalImageView.image = image
             }
         }.resume()
     }
+
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

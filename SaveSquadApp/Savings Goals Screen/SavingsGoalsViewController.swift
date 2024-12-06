@@ -242,6 +242,23 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
             }
     }
     
+    func saveCompletedGoalAsMilestone(_ goal: SavingsGoal) {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
 
-    
+        let milestoneData: [String: Any] = [
+            "friendName": Auth.auth().currentUser?.email ?? "Unknown User",
+            "milestone": "Goal Achieved: \(goal.name ?? "Unknown Goal")",
+            "timestamp": Timestamp(date: Date()),
+            "imageURL": goal.imageURL ?? ""
+        ]
+
+        db.collection("users").document(currentUserID).collection("milestones").addDocument(data: milestoneData) { error in
+            if let error = error {
+                print("Error saving milestone: \(error.localizedDescription)")
+            } else {
+                print("Milestone saved successfully!")
+            }
+        }
+    }
 }

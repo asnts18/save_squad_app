@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class SocialFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let socialScreen = SocialFeedView()
-    var milestones: [Milestone] = [] // Store milestones
+    var milestones: [Milestone] = []
     
 
     override func loadView() {
@@ -63,9 +63,14 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
                                     let text = document.get("milestone") as? String,
                                     let timestamp = document.get("timestamp") as? Timestamp
                                 else {
+                                    print("Missing required fields for milestone: \(document.data())")
                                     return nil
                                 }
-                                return Milestone(friendName: friendName, text: text, timestamp: timestamp)
+
+                                let imageURL = document.get("imageURL") as? String
+                                print("Fetched Milestone - friendName: \(friendName), text: \(text), imageURL: \(imageURL ?? "No URL")")
+
+                                return Milestone(friendName: friendName, text: text, timestamp: timestamp, imageURL: imageURL)
                             } ?? []
 
                             self.milestones.append(contentsOf: friendMilestones)
@@ -91,11 +96,12 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
         cell.configure(with: SocialGoal(
             userEmail: milestone.friendName,
             goalName: milestone.text,
-            goalDescription: "Achieved a goal!",
-            goalCost: 0.0,
+            goalDescription: "Achieved a goal!", // Example description
+            goalCost: 0.0, // Replace with actual cost if available
             completedDate: milestone.timestamp.dateValue(),
-            imageURL: nil
+            imageURL: nil // Replace with actual image URL if available
         ))
+
         return cell
     }
 
@@ -105,4 +111,6 @@ struct Milestone {
     let friendName: String
     let text: String
     let timestamp: Timestamp
+    let imageURL: String?
 }
+

@@ -90,7 +90,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 print("Error denying friend request: \(error.localizedDescription)")
             } else {
                 print("Friend request denied!")
-                self.fetchFriendRequests() // Refresh the list
+                self.fetchFriendRequests()
             }
         }
     }
