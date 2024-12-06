@@ -195,10 +195,11 @@ extension SavingsGoalsViewController: UITableViewDataSource, UITableViewDelegate
 
 extension SavingsGoalsViewController: GoalDetailDelegate {
     
-    func markGoalAsComplete(_ goal: SavingsGoal) {
+    func changeCompletionStatus(_ goal: SavingsGoal) {
+        let completed = goal.completed
         db.collection("users").document(self.currentUser?.uid ?? "")
             .collection("goals").document("\(goal.id ?? "")").updateData([
-                "completed": true
+                "completed": !completed
             ]) { error in
                 if let error = error {
                     print("Error updating completion status: \(error.localizedDescription)")

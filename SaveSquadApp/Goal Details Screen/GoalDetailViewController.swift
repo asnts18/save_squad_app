@@ -8,7 +8,7 @@
 import UIKit
 
 protocol GoalDetailDelegate: AnyObject {
-    func markGoalAsComplete(_ goal: SavingsGoal)
+    func changeCompletionStatus(_ goal: SavingsGoal)
     func deleteGoal(_ goal: SavingsGoal)
 }
 
@@ -37,7 +37,7 @@ class GoalDetailViewController: UIViewController {
 
         setLabelsText()
         
-        goalDetailScreen.completeGoalButton.addTarget(self, action: #selector(completeGoal), for: .touchUpInside)
+        goalDetailScreen.completeGoalButton.addTarget(self, action: #selector(changeCompletionStatus), for: .touchUpInside)
         goalDetailScreen.deleteGoalButton.addTarget(self, action: #selector(deleteGoal), for: .touchUpInside)
         
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -66,12 +66,14 @@ class GoalDetailViewController: UIViewController {
         goalDetailScreen.goalDescriptionLabel.text = goal.description
         goalDetailScreen.goalCostLabel.text = String(format: "Cost: $%.2f", goal.cost ?? 0.0)
         goalDetailScreen.goalTargetDateLabel.text = "Target Date: \(goal.targetDateFormatted)"
-        
+        if goal.completed {
+            goalDetailScreen.completeGoalButton.setTitle("Undo Completion", for: .normal)
+        }
     }
     
     // MARK: - Actions
-    @objc func completeGoal() {
-        delegate?.markGoalAsComplete(goal)
+    @objc func changeCompletionStatus() {
+        delegate?.changeCompletionStatus(goal)
         navigationController?.popViewController(animated: true)
     }
     

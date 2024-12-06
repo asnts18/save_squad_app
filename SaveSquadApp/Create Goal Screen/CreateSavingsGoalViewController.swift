@@ -121,7 +121,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
                 guard let self = self else {return }
                 
                 // Create newGoal object with the image URL
-                let newGoal = SavingsGoal(name: name, description: description, cost: cost, targetDate: targetDate, imageURL: imageURL)
+                let newGoal = SavingsGoal(name: name, description: description, cost: cost, targetDate: targetDate, imageURL: imageURL, completed: false)
                 
                 // Convert to dictionary
                 let newGoalData = newGoal.toDictionary()
@@ -137,7 +137,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
             }
         } else {
             // Create newGoal object without an image URL
-            let newGoal = SavingsGoal(name: name, description: description, cost: cost, targetDate: targetDate, imageURL: nil)
+            let newGoal = SavingsGoal(name: name, description: description, cost: cost, targetDate: targetDate, imageURL: nil, completed: false)
             
             // Convert to dictionary
             let newGoalData = newGoal.toDictionary()
