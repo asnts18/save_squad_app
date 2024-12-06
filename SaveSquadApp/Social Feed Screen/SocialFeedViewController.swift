@@ -12,6 +12,7 @@ import FirebaseAuth
 class SocialFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let socialScreen = SocialFeedView()
     var milestones: [Milestone] = [] // Store milestones
+    
 
     override func loadView() {
         view = socialScreen
@@ -35,7 +36,6 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
         let db = Firestore.firestore()
 
-        // Step 1: Fetch the list of friends
         db.collection("users").document(currentUserID).collection("friends").getDocuments { snapshot, error in
             if let error = error {
                 print("Error fetching friends: \(error.localizedDescription)")
@@ -43,11 +43,10 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
             }
 
             guard let friends = snapshot?.documents.map({ $0.documentID }) else { return }
-            self.milestones = [] // Reset milestones
+            self.milestones = []
 
             let group = DispatchGroup()
 
-            // Step 2: Fetch milestones for each friend
             for friendID in friends {
                 group.enter()
                 db.collection("users").document(friendID).collection("milestones")
@@ -73,14 +72,12 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
                         }
                     }
             }
-
-            group.notify(queue: .main) {
-                self.milestones.sort(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() })
-                self.socialScreen.tableView.reloadData()
+                group.notify(queue: .main) {
+                    self.milestones.sort(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() })
+                    self.socialScreen.tableView.reloadData()
+                    }
+                }
             }
-        }
-    }
-
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return milestones.count
@@ -90,6 +87,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
         let milestone = milestones[indexPath.row]
         cell.textLabel?.text = "\(milestone.friendName): \(milestone.text)"
+        cell.textLabel?.numberOfLines = 0
         return cell
     }
 }
