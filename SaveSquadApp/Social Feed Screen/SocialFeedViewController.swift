@@ -22,6 +22,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         socialScreen.tableView.dataSource = self
         socialScreen.tableView.delegate = self
+        socialScreen.tableView.register(SocialGoalCell.self, forCellReuseIdentifier: "SocialGoalCell")
         socialScreen.addFriendButton.addTarget(self, action: #selector(navigateToFriendsList), for: .touchUpInside)
 
         fetchMilestones()
@@ -78,18 +79,26 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
                     }
                 }
             }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return milestones.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SocialGoalCell", for: indexPath) as! SocialGoalCell
         let milestone = milestones[indexPath.row]
-        cell.textLabel?.text = "\(milestone.friendName): \(milestone.text)"
-        cell.textLabel?.numberOfLines = 0
+
+        cell.configure(with: SocialGoal(
+            userEmail: milestone.friendName,
+            goalName: milestone.text,
+            goalDescription: "Achieved a goal!",
+            goalCost: 0.0,
+            completedDate: milestone.timestamp.dateValue(),
+            imageURL: nil
+        ))
         return cell
     }
+
 }
 
 struct Milestone {

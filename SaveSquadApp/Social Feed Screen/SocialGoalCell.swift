@@ -4,16 +4,14 @@
 //
 //  Created by Haritha on 06/12/24.
 //
-
 import UIKit
 
 class SocialGoalCell: UITableViewCell {
-    let userEmailLabel = UILabel()
-    let goalNameLabel = UILabel()
-    let goalDescriptionLabel = UILabel()
-    let goalCostLabel = UILabel()
-    let completedDateLabel = UILabel()
-    let goalImageView = UIImageView()
+    private let userNameLabel = UILabel()
+    private let goalDetailsLabel = UILabel()
+    private let goalDateLabel = UILabel()
+    private let goalImageView = UIImageView()
+    private let containerView = UIView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,64 +20,67 @@ class SocialGoalCell: UITableViewCell {
     }
 
     private func setupUI() {
-        userEmailLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        goalNameLabel.font = UIFont.systemFont(ofSize: 14)
-        goalDescriptionLabel.font = UIFont.systemFont(ofSize: 12)
-        goalCostLabel.font = UIFont.systemFont(ofSize: 12)
-        completedDateLabel.font = UIFont.systemFont(ofSize: 12)
-        goalImageView.contentMode = .scaleAspectFit
+        containerView.layer.cornerRadius = 12
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.lightGray.cgColor
+        containerView.clipsToBounds = true
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(containerView)
+
+        userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        userNameLabel.textColor = .darkGray
+        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(userNameLabel)
+
+        goalDetailsLabel.font = UIFont.systemFont(ofSize: 14)
+        goalDetailsLabel.textColor = .black
+        goalDetailsLabel.numberOfLines = 2
+        goalDetailsLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(goalDetailsLabel)
+
+        goalDateLabel.font = UIFont.systemFont(ofSize: 12)
+        goalDateLabel.textColor = .gray
+        goalDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(goalDateLabel)
+
+        goalImageView.contentMode = .scaleAspectFill
         goalImageView.layer.cornerRadius = 8
         goalImageView.clipsToBounds = true
-
-        contentView.addSubview(userEmailLabel)
-        contentView.addSubview(goalNameLabel)
-        contentView.addSubview(goalDescriptionLabel)
-        contentView.addSubview(goalCostLabel)
-        contentView.addSubview(completedDateLabel)
-        contentView.addSubview(goalImageView)
+        goalImageView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(goalImageView)
     }
 
     private func setupConstraints() {
-        userEmailLabel.translatesAutoresizingMaskIntoConstraints = false
-        goalNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        goalDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        goalCostLabel.translatesAutoresizingMaskIntoConstraints = false
-        completedDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        goalImageView.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
-            goalImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            goalImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            goalImageView.widthAnchor.constraint(equalToConstant: 50),
-            goalImageView.heightAnchor.constraint(equalToConstant: 50),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
 
-            userEmailLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            userEmailLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 16),
-            userEmailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            goalImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            goalImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            goalImageView.widthAnchor.constraint(equalToConstant: 60),
+            goalImageView.heightAnchor.constraint(equalToConstant: 60),
 
-            goalNameLabel.topAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 4),
-            goalNameLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
+            userNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            userNameLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 10),
+            userNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
 
-            goalDescriptionLabel.topAnchor.constraint(equalTo: goalNameLabel.bottomAnchor, constant: 4),
-            goalDescriptionLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
+            goalDetailsLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
+            goalDetailsLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
+            goalDetailsLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
 
-            goalCostLabel.topAnchor.constraint(equalTo: goalDescriptionLabel.bottomAnchor, constant: 4),
-            goalCostLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
-
-            completedDateLabel.topAnchor.constraint(equalTo: goalCostLabel.bottomAnchor, constant: 4),
-            completedDateLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
-            completedDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            goalDateLabel.topAnchor.constraint(equalTo: goalDetailsLabel.bottomAnchor, constant: 5),
+            goalDateLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
+            goalDateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
         ])
     }
 
     func configure(with goal: SocialGoal) {
-        userEmailLabel.text = goal.userEmail
-        goalNameLabel.text = "Goal: \(goal.goalName)"
-        goalDescriptionLabel.text = "Description: \(goal.goalDescription)"
-        goalCostLabel.text = "Cost: $\(goal.goalCost)"
-        completedDateLabel.text = "Completed: \(DateFormatter.localizedString(from: goal.completedDate, dateStyle: .medium, timeStyle: .short))"
+        userNameLabel.text = goal.userEmail
+        goalDetailsLabel.text = "Goal Achieved: \(goal.goalName)"
+        goalDateLabel.text = DateFormatter.localizedString(from: goal.completedDate, dateStyle: .medium, timeStyle: .short)
 
-        // Load the image from URL
         if let imageURL = goal.imageURL, let url = URL(string: imageURL) {
             loadImage(from: url)
         } else {
