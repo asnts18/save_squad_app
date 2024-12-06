@@ -194,18 +194,40 @@ extension SavingsGoalsViewController: UITableViewDataSource, UITableViewDelegate
 extension SavingsGoalsViewController: GoalDetailDelegate {
     
     func changeCompletionStatus(_ goal: SavingsGoal) {
-        let completed = goal.completed
-        db.collection("users").document(self.currentUser?.uid ?? "")
-            .collection("goals").document("\(goal.id ?? "")").updateData([
-                "completed": !completed
-            ]) { error in
-                if let error = error {
-                    print("Error updating completion status: \(error.localizedDescription)")
-                } else {
-                    print("Completion status updated successfully!")
+            let completed = goal.completed
+            let userEmail = self.currentUser?.email ?? "Unknown User"
+            let userID = self.currentUser?.uid ?? ""
+            let db = Firestore.firestore()
+
+            db.collection("users").document(userID)
+                .collection("goals").document("\(goal.id ?? "")").updateData([
+                    "completed": !completed
+                ]) { error in
+                    if let error = error {
+                        print("Error updating completion status: \(error.localizedDescription)")
+                    } else {
+                        print("Completion status updated successfully!")
+                        
+                        // If goal is marked complete, add it to milestones
+                        if !completed {
+                            let milestoneData: [String: Any] = [
+                                "friendName": userEmail,
+                                "milestone": "Completed goal: \(goal.name ?? "Unnamed Goal")",
+                                "timestamp": Timestamp(date: Date())
+                            ]
+                            
+                            db.collection("users").document(userID).collection("milestones")
+                                .addDocument(data: milestoneData) { error in
+                                    if let error = error {
+                                        print("Error adding milestone: \(error.localizedDescription)")
+                                    } else {
+                                        print("Milestone added successfully!")
+                                    }
+                                }
+                        }
+                    }
                 }
-            }
-    }
+        }
     
     func deleteGoal(_ goal: SavingsGoal) {
         db.collection("users").document(self.currentUser?.uid ?? "")
@@ -216,5 +238,25 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
                     print("Document successfully deleted")
                 }
             }
+    }
+    
+    func saveCompletedGoalAsMilestone(_ goal: SavingsGoal) {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+
+        let milestoneData: [String: Any] = [
+            "friendName": Auth.auth().currentUser?.email ?? "Unknown User",
+            "milestone": "Goal Achieved: \(goal.name ?? "Unknown Goal")",
+            "timestamp": Timestamp(date: Date()),
+            "imageURL": goal.imageURL ?? ""
+        ]
+
+        db.collection("users").document(currentUserID).collection("milestones").addDocument(data: milestoneData) { error in
+            if let error = error {
+                print("Error saving milestone: \(error.localizedDescription)")
+            } else {
+                print("Milestone saved successfully!")
+            }
+        }
     }
 }

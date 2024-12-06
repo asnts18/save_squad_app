@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,16 +15,12 @@
 		4822734C2CF65DD700C001B6 /* IncomeLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822734B2CF65DD700C001B6 /* IncomeLogView.swift */; };
 		4822734E2CF666D600C001B6 /* TableViewIncomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822734D2CF666D600C001B6 /* TableViewIncomeCell.swift */; };
 		482273502CF67E3B00C001B6 /* IncomeLogTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822734F2CF67E3B00C001B6 /* IncomeLogTableViewManager.swift */; };
-		4822FDBC2CD9430900FDE851 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBB2CD9430900FDE851 /* SocialFeedView.swift */; };
 		4822FDC82CD9433300FDE851 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBD2CD9433200FDE851 /* AddExpenseView.swift */; };
 		4822FDC92CD9433300FDE851 /* ExpenseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */; };
-		4822FDCD2CD9433300FDE851 /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC22CD9433300FDE851 /* FriendsListView.swift */; };
-		4822FDD02CD9433300FDE851 /* FriendRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */; };
 		4822FDD22CD9433300FDE851 /* SavingsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC72CD9433300FDE851 /* SavingsGoalsView.swift */; };
 		4838E9272CDBDF750068129F /* ExpenseLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9262CDBDF750068129F /* ExpenseLogViewController.swift */; };
 		4838E92A2CDBDFF70068129F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9292CDBDFF70068129F /* TabBarController.swift */; };
 		4838E92C2CDBEADE0068129F /* SavingsGoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E92B2CDBEADE0068129F /* SavingsGoalsViewController.swift */; };
-		4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E92E2CDBEDD10068129F /* SocialFeedViewController.swift */; };
 		4838E9322CDC0FC50068129F /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */; };
 		4838E9352CDC20E40068129F /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838E9342CDC20E40068129F /* AddIncomeViewController.swift */; };
 		484F15FB2CFE389200D3C1CF /* ProgressSpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F15FA2CFE389200D3C1CF /* ProgressSpinnerViewController.swift */; };
@@ -96,18 +92,14 @@
 		4822734B2CF65DD700C001B6 /* IncomeLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeLogView.swift; sourceTree = "<group>"; };
 		4822734D2CF666D600C001B6 /* TableViewIncomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewIncomeCell.swift; sourceTree = "<group>"; };
 		4822734F2CF67E3B00C001B6 /* IncomeLogTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeLogTableViewManager.swift; sourceTree = "<group>"; };
-		4822FDBB2CD9430900FDE851 /* SocialFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedView.swift; sourceTree = "<group>"; };
 		4822FDBD2CD9433200FDE851 /* AddExpenseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		4822FDBE2CD9433300FDE851 /* ExpenseDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsView.swift; sourceTree = "<group>"; };
 		4822FDC12CD9433300FDE851 /* ExpenseLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseLogView.swift; sourceTree = "<group>"; };
-		4822FDC22CD9433300FDE851 /* FriendsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
 		4822FDC42CD9433300FDE851 /* AddIncomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIncomeView.swift; sourceTree = "<group>"; };
-		4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsView.swift; sourceTree = "<group>"; };
 		4822FDC72CD9433300FDE851 /* SavingsGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingsGoalsView.swift; sourceTree = "<group>"; };
 		4838E9262CDBDF750068129F /* ExpenseLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLogViewController.swift; sourceTree = "<group>"; };
 		4838E9292CDBDFF70068129F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4838E92B2CDBEADE0068129F /* SavingsGoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsViewController.swift; sourceTree = "<group>"; };
-		4838E92E2CDBEDD10068129F /* SocialFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedViewController.swift; sourceTree = "<group>"; };
 		4838E9312CDC0FC50068129F /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		4838E9342CDC20E40068129F /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
 		484F15FA2CFE389200D3C1CF /* ProgressSpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSpinnerViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +147,10 @@
 		BACF9E392CFF7C0900260E86 /* EditExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewController.swift; sourceTree = "<group>"; };
 		BACF9E402D01465800260E86 /* ImageViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		09E8E7802D02DE0B007FA1E3 /* Social Feed Screen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Social Feed Screen"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BA5A746E2CC9AF8700797481 /* Frameworks */ = {
@@ -214,15 +210,6 @@
 				481446B92D027573002AB45D /* SavingsGoalsProgressIndicator.swift */,
 			);
 			path = "Savings Goals Screen";
-			sourceTree = "<group>";
-		};
-		4838E9302CDBEDEC0068129F /* Social Feed Screen */ = {
-			isa = PBXGroup;
-			children = (
-				4822FDBB2CD9430900FDE851 /* SocialFeedView.swift */,
-				4838E92E2CDBEDD10068129F /* SocialFeedViewController.swift */,
-			);
-			path = "Social Feed Screen";
 			sourceTree = "<group>";
 		};
 		4838E9332CDC0FCD0068129F /* Add Expense Screen */ = {
@@ -322,6 +309,7 @@
 		BA5A74732CC9AF8700797481 /* SaveSquadApp */ = {
 			isa = PBXGroup;
 			children = (
+				09E8E7802D02DE0B007FA1E3 /* Social Feed Screen */,
 				BA6B03112CD9BEFC0076F361 /* Login Screen */,
 				4857D1FC2CE9789400408DE6 /* Register Screen */,
 				BA6B03142CD9BEFC0076F361 /* Home Screen */,
@@ -329,17 +317,14 @@
 				4857D1F02CE95A0C00408DE6 /* Create Goal Screen */,
 				4857D1F12CE95A2D00408DE6 /* Goal Details Screen */,
 				4838E9282CDBDF7B0068129F /* Expense Log Screen */,
-				4838E9302CDBEDEC0068129F /* Social Feed Screen */,
 				4838E9292CDBDFF70068129F /* TabBarController.swift */,
 				4838E9332CDC0FCD0068129F /* Add Expense Screen */,
 				4838E9362CDC20F60068129F /* Add Income Screen */,
 				BACF9E312CF5655500260E86 /* Expense Details Screen */,
 				4822734A2CF65D4000C001B6 /* Income Log Screen */,
-				4822FDC52CD9433300FDE851 /* FriendRequestsView.swift */,
 				48D6E9142CF8033B00D1AD51 /* Income Details Screen */,
 				487621E02CFA1AA400CEE666 /* Edit Income Screen */,
 				BA5A74742CC9AF8700797481 /* AppDelegate.swift */,
-				4822FDC22CD9433300FDE851 /* FriendsListView.swift */,
 				484F15F92CFE385900D3C1CF /* Progress Indicator */,
 				BA5A74762CC9AF8700797481 /* SceneDelegate.swift */,
 				BACF9E3D2D01464000260E86 /* Utilities */,
@@ -436,6 +421,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				09E8E7802D02DE0B007FA1E3 /* Social Feed Screen */,
 			);
 			name = SaveSquadApp;
 			packageProductDependencies = (
@@ -567,7 +555,6 @@
 				487621DF2CFA1A6F00CEE666 /* EditIncomeViewController.swift in Sources */,
 				5FC9FA412CDD665800F50B9D /* CreateSavingsGoalView.swift in Sources */,
 				481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */,
-				4838E92F2CDBEDD10068129F /* SocialFeedViewController.swift in Sources */,
 				BA6B03192CD9BEFC0076F361 /* HomeScreenViewController.swift in Sources */,
 				48D6E9162CF8035700D1AD51 /* IncomeDetailsView.swift in Sources */,
 				BACF9E2E2CF2C06700260E86 /* BudgetManager.swift in Sources */,
@@ -579,14 +566,12 @@
 				BA6B03172CD9BEFC0076F361 /* ViewController.swift in Sources */,
 				4838E9352CDC20E40068129F /* AddIncomeViewController.swift in Sources */,
 				4872709B2CED8234004683A8 /* DateHelper.swift in Sources */,
-				4822FDD02CD9433300FDE851 /* FriendRequestsView.swift in Sources */,
 				48D5D5522CEA7B2F000FDB9C /* LoginFirebaseManager.swift in Sources */,
 				4838E92C2CDBEADE0068129F /* SavingsGoalsViewController.swift in Sources */,
 				4822FDC92CD9433300FDE851 /* ExpenseDetailsView.swift in Sources */,
 				BA6B03182CD9BEFC0076F361 /* HomeScreenView.swift in Sources */,
 				482273492CF65D3900C001B6 /* IncomeLogViewController.swift in Sources */,
 				BA6B03162CD9BEFC0076F361 /* RegisterView.swift in Sources */,
-				4822FDBC2CD9430900FDE851 /* SocialFeedView.swift in Sources */,
 				BA6B03202CDC7CB10076F361 /* TableViewExpenseCell.swift in Sources */,
 				4838E92A2CDBDFF70068129F /* TabBarController.swift in Sources */,
 				48D6E9132CF800CF00D1AD51 /* IncomeDetailViewController.swift in Sources */,
@@ -596,7 +581,6 @@
 				486AC4312CF3A8B2009C81A6 /* Income.swift in Sources */,
 				5FC9FA472CDD6D2000F50B9D /* GoalDetailViewController.swift in Sources */,
 				5FC9FA432CDD6A0D00F50B9D /* CreateSavingsGoalViewController.swift in Sources */,
-				4822FDCD2CD9433300FDE851 /* FriendsListView.swift in Sources */,
 				BACF9E2C2CEF99FD00260E86 /* SavingsGoal.swift in Sources */,
 				5FC9FA3D2CDD657300F50B9D /* SavingsGoalCell.swift in Sources */,
 				4857D1FE2CE97B2300408DE6 /* RegisterFirebaseManager.swift in Sources */,
