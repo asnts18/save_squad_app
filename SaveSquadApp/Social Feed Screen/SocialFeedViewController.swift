@@ -19,7 +19,6 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Social Feed"
         socialScreen.tableView.dataSource = self
         socialScreen.tableView.delegate = self
         socialScreen.addFriendButton.addTarget(self, action: #selector(navigateToFriendsList), for: .touchUpInside)
@@ -36,6 +35,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
         let db = Firestore.firestore()
 
+        // Step 1: Fetch the list of friends
         db.collection("users").document(currentUserID).collection("friends").getDocuments { snapshot, error in
             if let error = error {
                 print("Error fetching friends: \(error.localizedDescription)")
@@ -46,6 +46,8 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
             self.milestones = [] // Reset milestones
 
             let group = DispatchGroup()
+
+            // Step 2: Fetch milestones for each friend
             for friendID in friends {
                 group.enter()
                 db.collection("users").document(friendID).collection("milestones")
@@ -53,20 +55,22 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
                     .getDocuments { milestoneSnapshot, milestoneError in
                         if let milestoneError = milestoneError {
                             print("Error fetching milestones: \(milestoneError.localizedDescription)")
+                            group.leave()
                         } else {
-                            let friendMilestones = milestoneSnapshot?.documents.compactMap { document in
-                                if let timestamp = document.get("timestamp") as? Timestamp {
-                                    return Milestone(
-                                        friendName: document.get("friendName") as? String ?? "Unknown Friend",
-                                        text: document.get("milestone") as? String ?? "No description",
-                                        timestamp: timestamp
-                                    )
+                            let friendMilestones: [Milestone] = milestoneSnapshot?.documents.compactMap { document in
+                                guard
+                                    let friendName = document.get("friendName") as? String,
+                                    let text = document.get("milestone") as? String,
+                                    let timestamp = document.get("timestamp") as? Timestamp
+                                else {
+                                    return nil
                                 }
-                                return nil
+                                return Milestone(friendName: friendName, text: text, timestamp: timestamp)
                             } ?? []
+
                             self.milestones.append(contentsOf: friendMilestones)
+                            group.leave()
                         }
-                        group.leave()
                     }
             }
 
@@ -76,6 +80,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
+
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return milestones.count
