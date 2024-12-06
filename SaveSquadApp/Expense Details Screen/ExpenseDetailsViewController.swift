@@ -59,12 +59,6 @@ class ExpenseDetailsViewController: UIViewController {
             self.currentUser = nil
         }
         
-        // notification center
-        notificationCenter.addObserver(
-                    self,
-                    selector: #selector(notificationReceivedForExpenseEdited(notification:)),
-                    name: Notification.Name("expenseUpdated"),
-                    object: nil)
     }
     
     private func setLabelsText() {
@@ -82,8 +76,9 @@ class ExpenseDetailsViewController: UIViewController {
     }
     
     @objc func editExpenseButtonTapped() {
-        let editExpenseVC = EditExpenseViewController(expense: self.expense, currentUser: self.currentUser)
-        editExpenseVC.expense = self.expense
+        let editExpenseVC = EditExpenseViewController()
+        editExpenseVC.expense = expense
+        editExpenseVC.expenseID = expense.id
         navigationController?.pushViewController(editExpenseVC, animated: true)
     }
     
@@ -92,13 +87,6 @@ class ExpenseDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
         
-    
-    @objc func notificationReceivedForExpenseEdited(notification: Notification){
-        let editedExpense = notification.object as! Expense
-        self.expense = editedExpense
-        setLabelsText()
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

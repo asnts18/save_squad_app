@@ -126,8 +126,6 @@ class SavingsGoalsViewController: UIViewController {
                     print("Error saving goal: \(error.localizedDescription)")
                 } else {
                     print("Savings goal saved successfully!")
-                    // Post notification to update goal in homescreen
-                    NotificationCenter.default.post(name: NSNotification.Name("UpdateGoalInHomeScreen"), object: nil, userInfo: ["newGoalData": newGoalData])
                 }
             }
         hideActivityIndicator()

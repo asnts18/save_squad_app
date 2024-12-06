@@ -196,6 +196,7 @@ extension AddExpenseViewController: PHPickerViewControllerDelegate, UIImagePicke
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             addExpenseScreen.expenseImageView.image = image
+            print("Image picked: \(image)")
         }
         picker.dismiss(animated: true)
     }
@@ -209,15 +210,16 @@ extension AddExpenseViewController: PHPickerViewControllerDelegate, UIImagePicke
                     DispatchQueue.main.async {
                         self?.addExpenseScreen.expenseImageView.image = image
                     }
+                    print("Image picked: \(image)")
+
                 }
             }
         }
     }
-    
-    // MARK: Upload the image to Firebase Storage
-    func uploadExpensePhotoToStorage(completion: @escaping (String?) -> Void) {
+    public func uploadExpensePhotoToStorage(completion: @escaping (String?) -> Void) {
         // Ensure pickedImage is not nil and convert it to JPEG data
         guard let pickedImage = pickedImage, let jpegData = pickedImage.jpegData(compressionQuality: 0.5) else {
+            print("Error: No image selected or failed to convert to JPEG.")
             completion(nil)  // Return nil if image is not picked or data conversion fails
             return
         }
@@ -240,12 +242,15 @@ extension AddExpenseViewController: PHPickerViewControllerDelegate, UIImagePicke
                 if let error = error {
                     print("Error fetching download URL: \(error.localizedDescription)")
                     completion(nil)  // Return nil if fetching URL fails
+                } else if let imageURL = url?.absoluteString {
+                    print("Image uploaded successfully. URL: \(imageURL)")
+                    completion(imageURL)  // Return the image URL on success
                 } else {
-                    completion(url?.absoluteString)  // Return the image URL on success
+                    print("Error: URL not found after image upload.")
+                    completion(nil)
                 }
             }
         }
     }
-
     
 }
