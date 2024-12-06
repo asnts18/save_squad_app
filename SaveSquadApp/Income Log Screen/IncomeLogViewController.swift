@@ -37,7 +37,6 @@ class IncomeLogViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .white
         incomeLogScreen.tableViewIncome.delegate = self
         incomeLogScreen.tableViewIncome.dataSource = self
-        incomeLogScreen.tableViewIncome.separatorStyle = .none
         handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
             if user == nil{
                 self.currentUser = nil

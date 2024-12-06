@@ -8,14 +8,15 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CreateSavingsGoalDelegate {
-    
+class SavingsGoalsViewController: UIViewController {
+
     let savingsGoalsScreen = SavingsGoalsView()
     var currentGoals: [SavingsGoal] = []
     var completedGoals: [SavingsGoal] = []
     let db = Firestore.firestore()
     var currentUser: FirebaseAuth.User?
     var handleAuth: AuthStateDidChangeListenerHandle?
+    let childProgressView = ProgressSpinnerViewController()
     
     override func loadView() {
         view = savingsGoalsScreen
@@ -90,6 +91,9 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
         savingsGoalsScreen.tableView.dataSource = self
 
         savingsGoalsScreen.addGoalButton.addTarget(self, action: #selector(addGoal), for: .touchUpInside)
+        
+        // Add notification observer
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNewGoal(_:)), name: NSNotification.Name("NewGoalAdded"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -99,28 +103,44 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
     
     @objc func addGoal() {
         let createGoalVC = CreateSavingsGoalViewController()
-        createGoalVC.delegate = self
         navigationController?.pushViewController(createGoalVC, animated: true)
     }
     
-    func didCreateGoal(_ goal: SavingsGoal) {
-        let createdGoalData: [String: Any] = [
-            "name": goal.name,
-            "description": goal.description,
-            "cost": goal.cost,
-            "targetDate": goal.targetDate,
-            "completed": false
-        ]
-        db.collection("users").document(self.currentUser?.uid ?? "")
-            .collection("goals").addDocument(data: createdGoalData) { error in
-            if let error = error {
-                print("Error saving message: \(error.localizedDescription)")
-            } else {
-                print("Savings goal saved successfully!")
-                self.savingsGoalsScreen.tableView.reloadData()
-            }
+    // MARK: Add new goal to Firestore
+    @objc func didReceiveNewGoal(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let newGoal = userInfo["newGoal"] as? SavingsGoal, // Access SavingsGoal object
+              let newGoalData = userInfo["newGoalData"] as? [String: Any] else {
+            return
         }
+
+        // TODO: delete after. Print for debugging purposes
+        print("New Savings Goal Object: \(newGoal)")
+        print("New Savings Goal  Data Dictionary: \(newGoalData)")
+
+        // Save the expense to Firestore using the newExpenseData dictionary
+        guard let userID = self.currentUser?.uid else { return }
+        db.collection("users").document(userID)
+            .collection("goals").addDocument(data: newGoalData) { error in
+                if let error = error {
+                    print("Error saving goal: \(error.localizedDescription)")
+                } else {
+                    print("Savings goal saved successfully!")
+                    // Post notification to update goal in homescreen
+                    NotificationCenter.default.post(name: NSNotification.Name("UpdateGoalInHomeScreen"), object: nil, userInfo: ["newGoalData": newGoalData])
+                }
+            }
+        hideActivityIndicator()
     }
+    
+    deinit {
+        // Remove observer
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("NewGoalAdded"), object: nil)
+    }
+    
+}
+
+extension SavingsGoalsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -169,14 +189,17 @@ class SavingsGoalsViewController: UIViewController, UITableViewDataSource, UITab
         goalDetailVC.delegate = self
         navigationController?.pushViewController(goalDetailVC, animated: true)
     }
+    
+    
 }
 
 extension SavingsGoalsViewController: GoalDetailDelegate {
     
-    func markGoalAsComplete(_ goal: SavingsGoal) {
+    func changeCompletionStatus(_ goal: SavingsGoal) {
+        let completed = goal.completed
         db.collection("users").document(self.currentUser?.uid ?? "")
             .collection("goals").document("\(goal.id ?? "")").updateData([
-                "completed": true
+                "completed": !completed
             ]) { error in
                 if let error = error {
                     print("Error updating completion status: \(error.localizedDescription)")

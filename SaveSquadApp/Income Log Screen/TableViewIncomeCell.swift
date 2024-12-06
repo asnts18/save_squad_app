@@ -8,7 +8,6 @@
 import UIKit
 
 class TableViewIncomeCell: UITableViewCell {
-    var wrapperCellView: UIView!
     var labelDescription: UILabel!
     var labelAmount: UILabel!
     var labelFrequency: UILabel!
@@ -16,7 +15,6 @@ class TableViewIncomeCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupWrapperCellView()
         setupLabelDescription()
         setupLabelAmount()
         setupLabelFrequency()
@@ -24,24 +22,12 @@ class TableViewIncomeCell: UITableViewCell {
         initConstraints()
     }
     
-    func setupWrapperCellView(){
-        wrapperCellView = UITableViewCell()
-        wrapperCellView.backgroundColor = .white
-        wrapperCellView.layer.cornerRadius = 6.0
-        wrapperCellView.layer.shadowColor = UIColor.gray.cgColor
-        wrapperCellView.layer.shadowOffset = .zero
-        wrapperCellView.layer.shadowRadius = 4.0
-        wrapperCellView.layer.shadowOpacity = 0.4
-        wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(wrapperCellView)
-    }
-    
     func setupLabelDescription(){
         labelDescription = UILabel()
         labelDescription.font = UIFont.boldSystemFont(ofSize: 18)
         labelDescription.textColor = .black
         labelDescription.translatesAutoresizingMaskIntoConstraints = false
-        wrapperCellView.addSubview(labelDescription)
+        contentView.addSubview(labelDescription)
     }
     
     func setupLabelAmount(){
@@ -49,7 +35,7 @@ class TableViewIncomeCell: UITableViewCell {
         labelAmount.font = UIFont.boldSystemFont(ofSize: 24)
         labelAmount.textColor = .systemGreen
         labelAmount.translatesAutoresizingMaskIntoConstraints = false
-        wrapperCellView.addSubview(labelAmount)
+        contentView.addSubview(labelAmount)
     }
     
     func setupLabelFrequency(){
@@ -57,7 +43,7 @@ class TableViewIncomeCell: UITableViewCell {
         labelFrequency.font = UIFont.systemFont(ofSize: 14)
         labelFrequency.textColor = .black
         labelFrequency.translatesAutoresizingMaskIntoConstraints = false
-        wrapperCellView.addSubview(labelFrequency)
+        contentView.addSubview(labelFrequency)
     }
     
     func setupLabelDate(){
@@ -65,7 +51,7 @@ class TableViewIncomeCell: UITableViewCell {
         labelDate.font = UIFont.systemFont(ofSize: 14)
         labelDate.textColor = .lightGray
         labelDate.translatesAutoresizingMaskIntoConstraints = false
-        wrapperCellView.addSubview(labelDate)
+        contentView.addSubview(labelDate)
     }
     
     func populateCell(income: Income) {
@@ -77,17 +63,12 @@ class TableViewIncomeCell: UITableViewCell {
     
     func initConstraints(){
         NSLayoutConstraint.activate([
-            wrapperCellView.topAnchor.constraint(equalTo: self.topAnchor,constant: 10),
-            wrapperCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-            wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            
-            labelDescription.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 10),
-            labelDescription.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 15),
+            labelDescription.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            labelDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             labelDescription.trailingAnchor.constraint(lessThanOrEqualTo: labelAmount.leadingAnchor, constant: -15),
 
-            labelAmount.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 10),
-            labelAmount.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -15),
+            labelAmount.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            labelAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             
             labelFrequency.topAnchor.constraint(equalTo: labelDescription.bottomAnchor, constant: 5),
             labelFrequency.leadingAnchor.constraint(equalTo: labelDescription.leadingAnchor),
@@ -96,7 +77,7 @@ class TableViewIncomeCell: UITableViewCell {
             labelDate.topAnchor.constraint(equalTo: labelFrequency.bottomAnchor, constant: 5),
             labelDate.leadingAnchor.constraint(equalTo: labelDescription.leadingAnchor),
             labelDate.trailingAnchor.constraint(equalTo: labelDescription.trailingAnchor),
-            labelDate.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -10),
+            labelDate.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }
     
@@ -116,3 +97,4 @@ class TableViewIncomeCell: UITableViewCell {
     }
 
 }
+

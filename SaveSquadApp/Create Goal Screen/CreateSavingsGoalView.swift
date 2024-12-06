@@ -81,6 +81,7 @@ class CreateSavingsGoalView: UIView {
         button.backgroundColor = .white
         button.layer.borderWidth = 1
         button.layer.borderColor = Utilities.purple.cgColor
+        button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

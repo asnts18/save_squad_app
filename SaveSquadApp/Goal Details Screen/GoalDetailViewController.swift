@@ -8,13 +8,13 @@
 import UIKit
 
 protocol GoalDetailDelegate: AnyObject {
-    func markGoalAsComplete(_ goal: SavingsGoal)
+    func changeCompletionStatus(_ goal: SavingsGoal)
     func deleteGoal(_ goal: SavingsGoal)
 }
 
 class GoalDetailViewController: UIViewController {
     
-    let goalDetailView = GoalDetailView()
+    let goalDetailScreen = GoalDetailView()
     weak var delegate: GoalDetailDelegate?
     var goal: SavingsGoal
 
@@ -28,21 +28,18 @@ class GoalDetailViewController: UIViewController {
     }
 
     override func loadView() {
-        view = goalDetailView
+        view = goalDetailScreen
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        goalDetailView.goalImageView.image = goal.image
-        goalDetailView.goalNameLabel.text = goal.name
-        goalDetailView.goalDescriptionLabel.text = goal.description
-        goalDetailView.goalCostLabel.text = String(format: "Cost: $%.2f", goal.cost)
-        goalDetailView.goalTargetDateLabel.text = "Target Date: \(goal.targetDateFormatted)"
-        
-        goalDetailView.completeGoalButton.addTarget(self, action: #selector(completeGoal), for: .touchUpInside)
-        goalDetailView.deleteGoalButton.addTarget(self, action: #selector(deleteGoal), for: .touchUpInside)
         title = "Goal Details"
+
+        setLabelsText()
+        
+        goalDetailScreen.completeGoalButton.addTarget(self, action: #selector(changeCompletionStatus), for: .touchUpInside)
+        goalDetailScreen.deleteGoalButton.addTarget(self, action: #selector(deleteGoal), for: .touchUpInside)
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.backgroundColor = Utilities.purple
         let attributes: [NSAttributedString.Key: Any] = [
@@ -56,9 +53,27 @@ class GoalDetailViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .white
     }
     
+    private func setLabelsText() {
+        
+        if let imageURLString = goal.imageURL, let imageURL = URL(string: imageURLString) {
+            goalDetailScreen.goalImageView.loadRemoteImage(from: imageURL)
+        } else {
+            // Set a placeholder image
+            goalDetailScreen.goalImageView.image = UIImage(named: "photo")
+        }
+        
+        goalDetailScreen.goalNameLabel.text = goal.name
+        goalDetailScreen.goalDescriptionLabel.text = goal.description
+        goalDetailScreen.goalCostLabel.text = String(format: "Cost: $%.2f", goal.cost ?? 0.0)
+        goalDetailScreen.goalTargetDateLabel.text = "Target Date: \(goal.targetDateFormatted)"
+        if goal.completed {
+            goalDetailScreen.completeGoalButton.setTitle("Undo Completion", for: .normal)
+        }
+    }
+    
     // MARK: - Actions
-    @objc func completeGoal() {
-        delegate?.markGoalAsComplete(goal)
+    @objc func changeCompletionStatus() {
+        delegate?.changeCompletionStatus(goal)
         navigationController?.popViewController(animated: true)
     }
     

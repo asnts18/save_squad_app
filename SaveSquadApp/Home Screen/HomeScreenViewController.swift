@@ -46,6 +46,7 @@ class HomeScreenViewController: UIViewController {
                             var earliestDate: Date?
                             for document in documents{
                                 if let completed = document.get("completed") as? Bool {
+                                    
                                     if completed == false {
                                         if let targetDate = document.get("targetDate") as? Timestamp {
                                             let date = targetDate.dateValue()
@@ -54,6 +55,9 @@ class HomeScreenViewController: UIViewController {
                                                 earliestDocument = document
                                             }
                                         }
+                                    } else {
+                                        // If the goal is completed, set the image to the default image
+                                         self.homeScreen.goalPic.image = UIImage(systemName: "photo.circle.fill") // Placeholder image
                                     }
                                 }
                             }
@@ -67,6 +71,15 @@ class HomeScreenViewController: UIViewController {
                                     let targetDate = Date()
                                     self.updateBudget(cost: cost, targetDate: targetDate)
                                 }
+                                
+                                // Fetch and load the image
+                                if let imageURLString = earliestDocument.get("imageURL") as? String,
+                                   let imageURL = URL(string: imageURLString) {
+                                    self.homeScreen.goalPic.loadRemoteImage(from: imageURL)
+                                } else {
+                                    self.homeScreen.goalPic.image = UIImage(named: "defaultImage") // Placeholder image
+                                }
+                                
                             } else {
                                 self.homeScreen.spendLabel2.text = "$00.00"
                                 self.homeScreen.spendLabel3.text = "$00.00 remaining for the month"
@@ -75,7 +88,6 @@ class HomeScreenViewController: UIViewController {
                             }
                         }
                     })
-            
             }
         }
     }
