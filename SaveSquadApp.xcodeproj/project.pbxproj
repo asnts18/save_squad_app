@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		481446BA2D027573002AB45D /* SavingsGoalsProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481446B92D027573002AB45D /* SavingsGoalsProgressIndicator.swift */; };
+		481446BC2D027AF8002AB45D /* CreateGoalProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481446BB2D027AF8002AB45D /* CreateGoalProgressIndicator.swift */; };
 		481EEEA32CDB20C600A601B2 /* AddIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC42CD9433300FDE851 /* AddIncomeView.swift */; };
 		481EEEA52CDB20CF00A601B2 /* ExpenseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4822FDC12CD9433300FDE851 /* ExpenseLogView.swift */; };
 		482273492CF65D3900C001B6 /* IncomeLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482273482CF65D3900C001B6 /* IncomeLogViewController.swift */; };
@@ -88,6 +90,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		481446B92D027573002AB45D /* SavingsGoalsProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsProgressIndicator.swift; sourceTree = "<group>"; };
+		481446BB2D027AF8002AB45D /* CreateGoalProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalProgressIndicator.swift; sourceTree = "<group>"; };
 		482273482CF65D3900C001B6 /* IncomeLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeLogViewController.swift; sourceTree = "<group>"; };
 		4822734B2CF65DD700C001B6 /* IncomeLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeLogView.swift; sourceTree = "<group>"; };
 		4822734D2CF666D600C001B6 /* TableViewIncomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewIncomeCell.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				5FC9FA3C2CDD656C00F50B9D /* SavingsGoalCell.swift */,
 				4822FDC72CD9433300FDE851 /* SavingsGoalsView.swift */,
 				4838E92B2CDBEADE0068129F /* SavingsGoalsViewController.swift */,
+				481446B92D027573002AB45D /* SavingsGoalsProgressIndicator.swift */,
 			);
 			path = "Savings Goals Screen";
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 			children = (
 				5FC9FA422CDD6A0200F50B9D /* CreateSavingsGoalViewController.swift */,
 				5FC9FA402CDD665000F50B9D /* CreateSavingsGoalView.swift */,
+				481446BB2D027AF8002AB45D /* CreateGoalProgressIndicator.swift */,
 			);
 			path = "Create Goal Screen";
 			sourceTree = "<group>";
@@ -604,9 +610,11 @@
 				487621E22CFA1D0000CEE666 /* EditIncomeView.swift in Sources */,
 				484F15FD2CFE38AB00D3C1CF /* ProgressSpinnerDelegate.swift in Sources */,
 				4822734C2CF65DD700C001B6 /* IncomeLogView.swift in Sources */,
+				481446BC2D027AF8002AB45D /* CreateGoalProgressIndicator.swift in Sources */,
 				BA5A74772CC9AF8700797481 /* SceneDelegate.swift in Sources */,
 				BA6B031E2CDC79520076F361 /* Utilities.swift in Sources */,
 				4838E9322CDC0FC50068129F /* AddExpenseViewController.swift in Sources */,
+				481446BA2D027573002AB45D /* SavingsGoalsProgressIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

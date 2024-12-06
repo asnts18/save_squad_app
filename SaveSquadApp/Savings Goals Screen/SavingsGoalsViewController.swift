@@ -16,6 +16,7 @@ class SavingsGoalsViewController: UIViewController {
     let db = Firestore.firestore()
     var currentUser: FirebaseAuth.User?
     var handleAuth: AuthStateDidChangeListenerHandle?
+    let childProgressView = ProgressSpinnerViewController()
     
     override func loadView() {
         view = savingsGoalsScreen
@@ -119,20 +120,17 @@ class SavingsGoalsViewController: UIViewController {
 
         // Save the expense to Firestore using the newExpenseData dictionary
         guard let userID = self.currentUser?.uid else { return }
-        
         db.collection("users").document(userID)
             .collection("goals").addDocument(data: newGoalData) { error in
                 if let error = error {
                     print("Error saving goal: \(error.localizedDescription)")
                 } else {
                     print("Savings goal saved successfully!")
-                    
                     // Post notification to update goal in homescreen
                     NotificationCenter.default.post(name: NSNotification.Name("UpdateGoalInHomeScreen"), object: nil, userInfo: ["newGoalData": newGoalData])
-
-//                    self.currentGoals.append(newGoal) // Add newGoal object to currentGoals list
                 }
             }
+        hideActivityIndicator()
     }
     
     deinit {
