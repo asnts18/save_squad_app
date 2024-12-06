@@ -28,7 +28,7 @@ class AddExpenseView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     let buttonAddPhoto: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Upload Image", for: .normal)
@@ -80,7 +80,7 @@ class AddExpenseView: UIView {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-
+    
     
     let buttonCategory: UIButton = {
         let button = UIButton(type: .system)
@@ -107,7 +107,7 @@ class AddExpenseView: UIView {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-
+    
     let labelDate: UILabel = {
         let label = UILabel()
         label.text = "Select Date"
@@ -177,7 +177,6 @@ class AddExpenseView: UIView {
     }
     
     private func setupView() {
-        
         // Image and button stack (expenseImageView and buttonAddPhoto)
         let imageStackView = UIStackView(arrangedSubviews: [expenseImageView, buttonAddPhoto])
         imageStackView.axis = .vertical
@@ -215,7 +214,7 @@ class AddExpenseView: UIView {
         dateStackView.alignment = .center
         dateStackView.spacing = 10
         dateStackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         // Main stack view
         let stackView = UIStackView(arrangedSubviews: [
             imageStackView,
@@ -225,7 +224,7 @@ class AddExpenseView: UIView {
             dateStackView
         ])
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = 30
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentWrapper.addSubview(stackView)
@@ -243,7 +242,7 @@ class AddExpenseView: UIView {
         contentWrapper.addSubview(buttonStackView)
         
         
-        // Constraints for the title section
+        // MARK: Activate constraints
         NSLayoutConstraint.activate([
             titleBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -254,33 +253,26 @@ class AddExpenseView: UIView {
             contentWrapper.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             contentWrapper.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             contentWrapper.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-        ])
-        
-        // Main stack view constraints
-        NSLayoutConstraint.activate([
+            
+            // Main stack view constraints
             stackView.topAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.topAnchor, constant: 30),
             stackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20)
-        ])
-        
-        // Button stack view constraints
-        NSLayoutConstraint.activate([
+            stackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
+            
+            // Button stack view constraints
             buttonStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             buttonStackView.leadingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.leadingAnchor, constant: 20),
             buttonStackView.trailingAnchor.constraint(equalTo: contentWrapper.frameLayoutGuide.trailingAnchor, constant: -20),
-            buttonStackView.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -50)
-        ])
-        
-        // Image and button size constraints
-        NSLayoutConstraint.activate([
+            buttonStackView.bottomAnchor.constraint(equalTo: contentWrapper.contentLayoutGuide.bottomAnchor, constant: -50),
+            
+            // Image and button size constraints
             expenseImageView.heightAnchor.constraint(equalToConstant: 150),
             expenseImageView.widthAnchor.constraint(equalToConstant: 150),
             
             buttonAddExpense.heightAnchor.constraint(equalToConstant: 50),
-            buttonCancel.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        NSLayoutConstraint.activate([
+            buttonCancel.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Icon size constraints
             imageAmount.heightAnchor.constraint(equalToConstant: 20),
             imageAmount.widthAnchor.constraint(equalToConstant: 20),
             
@@ -294,9 +286,8 @@ class AddExpenseView: UIView {
             imageDate.widthAnchor.constraint(equalToConstant: 20)
         ])
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
