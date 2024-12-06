@@ -15,6 +15,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
     let createSavingsGoalView = CreateSavingsGoalView()
     let storage = Storage.storage()
     var pickedImage: UIImage?
+    let childProgressView = ProgressSpinnerViewController()
 
     override func loadView() {
         view = createSavingsGoalView
@@ -102,6 +103,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
     }
 
     @objc func onCreateGoalButtonTapped() {
+        showActivityIndicator()
         guard let name = createSavingsGoalView.nameTextField.text, !name.isEmpty,
               let description = createSavingsGoalView.descriptionTextField.text, !description.isEmpty,
               let costText = createSavingsGoalView.amountTextField.text, let cost = Double(costText) else {
@@ -112,12 +114,11 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
         }
         
         let targetDate = createSavingsGoalView.targetDatePicker.date
-        
         // Check if an image was selected
         if let image = createSavingsGoalView.goalImageView.image {
             pickedImage = image // Assign the picked image to the property used in uploadGoalPhotoToStorage
             uploadGoalPhotoToStorage { [weak self] imageURL in
-                guard let self = self else { return }
+                guard let self = self else {return }
                 
                 // Create newGoal object with the image URL
                 let newGoal = SavingsGoal(name: name, description: description, cost: cost, targetDate: targetDate, imageURL: imageURL)
