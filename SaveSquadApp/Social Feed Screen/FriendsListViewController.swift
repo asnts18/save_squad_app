@@ -2,7 +2,7 @@
 //  FriendsListViewController.swift
 //  SaveSquadApp
 //
-//  Created by indianrenters on 06/12/24.
+//  Created by Haritha on 06/12/24.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class FriendsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let friendsListView = FriendsListView()
-    var friends: [Friend] = [] // List of existing friends
+    var friends: [Friend] = []
     let db = Firestore.firestore()
 
     override func loadView() {
@@ -21,6 +21,7 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Friends List"
+        setupToolbar()
         setupView()
         fetchFriends()
     }
@@ -30,7 +31,22 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
         friendsListView.tableView.delegate = self
         friendsListView.addFriendButton.addTarget(self, action: #selector(addFriendTapped), for: .touchUpInside)
     }
-
+    
+    private func setupToolbar() {
+            let friendRequestsButton = UIBarButtonItem(
+                image: UIImage(systemName: "person.crop.circle.badge.plus"),
+                style: .plain,
+                target: self,
+                action: #selector(friendRequestsTapped)
+            )
+            friendRequestsButton.tintColor = .purple
+            navigationItem.rightBarButtonItem = friendRequestsButton
+        }
+    @objc private func friendRequestsTapped() {
+            let friendRequestsVC = FriendRequestsViewController()
+            navigationController?.pushViewController(friendRequestsVC, animated: true)
+        }
+    
     // MARK: - Fetch Friends
     func fetchFriends() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }

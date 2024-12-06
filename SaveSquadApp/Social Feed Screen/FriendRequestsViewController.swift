@@ -2,7 +2,7 @@
 //  FriendRequestsViewController.swift
 //  SaveSquadApp
 //
-//  Created by indianrenters on 06/12/24.
+//  Created by Haritha  on 06/12/24.
 //
 
 import UIKit
@@ -26,6 +26,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         tableView.register(FriendRequestCell.self, forCellReuseIdentifier: "FriendRequestCell")
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = 70 
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

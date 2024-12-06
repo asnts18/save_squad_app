@@ -2,7 +2,7 @@
 //  SocialFeedViewController.swift
 //  SaveSquadApp
 //
-//  Created by indianrenters on 06/12/24.
+//  Created by Haritha on 06/12/24.
 //
 
 import UIKit
