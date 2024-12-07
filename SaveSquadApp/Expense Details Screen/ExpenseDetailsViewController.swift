@@ -83,10 +83,21 @@ class ExpenseDetailsViewController: UIViewController {
     }
     
     @objc func deleteExpenseButtonTapped() {
-        delegate?.deleteExpense(expense)
-        navigationController?.popViewController(animated: true)
-    }
+        let alert = UIAlertController(title: "Delete Expense", message: "Are you sure you want to delete this expense?", preferredStyle: .alert)
         
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.delegate?.deleteExpense(self.expense)
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

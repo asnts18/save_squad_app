@@ -58,16 +58,28 @@ class IncomeDetailViewController: UIViewController {
     }
     
     @objc func deleteIncome() {
-        db.collection("users").document(self.currentUser?.uid ?? "")
-            .collection("income").document("\(income.id ?? "")").delete { error in
-                if let error = error {
-                    print("Error deleting document: \(error.localizedDescription)")
-                } else {
-                    print("Document successfully deleted")
+        let alert = UIAlertController(title: "Delete Income", message: "Are you sure you want to delete this income?", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.db.collection("users").document(self.currentUser?.uid ?? "")
+                .collection("income").document("\(self.income.id ?? "")").delete { error in
+                    if let error = error {
+                        print("Error deleting document: \(error.localizedDescription)")
+                    } else {
+                        print("Document successfully deleted")
+                    }
                 }
-            }
-        navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
+
     
     @objc func editIncome() {
         let editIncomeVC = EditIncomeViewController()
