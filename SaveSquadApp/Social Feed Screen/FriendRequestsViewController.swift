@@ -12,6 +12,7 @@ import FirebaseFirestore
 class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FriendRequestCellDelegate {
     let tableView = UITableView()
     var friendRequests: [(fromUserID: String, fromEmail: String)] = []
+    let notificationCenter = NotificationCenter.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 self.tableView.reloadData()
             }
         }
+        
     }
 
     func didAcceptRequest(fromUserID: String) {
@@ -79,6 +81,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 self.fetchFriendRequests() // Refresh the list
             }
         }
+        self.notificationCenter.post(
+            name: Notification.Name("friendAdded"),
+            object: nil)
     }
 
     func didDenyRequest(fromUserID: String) {

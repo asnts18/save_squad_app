@@ -13,6 +13,7 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
     let friendsListView = FriendsListView()
     var friends: [Friend] = []
     let db = Firestore.firestore()
+    let notificationCenter = NotificationCenter.default
 
     override func loadView() {
         view = friendsListView
@@ -24,6 +25,11 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
         setupToolbar()
         setupView()
         fetchFriends()
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(notificationReceivedForFriendAdded(notification:)),
+            name: Notification.Name("friendAdded"),
+            object: nil)
     }
 
     private func setupView() {
@@ -130,6 +136,10 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    @objc func notificationReceivedForFriendAdded(notification: Notification){
+        fetchFriends()
     }
 }
 
