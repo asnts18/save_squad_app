@@ -20,7 +20,6 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         registerView.buttonCreateAccount.addTarget(self, action: #selector(onRegisterTapped), for: .touchUpInside)
         registerView.buttonCancel.addTarget(self, action: #selector(onButtonCancelTapped), for: .touchUpInside)
-
     }
     
     @objc func onRegisterTapped(){

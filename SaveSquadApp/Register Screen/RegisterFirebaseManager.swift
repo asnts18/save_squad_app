@@ -38,7 +38,7 @@ extension RegisterViewController{
                     self.showErrorAlert(message: "Please enter a valid email address.")
                     return
                 } else {
-                    email = emailText
+                    email = emailText.lowercased()
                 }
             } else {
                 self.showErrorAlert(message: "Fields cannot be left empty.")
