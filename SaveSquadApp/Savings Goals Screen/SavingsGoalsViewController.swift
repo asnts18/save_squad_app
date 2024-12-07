@@ -114,7 +114,7 @@ class SavingsGoalsViewController: UIViewController {
             return
         }
 
-        // TODO: delete after. Print for debugging purposes
+        // Print for debugging purposes
         print("New Savings Goal Object: \(newGoal)")
         print("New Savings Goal  Data Dictionary: \(newGoalData)")
 
@@ -253,6 +253,10 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
                                     "friendEmail": userEmail,
                                     "imageURL": completedGoal.imageURL ?? ""
                                 ]
+                                
+                                print("Adding to milestone collection: ")
+                                print(milestoneData) // debug print
+                                
                                 db.collection("users").document(userID).collection("milestones")
                                     .addDocument(data: milestoneData) { error in
                                         if let error = error {
@@ -277,4 +281,5 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
                 }
             }
     }
+    
 }

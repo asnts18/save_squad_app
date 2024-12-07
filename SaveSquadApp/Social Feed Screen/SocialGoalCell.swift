@@ -82,39 +82,12 @@ class SocialGoalCell: UITableViewCell {
         goalNameLabel.text = "\(goal.goalName)"
         goalDateLabel.text = DateFormatter.localizedString(from: goal.completedDate, dateStyle: .medium, timeStyle: .short)
 
-        if let imageURL = goal.imageURL {
-            print("Configuring with imageURL: \(imageURL)") // Debug print
-            if let url = URL(string: imageURL) {
-                loadImage(from: url)
-            } else {
-                print("Invalid URL format: \(imageURL)")
-                goalImageView.image = UIImage(systemName: "photo") // Placeholder
-            }
+        if let imageURL = goal.imageURL, let url = URL(string: imageURL) {
+            goalImageView.loadRemoteImage(from: url)
         } else {
-            print("No image URL available for this goal.")
             goalImageView.image = UIImage(systemName: "photo") // Placeholder
         }
     }
-
-
-    private func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            if let error = error {
-                print("Error loading image: \(error.localizedDescription)")
-                return
-            }
-
-            guard let data = data, let image = UIImage(data: data) else {
-                print("Failed to decode image data.")
-                return
-            }
-
-            DispatchQueue.main.async {
-                self?.goalImageView.image = image
-            }
-        }.resume()
-    }
-
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
