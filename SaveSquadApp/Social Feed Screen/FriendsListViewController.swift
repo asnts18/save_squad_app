@@ -86,6 +86,13 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
             showAlert(title: "Error", message: "Please enter a valid email.")
             return
         }
+        
+        
+        // Check if the email is already in the friends list
+        if friends.contains(where: { $0.email.lowercased() == email }) {
+            showAlert(title: "Error", message: "You're already friends with this user.")
+            return
+        }
 
         // Search for the user in Firebase by email
         db.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, error in
