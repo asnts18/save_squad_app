@@ -188,6 +188,37 @@ extension SavingsGoalsViewController: UITableViewDataSource, UITableViewDelegate
         navigationController?.pushViewController(goalDetailVC, animated: true)
     }
     
+    func deleteAllMilestones(completion: @escaping (Error?) -> Void) {
+        let userID = self.currentUser?.uid ?? ""
+        db.collection("users").document(userID).collection("milestones").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching milestones: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            guard let documents = snapshot?.documents else {
+                print("No milestones to delete.")
+                completion(nil)
+                return
+            }
+            let group = DispatchGroup()
+            for document in documents {
+                group.enter()
+                document.reference.delete { error in
+                    if let error = error {
+                        print("Error deleting document \(document.documentID): \(error.localizedDescription)")
+                    } else {
+                        print("Document \(document.documentID) successfully deleted.")
+                    }
+                    group.leave()
+                }
+            }
+            group.notify(queue: .main) {
+                completion(nil)
+            }
+        }
+    }
+    
     
 }
 
@@ -207,23 +238,27 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
                         print("Error updating completion status: \(error.localizedDescription)")
                     } else {
                         print("Completion status updated successfully!")
-                        
-                        // If goal is marked complete, add it to milestones
-                        if !completed {
-                            let milestoneData: [String: Any] = [
-                                "friendName": userEmail,
-                                "milestone": "Completed goal: \(goal.name ?? "Unnamed Goal")",
-                                "timestamp": Timestamp(date: Date())
-                            ]
-                            
-                            db.collection("users").document(userID).collection("milestones")
-                                .addDocument(data: milestoneData) { error in
-                                    if let error = error {
-                                        print("Error adding milestone: \(error.localizedDescription)")
-                                    } else {
-                                        print("Milestone added successfully!")
+                        self.deleteAllMilestones { error in
+                            if let error = error {
+                                print("Error deleting milestones: \(error.localizedDescription)")
+                                return
+                            }
+                            print("All milestones deleted successfully!")
+                            for completedGoal in self.completedGoals {
+                                let milestoneData: [String: Any] = [
+                                    "friendName": userEmail,
+                                    "milestone": "Completed goal: \(completedGoal.name ?? "Unnamed Goal")",
+                                    "timestamp": Timestamp(date: Date())
+                                ]
+                                db.collection("users").document(userID).collection("milestones")
+                                    .addDocument(data: milestoneData) { error in
+                                        if let error = error {
+                                            print("Error adding milestone: \(error.localizedDescription)")
+                                        } else {
+                                            print("Milestone added successfully!")
+                                        }
                                     }
-                                }
+                            }
                         }
                     }
                 }
