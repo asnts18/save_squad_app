@@ -7,7 +7,7 @@
 import UIKit
 
 class SocialGoalCell: UITableViewCell {
-    private let userEmailLabel = UILabel()
+    private let userNameLabel = UILabel()
     private let goalNameLabel = UILabel()
     private let goalDateLabel = UILabel()
     private let goalImageView = UIImageView()
@@ -33,10 +33,10 @@ class SocialGoalCell: UITableViewCell {
         goalImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(goalImageView)
 
-        userEmailLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        userEmailLabel.textColor = .darkGray
-        userEmailLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(userEmailLabel)
+        userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        userNameLabel.textColor = .darkGray
+        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(userNameLabel)
 
         goalNameLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         goalNameLabel.textColor = .black
@@ -62,24 +62,24 @@ class SocialGoalCell: UITableViewCell {
             goalImageView.widthAnchor.constraint(equalToConstant: 60),
             goalImageView.heightAnchor.constraint(equalToConstant: 60),
 
-            userEmailLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-            userEmailLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 10),
-            userEmailLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            userNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            userNameLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 10),
+            userNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
 
-            goalNameLabel.topAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 5),
-            goalNameLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
-            goalNameLabel.trailingAnchor.constraint(equalTo: userEmailLabel.trailingAnchor),
+            goalNameLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
+            goalNameLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
+            goalNameLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
 
             goalDateLabel.topAnchor.constraint(equalTo: goalNameLabel.bottomAnchor, constant: 5),
-            goalDateLabel.leadingAnchor.constraint(equalTo: userEmailLabel.leadingAnchor),
-            goalDateLabel.trailingAnchor.constraint(equalTo: userEmailLabel.trailingAnchor),
+            goalDateLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
+            goalDateLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
             goalDateLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -10)
         ])
     }
 
     func configure(with goal: SocialGoal) {
-        userEmailLabel.text = goal.userEmail
-        goalNameLabel.text = "Goal Achieved: \(goal.goalName)"
+        userNameLabel.text = "\(goal.userName) achieved their goal!"
+        goalNameLabel.text = "\(goal.goalName)"
         goalDateLabel.text = DateFormatter.localizedString(from: goal.completedDate, dateStyle: .medium, timeStyle: .short)
 
         if let imageURL = goal.imageURL {
