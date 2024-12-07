@@ -114,7 +114,7 @@ class SavingsGoalsViewController: UIViewController {
             return
         }
 
-        // TODO: delete after. Print for debugging purposes
+        // Print for debugging purposes
         print("New Savings Goal Object: \(newGoal)")
         print("New Savings Goal  Data Dictionary: \(newGoalData)")
 
@@ -247,9 +247,14 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
                             for completedGoal in self.completedGoals {
                                 let milestoneData: [String: Any] = [
                                     "friendName": userEmail,
-                                    "milestone": "Completed goal: \(completedGoal.name ?? "Unnamed Goal")",
-                                    "timestamp": Timestamp(date: Date())
+                                    "milestone": "\(completedGoal.name ?? "Unnamed Goal")",
+                                    "timestamp": Timestamp(date: Date()),
+                                    "imageURL": completedGoal.imageURL ?? ""
                                 ]
+                                
+                                print("Adding to milestone collection: ")
+                                print(milestoneData) // debug print
+                                
                                 db.collection("users").document(userID).collection("milestones")
                                     .addDocument(data: milestoneData) { error in
                                         if let error = error {
@@ -275,23 +280,4 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
             }
     }
     
-    func saveCompletedGoalAsMilestone(_ goal: SavingsGoal) {
-        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        let db = Firestore.firestore()
-
-        let milestoneData: [String: Any] = [
-            "friendName": Auth.auth().currentUser?.email ?? "Unknown User",
-            "milestone": "Goal Achieved: \(goal.name ?? "Unknown Goal")",
-            "timestamp": Timestamp(date: Date()),
-            "imageURL": goal.imageURL ?? ""
-        ]
-
-        db.collection("users").document(currentUserID).collection("milestones").addDocument(data: milestoneData) { error in
-            if let error = error {
-                print("Error saving milestone: \(error.localizedDescription)")
-            } else {
-                print("Milestone saved successfully!")
-            }
-        }
-    }
 }

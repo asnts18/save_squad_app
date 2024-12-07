@@ -12,6 +12,7 @@ import FirebaseAuth
 class SocialFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let socialScreen = SocialFeedView()
     var milestones: [Milestone] = []
+    let db = Firestore.firestore()
     
 
     override func loadView() {
@@ -35,7 +36,6 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
 
     func fetchMilestones() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        let db = Firestore.firestore()
 
         db.collection("users").document(currentUserID).collection("friends").getDocuments { snapshot, error in
             if let error = error {
@@ -50,7 +50,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
 
             for friendID in friends {
                 group.enter()
-                db.collection("users").document(friendID).collection("milestones")
+                self.db.collection("users").document(friendID).collection("milestones")
                     .order(by: "timestamp", descending: true)
                     .getDocuments { milestoneSnapshot, milestoneError in
                         if let milestoneError = milestoneError {
@@ -99,7 +99,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
             goalDescription: "Achieved a goal!", // Example description
             goalCost: 0.0, // Replace with actual cost if available
             completedDate: milestone.timestamp.dateValue(),
-            imageURL: nil // Replace with actual image URL if available
+            imageURL: milestone.imageURL
         ))
 
         return cell
