@@ -61,7 +61,8 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
                                 guard
                                     let friendName = document.get("friendName") as? String,
                                     let text = document.get("milestone") as? String,
-                                    let timestamp = document.get("timestamp") as? Timestamp
+                                    let timestamp = document.get("timestamp") as? Timestamp,
+                                    let friendEmail = document.get("friendEmail") as? String
                                 else {
                                     print("Missing required fields for milestone: \(document.data())")
                                     return nil
@@ -70,7 +71,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
                                 let imageURL = document.get("imageURL") as? String
                                 print("Fetched Milestone - friendName: \(friendName), text: \(text), imageURL: \(imageURL ?? "No URL")")
 
-                                return Milestone(friendName: friendName, text: text, timestamp: timestamp, imageURL: imageURL)
+                                return Milestone(friendName: friendName, text: text, timestamp: timestamp, friendEmail: friendEmail, imageURL: imageURL)
                             } ?? []
 
                             self.milestones.append(contentsOf: friendMilestones)
@@ -94,14 +95,14 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
         let milestone = milestones[indexPath.row]
 
         cell.configure(with: SocialGoal(
-            userEmail: milestone.friendName,
+            userName: milestone.friendName,
             goalName: milestone.text,
             goalDescription: "Achieved a goal!", // Example description
             goalCost: 0.0, // Replace with actual cost if available
             completedDate: milestone.timestamp.dateValue(),
+            userEmail: milestone.friendEmail,
             imageURL: milestone.imageURL
         ))
-
         return cell
     }
 
@@ -111,6 +112,7 @@ struct Milestone {
     let friendName: String
     let text: String
     let timestamp: Timestamp
+    let friendEmail: String
     let imageURL: String?
 }
 

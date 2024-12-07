@@ -10,10 +10,11 @@ import FirebaseFirestore
 
 struct SocialGoal: Codable {
     @DocumentID var id: String?
-    var userEmail: String
+    var userName: String
     var goalName: String
     var goalDescription: String
     var goalCost: Double
     var completedDate: Date
+    var userEmail: String
     var imageURL: String?
 }

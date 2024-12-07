@@ -228,6 +228,7 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
             let completed = goal.completed
             let userEmail = self.currentUser?.email ?? "Unknown User"
             let userID = self.currentUser?.uid ?? ""
+            let userName = self.currentUser?.displayName ?? ""
             let db = Firestore.firestore()
 
             db.collection("users").document(userID)
@@ -246,9 +247,10 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
                             print("All milestones deleted successfully!")
                             for completedGoal in self.completedGoals {
                                 let milestoneData: [String: Any] = [
-                                    "friendName": userEmail,
+                                    "friendName": userName,
                                     "milestone": "\(completedGoal.name ?? "Unnamed Goal")",
                                     "timestamp": Timestamp(date: Date()),
+                                    "friendEmail": userEmail,
                                     "imageURL": completedGoal.imageURL ?? ""
                                 ]
                                 
