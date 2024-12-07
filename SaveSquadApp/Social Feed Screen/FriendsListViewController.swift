@@ -81,6 +81,11 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
             showAlert(title: "Error", message: "Please enter a valid email.")
             return
         }
+        
+        if !isValidEmail(email) {
+            showAlert(title: "Error", message: "Please enter a valid email.")
+            return
+        }
 
         // Search for the user in Firebase by email
         db.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, error in
@@ -144,6 +149,16 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
     
     @objc func notificationReceivedForFriendAdded(notification: Notification){
         fetchFriends()
+    }
+    
+    /*
+     Returns boolean value based on whether the inputted string is a valid email address.
+     Code borrowed from https://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift/25471164#25471164
+     */
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
 }
 
