@@ -96,6 +96,10 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
             }
 
             let recipientID = document.documentID
+            if (recipientID == Auth.auth().currentUser?.uid) {
+                self.showAlert(title: "Error", message: "You cannot add yourself as a friend.")
+                return
+            }
             self.sendFriendRequest(to: recipientID, recipientEmail: email)
         }
     }
