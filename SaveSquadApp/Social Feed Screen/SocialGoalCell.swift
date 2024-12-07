@@ -11,7 +11,7 @@ class SocialGoalCell: UITableViewCell {
     private let goalNameLabel = UILabel()
     private let goalDateLabel = UILabel()
     private let goalImageView = UIImageView()
-    private let containerView = UIView()
+    private let wrapperView = UITableViewCell()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,51 +20,55 @@ class SocialGoalCell: UITableViewCell {
     }
 
     private func setupUI() {
-        containerView.layer.cornerRadius = 12
-        containerView.layer.borderWidth = 1
-        containerView.layer.borderColor = UIColor.lightGray.cgColor
-        containerView.clipsToBounds = true
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(containerView)
+        wrapperView.layer.cornerRadius = 6.0
+        wrapperView.layer.shadowColor = UIColor.gray.cgColor
+        wrapperView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        wrapperView.layer.shadowRadius = 4
+        wrapperView.layer.shadowOpacity = 0.2
+        wrapperView.backgroundColor = .white
+        wrapperView.layer.borderColor = UIColor.lightGray.cgColor
+        wrapperView.clipsToBounds = false
+        wrapperView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(wrapperView)
 
         goalImageView.contentMode = .scaleAspectFill
         goalImageView.layer.cornerRadius = 8
         goalImageView.clipsToBounds = true
         goalImageView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(goalImageView)
+        wrapperView.addSubview(goalImageView)
 
         userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
         userNameLabel.textColor = .darkGray
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(userNameLabel)
+        wrapperView.addSubview(userNameLabel)
 
         goalNameLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         goalNameLabel.textColor = .black
         goalNameLabel.numberOfLines = 1
         goalNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(goalNameLabel)
+        wrapperView.addSubview(goalNameLabel)
 
         goalDateLabel.font = UIFont.systemFont(ofSize: 12)
         goalDateLabel.textColor = .gray
         goalDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(goalDateLabel)
+        wrapperView.addSubview(goalDateLabel)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            wrapperView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            wrapperView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            wrapperView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            wrapperView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
 
-            goalImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            goalImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            goalImageView.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 10),
+            goalImageView.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 10),
             goalImageView.widthAnchor.constraint(equalToConstant: 60),
             goalImageView.heightAnchor.constraint(equalToConstant: 60),
 
-            userNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            userNameLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 10),
             userNameLabel.leadingAnchor.constraint(equalTo: goalImageView.trailingAnchor, constant: 10),
-            userNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            userNameLabel.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -10),
 
             goalNameLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
             goalNameLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
@@ -73,7 +77,7 @@ class SocialGoalCell: UITableViewCell {
             goalDateLabel.topAnchor.constraint(equalTo: goalNameLabel.bottomAnchor, constant: 5),
             goalDateLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
             goalDateLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
-            goalDateLabel.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -10)
+            goalDateLabel.bottomAnchor.constraint(lessThanOrEqualTo: wrapperView.bottomAnchor, constant: -10)
         ])
     }
 
