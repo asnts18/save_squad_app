@@ -102,6 +102,7 @@ class SocialFeedViewController: UIViewController, UITableViewDataSource, UITable
             completedDate: milestone.timestamp.dateValue(),
             userEmail: milestone.friendEmail,
             imageURL: milestone.imageURL
+        ))
         return cell
     }
 
