@@ -57,9 +57,9 @@ class SocialFeedView: UIView {
 
     private func setupTableView() {
         tableView = UITableView()
+        tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "FeedCell")
-        tableView.separatorStyle = .singleLine
         self.addSubview(tableView)
     }
 
@@ -85,7 +85,7 @@ class SocialFeedView: UIView {
             tableView.topAnchor.constraint(equalTo: addFriendButton.bottomAnchor, constant: 15),
             tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
