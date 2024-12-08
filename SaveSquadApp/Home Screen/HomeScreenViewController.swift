@@ -56,8 +56,7 @@ class HomeScreenViewController: UIViewController {
                                             }
                                         }
                                     } else {
-                                        // If the goal is completed, set the image to the default image
-                                         self.homeScreen.goalPic.image = UIImage(systemName: "photo.circle.fill") // Placeholder image
+                                        self.homeScreen.goalPic.image = UIImage(systemName: "photo.circle.fill")
                                     }
                                 }
                             }
@@ -76,8 +75,6 @@ class HomeScreenViewController: UIViewController {
                                 if let imageURLString = earliestDocument.get("imageURL") as? String,
                                    let imageURL = URL(string: imageURLString) {
                                     self.homeScreen.goalPic.loadRemoteImage(from: imageURL)
-                                } else {
-                                    self.homeScreen.goalPic.image = UIImage(named: "defaultImage") // Placeholder image
                                 }
                                 
                             } else {

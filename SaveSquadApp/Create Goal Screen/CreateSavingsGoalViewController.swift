@@ -115,8 +115,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
         
         let targetDate = createSavingsGoalView.targetDatePicker.date
         // Check if an image was selected
-        if let image = createSavingsGoalView.goalImageView.image {
-            pickedImage = image // Assign the picked image to the property used in uploadGoalPhotoToStorage
+        if let pickedImage {
             uploadGoalPhotoToStorage { [weak self] imageURL in
                 guard let self = self else {return }
                 

@@ -59,7 +59,7 @@ class GoalDetailViewController: UIViewController {
             goalDetailScreen.goalImageView.loadRemoteImage(from: imageURL)
         } else {
             // Set a placeholder image
-            goalDetailScreen.goalImageView.image = UIImage(named: "photo")
+            goalDetailScreen.goalImageView.image = UIImage(systemName: "photo")?.withRenderingMode(.alwaysTemplate)
         }
         
         goalDetailScreen.goalNameLabel.text = goal.name

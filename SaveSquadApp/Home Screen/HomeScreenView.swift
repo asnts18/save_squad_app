@@ -146,15 +146,16 @@ class HomeScreenView: UIView {
         imageContainer = UIView()
         imageContainer.translatesAutoresizingMaskIntoConstraints = false
         imageContainer.backgroundColor = .white
-        imageContainer.layer.cornerRadius = 75
+        imageContainer.layer.cornerRadius = 50
         imageContainer.clipsToBounds = true
         goalStack.addArrangedSubview(imageContainer)
     }
     
     func setupGoalPic(){
         goalPic = UIImageView()
-        goalPic.image = UIImage(systemName: "photo")?.withRenderingMode(.alwaysOriginal)
-        goalPic.contentMode = .scaleAspectFill
+        goalPic.image = UIImage(systemName: "photo")?.withRenderingMode(.alwaysTemplate)
+        goalPic.contentMode = .scaleAspectFit
+        goalPic.tintColor = Utilities.lightPurple
         goalPic.clipsToBounds = true
         goalPic.translatesAutoresizingMaskIntoConstraints = false
         imageContainer.addSubview(goalPic)

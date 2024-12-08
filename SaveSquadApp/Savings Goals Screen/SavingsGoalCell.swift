@@ -11,6 +11,7 @@ class SavingsGoalCell: UITableViewCell {
     let goalImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.tintColor = Utilities.lightPurple
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
