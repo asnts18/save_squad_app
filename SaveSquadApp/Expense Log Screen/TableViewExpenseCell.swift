@@ -97,20 +97,26 @@ class TableViewExpenseCell: UITableViewCell {
     }
     
     func configure(with expense: Expense) {
+        expenseImageView.image = UIImage(systemName: "photo")
+        let tag = expense.id.hashValue
+        expenseImageView.tag = tag
         if let imageURLString = expense.imageURL, let imageURL = URL(string: imageURLString) {
             expenseImageView.loadRemoteImage(from: imageURL) { [weak self] image in
                 guard let self = self else { return }
-                if let image = image {
+                if self.expenseImageView.tag == tag {
                     self.expenseImageView.image = image
                 }
             }
-        } else {
-            expenseImageView.image = UIImage(systemName: "photo") // Fallback to default image
         }
         labelDescription.text = expense.description
         labelAmount.text = String(format: "-$%.2f", expense.amount ?? 00.00)
         labelCategory.text = "Category: \(expense.category ?? "Personal")"
         labelDate.text = "Date: \(expense.targetDateFormatted)"
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        expenseImageView.image = UIImage(systemName: "photo") // Reset to placeholder
     }
 
     
