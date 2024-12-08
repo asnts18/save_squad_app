@@ -16,6 +16,7 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
     let db = Firestore.firestore()
     var currentUser: FirebaseAuth.User?
     var handleAuth: AuthStateDidChangeListenerHandle?
+    let childProgressView = ProgressSpinnerViewController()
     
     override func loadView() {
         view = expenseLogScreen
@@ -115,6 +116,7 @@ class ExpenseLogViewController: UIViewController, UITableViewDataSource, UITable
                     self.expenses.append(newExpense) // Add newExpense object to expenses list
                 }
             }
+        hideActivityIndicator()
     }
 
 

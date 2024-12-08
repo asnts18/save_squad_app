@@ -17,6 +17,7 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
     let db = Firestore.firestore()
     var currentUser: FirebaseAuth.User?
     let storage = Storage.storage()
+    let childProgressView = ProgressSpinnerViewController()
     
     // default values
     var selectedCategory = "Personal"
@@ -71,7 +72,6 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
     
     // MARK: Action for tapping buttonAdd -- adding a new Expense
     @objc func onAddButtonTapped() {
-        
         var description: String = ""
         var amount: Double = 0.0
         
@@ -98,7 +98,7 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
                 showErrorAlert(message: "Please add an amount.")
                 return
             }
-            
+            showActivityIndicator()
             let image = addExpenseScreen.expenseImageView.image
             let date = addExpenseScreen.pickerDate.date
             
