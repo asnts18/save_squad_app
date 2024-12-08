@@ -44,6 +44,9 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
         addExpenseScreen.buttonAddPhoto.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         addExpenseScreen.buttonAddExpense.addTarget(self, action: #selector(onAddButtonTapped), for: .touchUpInside)
         addExpenseScreen.buttonCancel.addTarget(self, action: #selector(onCancelButtonTapped), for: .touchUpInside)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
     }
     
     //MARK: menu for buttonCategory setup
@@ -137,24 +140,31 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
         }
     }
         
-        func showErrorAlert(message: String){
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-        }
-        
-        // MARK: Cancel button action
-        @objc func onCancelButtonTapped() {
-            navigationController?.popViewController(animated: true)
-        }
-        
-        func showAlert(message: String) {
-            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-        }
+    func showErrorAlert(message: String){
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
+        
+    // MARK: Cancel button action
+    @objc func onCancelButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+        
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    /*
+     Hides the keyboard.
+     */
+    @objc func hideKeyboardOnTap(){
+        view.endEditing(true)
+    }
+}
 
 extension AddExpenseViewController: PHPickerViewControllerDelegate, UIImagePickerControllerDelegate {
     

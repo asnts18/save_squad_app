@@ -38,6 +38,9 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
         createSavingsGoalView.addPhotoButton.addTarget(self, action: #selector(onAddPhotoButtonTapped), for: .touchUpInside)
         createSavingsGoalView.createGoalButton.addTarget(self, action: #selector(onCreateGoalButtonTapped), for: .touchUpInside)
         createSavingsGoalView.cancelButton.addTarget(self, action: #selector(onCancelButtonTapped), for: .touchUpInside)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
     }
         
     @objc func onAddPhotoButtonTapped() {
@@ -190,6 +193,12 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
             }
         }
     }
-
+    
+    /*
+     Hides the keyboard.
+     */
+    @objc func hideKeyboardOnTap(){
+        view.endEditing(true)
+    }
 }
 

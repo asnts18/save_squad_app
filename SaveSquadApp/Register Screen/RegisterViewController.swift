@@ -20,6 +20,9 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         registerView.buttonCreateAccount.addTarget(self, action: #selector(onRegisterTapped), for: .touchUpInside)
         registerView.buttonCancel.addTarget(self, action: #selector(onButtonCancelTapped), for: .touchUpInside)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
     }
     
     @objc func onRegisterTapped(){
@@ -56,5 +59,12 @@ class RegisterViewController: UIViewController {
         let passwordRegEx = "[A-Z0-9a-z._%+-@$&*!#?]{6,50}"
         let passwordPred = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
         return passwordPred.evaluate(with: password)
+    }
+    
+    /*
+     Hides the keyboard.
+     */
+    @objc func hideKeyboardOnTap(){
+        view.endEditing(true)
     }
 }

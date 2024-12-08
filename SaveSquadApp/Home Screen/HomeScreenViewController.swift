@@ -81,7 +81,6 @@ class HomeScreenViewController: UIViewController {
                                 } else {
                                     self.homeScreen.goalPic.image = UIImage(systemName: "photo.circle.fill")
                                 }
-                                
                             } else {
                                 self.homeScreen.spendLabel2.text = "$00.00"
                                 self.homeScreen.spendLabel3.text = "$00.00 remaining for the month"

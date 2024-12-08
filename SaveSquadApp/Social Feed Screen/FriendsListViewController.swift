@@ -30,6 +30,9 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
             selector: #selector(notificationReceivedForFriendAdded(notification:)),
             name: Notification.Name("friendAdded"),
             object: nil)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
     }
 
     private func setupView() {
@@ -166,6 +169,13 @@ class FriendsListViewController: UIViewController, UITableViewDataSource, UITabl
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
+    }
+    
+    /*
+     Hides the keyboard.
+     */
+    @objc func hideKeyboardOnTap(){
+        view.endEditing(true)
     }
 }
 
