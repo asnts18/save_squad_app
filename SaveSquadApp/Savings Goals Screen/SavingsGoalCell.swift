@@ -79,15 +79,24 @@ class SavingsGoalCell: UITableViewCell {
     }
     
     func configure(with goal: SavingsGoal) {
-        
+        goalImageView.image = UIImage(systemName: "photo")
+        let tag = goal.id.hashValue
+        goalImageView.tag = tag
         if let imageURLString = goal.imageURL, let imageURL = URL(string: imageURLString) {
-            goalImageView.loadRemoteImage(from: imageURL)
-        } else {
-            goalImageView.image = UIImage(systemName: "photo") // Fallback to default image
+            goalImageView.loadRemoteImage(from: imageURL) { [weak self] image in
+                guard let self = self else { return }
+                if self.goalImageView.tag == tag {
+                    self.goalImageView.image = image
+                }
+            }
         }
         goalNameLabel.text = goal.name
         goalTargetAmountLabel.text = String(format: "$%.2f", goal.cost ?? 0.0)
         goalTargetDateLabel.text = "Target Date: \(goal.targetDateFormatted)"
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        goalImageView.image = UIImage(systemName: "photo") // Reset to placeholder
+    }
 }
-

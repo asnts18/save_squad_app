@@ -11,16 +11,20 @@ import Foundation
 import UIKit
 
 extension UIImageView {
-    //MARK: Borrowed from: https://www.hackingwithswift.com/example-code/uikit/how-to-load-a-remote-image-url-into-uiimageview
-    
-    func loadRemoteImage(from url: URL) {
-        //  Creating a background task to load the cloud image
+    func loadRemoteImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        let currentTag = self.tag
         DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
+            guard let data = try? Data(contentsOf: url), let image = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                if self?.tag == currentTag {
+                    completion(image)
+                } else {
+                    completion(nil)
                 }
             }
         }

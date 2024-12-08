@@ -98,7 +98,12 @@ class TableViewExpenseCell: UITableViewCell {
     
     func configure(with expense: Expense) {
         if let imageURLString = expense.imageURL, let imageURL = URL(string: imageURLString) {
-            expenseImageView.loadRemoteImage(from: imageURL)
+            expenseImageView.loadRemoteImage(from: imageURL) { [weak self] image in
+                guard let self = self else { return }
+                if let image = image {
+                    self.expenseImageView.image = image
+                }
+            }
         } else {
             expenseImageView.image = UIImage(systemName: "photo") // Fallback to default image
         }

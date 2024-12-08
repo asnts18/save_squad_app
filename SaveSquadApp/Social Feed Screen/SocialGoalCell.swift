@@ -87,7 +87,12 @@ class SocialGoalCell: UITableViewCell {
         goalDateLabel.text = DateFormatter.localizedString(from: goal.completedDate, dateStyle: .medium, timeStyle: .short)
 
         if let imageURL = goal.imageURL, let url = URL(string: imageURL) {
-            goalImageView.loadRemoteImage(from: url)
+            goalImageView.loadRemoteImage(from: url) { [weak self] image in
+                guard let self = self else { return }
+                if let image = image {
+                    self.goalImageView.image = image
+                }
+            }
         } else {
             goalImageView.image = UIImage(systemName: "photo") // Placeholder
         }

@@ -103,6 +103,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
     }
 
     @objc func onCreateGoalButtonTapped() {
+        createSavingsGoalView.createGoalButton.isEnabled = false
         showActivityIndicator()
         guard let name = createSavingsGoalView.nameTextField.text, !name.isEmpty,
               let description = createSavingsGoalView.descriptionTextField.text, !description.isEmpty,
@@ -110,6 +111,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
             let alert = UIAlertController(title: "Error", message: "Please fill all fields.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
+            createSavingsGoalView.createGoalButton.isEnabled = false
             return
         }
         
@@ -130,7 +132,7 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
                     "newGoal": newGoal,
                     "newGoalData": newGoalData
                 ])
-                
+                createSavingsGoalView.createGoalButton.isEnabled = true
                 // Pop the view controller
                 self.navigationController?.popViewController(animated: true)
             }
@@ -146,9 +148,9 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
                 "newGoal": newGoal,
                 "newGoalData": newGoalData
             ])
-            
+            createSavingsGoalView.createGoalButton.isEnabled = true
             // Pop the view controller
-            navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 

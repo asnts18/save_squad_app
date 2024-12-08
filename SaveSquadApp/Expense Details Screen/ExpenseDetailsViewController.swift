@@ -63,7 +63,12 @@ class ExpenseDetailsViewController: UIViewController {
     
     private func setLabelsText() {
         if let imageURLString = expense.imageURL, let imageURL = URL(string: imageURLString) {
-            expenseDetailsScreen.expenseImageView.loadRemoteImage(from: imageURL)
+            expenseDetailsScreen.expenseImageView.loadRemoteImage(from: imageURL) { [weak self] image in
+                guard let self = self else { return }
+                if let image = image {
+                    self.expenseDetailsScreen.expenseImageView.image = image
+                }
+            }
         } else {
             // Set a placeholder image
             expenseDetailsScreen.expenseImageView.image = UIImage(named: "photo")

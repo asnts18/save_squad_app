@@ -55,8 +55,6 @@ class HomeScreenViewController: UIViewController {
                                                 earliestDocument = document
                                             }
                                         }
-                                    } else {
-                                        self.homeScreen.goalPic.image = UIImage(systemName: "photo.circle.fill")
                                     }
                                 }
                             }
@@ -74,7 +72,14 @@ class HomeScreenViewController: UIViewController {
                                 // Fetch and load the image
                                 if let imageURLString = earliestDocument.get("imageURL") as? String,
                                    let imageURL = URL(string: imageURLString) {
-                                    self.homeScreen.goalPic.loadRemoteImage(from: imageURL)
+                                    self.homeScreen.goalPic.loadRemoteImage(from: imageURL) { [weak self] image in
+                                        guard let self = self else { return }
+                                        if let image = image {
+                                            self.homeScreen.goalPic.image = image
+                                        }
+                                    }
+                                } else {
+                                    self.homeScreen.goalPic.image = UIImage(systemName: "photo.circle.fill")
                                 }
                                 
                             } else {

@@ -27,7 +27,12 @@ class EditExpenseViewController: AddExpenseViewController {
             addExpenseScreen.pickerDate.date = expense.date
             addExpenseScreen.buttonAddExpense.setTitle("Save Changes", for: .normal)
             if let imageURL = expense.imageURL, let url = URL(string: imageURL) {
-                addExpenseScreen.expenseImageView.loadRemoteImage(from: url) // Load image from URL
+                addExpenseScreen.expenseImageView.loadRemoteImage(from: url) { [weak self] image in
+                    guard let self = self else { return }
+                    if let image = image {
+                        self.addExpenseScreen.expenseImageView.image = image
+                    }
+                }
             }
         }
         
