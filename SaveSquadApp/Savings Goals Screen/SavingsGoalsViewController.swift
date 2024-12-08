@@ -272,14 +272,25 @@ extension SavingsGoalsViewController: GoalDetailDelegate {
         }
     
     func deleteGoal(_ goal: SavingsGoal) {
-        db.collection("users").document(self.currentUser?.uid ?? "")
-            .collection("goals").document("\(goal.id ?? "")").delete { error in
-                if let error = error {
-                    print("Error deleting document: \(error.localizedDescription)")
-                } else {
-                    print("Document successfully deleted")
+        let alert = UIAlertController(title: "Delete Goal", message: "Are you sure you want to delete this goal?", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.db.collection("users").document(self.currentUser?.uid ?? "")
+                .collection("goals").document("\(goal.id ?? "")").delete { error in
+                    if let error = error {
+                        print("Error deleting document: \(error.localizedDescription)")
+                    } else {
+                        print("Document successfully deleted")
+                    }
                 }
-            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
 }
