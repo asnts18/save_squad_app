@@ -117,6 +117,12 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
             createSavingsGoalView.createGoalButton.isEnabled = false
             return
         }
+        if cost <= 0 {
+            showErrorAlert(message: "Goal amount must be a positive number!")
+            hideActivityIndicator()
+            createSavingsGoalView.createGoalButton.isEnabled = true
+            return
+        }
         
         let targetDate = createSavingsGoalView.targetDatePicker.date
         // Check if an image was selected
@@ -157,6 +163,17 @@ class CreateSavingsGoalViewController: UIViewController, PHPickerViewControllerD
         }
     }
 
+    /*
+     Shows appropriate error alert depending on the message value that is inputted.
+     */
+    func showErrorAlert(message:String){
+        let alert = UIAlertController(
+                title: "Error!", message: message,
+                preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
     
     @objc func onCancelButtonTapped() {
         navigationController?.popViewController(animated: true)

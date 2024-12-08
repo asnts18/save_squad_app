@@ -88,6 +88,10 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
             
             // Validate amount text field input
             if !amountText.isEmpty {
+                if !isValidAmount(amountText) {
+                    showErrorAlert(message: "Please enter a proper numerical value for the Amount.")
+                    return
+                }
                 if let uwAmount = Double(amountText) {
                     amount = uwAmount
                 } else {
@@ -163,6 +167,15 @@ class AddExpenseViewController: UIViewController, UINavigationControllerDelegate
      */
     @objc func hideKeyboardOnTap(){
         view.endEditing(true)
+    }
+    
+    /*
+     Returns a boolean value based on whether the inputted string is a valid amount.
+     */
+    func isValidAmount(_ amount: String) -> Bool {
+        let amountRegEx = "[0-9.]{1,10}"
+        let amountPred = NSPredicate(format:"SELF MATCHES %@", amountRegEx)
+        return amountPred.evaluate(with: amount)
     }
 }
 
