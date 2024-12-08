@@ -79,7 +79,7 @@ class EditExpenseViewController: AddExpenseViewController {
                 showErrorAlert(message: "Please add an amount.")
                 return
             }
-            
+            showActivityIndicator()
             let image = addExpenseScreen.expenseImageView.image
             let date = addExpenseScreen.pickerDate.date
             
@@ -100,9 +100,11 @@ class EditExpenseViewController: AddExpenseViewController {
                         .collection("expenses").document(expenseID).updateData(updatedExpenseData) { error in
                         if let error = error {
                             print("Error updating document: \(error.localizedDescription)")
+                            self.hideActivityIndicator()
                         } else {
                             print("Document successfully updated")
                             self.navigationController?.popToRootViewController(animated: true)
+                            self.hideActivityIndicator()
                         }
                     }
                 }
@@ -118,9 +120,11 @@ class EditExpenseViewController: AddExpenseViewController {
                     .collection("expenses").document(expenseID).updateData(updatedExpenseData) { error in
                     if let error = error {
                         print("Error updating document: \(error.localizedDescription)")
+                        self.hideActivityIndicator()
                     } else {
                         print("Document successfully updated")
                         self.navigationController?.popViewController(animated: true)
+                        self.hideActivityIndicator()
                     }
                 }
             }
