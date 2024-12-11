@@ -2,6 +2,9 @@
 
 SaveSquad is a personal budgeting tool designed to help users reach their financial goals while encouraging daily savings habits. It simplifies financial management by breaking down monthly or yearly budgets into manageable daily spending targets.
 
+- **Link to Documentation (PDF):** [SaveSquad App Documentation](https://drive.google.com/file/d/1yP0nPvdm-DwHSHgGBlCGnKISjpzo5ygR/view?usp=sharing)
+- **Link to App Demo(Video):** [SaveSquad App Demo](https://drive.google.com/file/d/1aBi8x_lmfdNikZiYcYuN0rcvvBltSaPG/view?usp=drive_link)
+
 ## Overview
 
 SaveSquad aims to provide a seamless and engaging experience for users to manage their finances. By setting savings goals, logging expenses, and celebrating milestones, users can maintain a healthy financial lifestyle.
